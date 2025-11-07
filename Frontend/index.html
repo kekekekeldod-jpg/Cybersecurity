@@ -1,0 +1,683 @@
+<!DOCTYPE html>     
+<html lang="de">   
+<!--Mein Name ist Mertcan, und trotz meiner aktuellen Situation habe ich mich bemüht, diese Seite eigenständig zu programmieren. Mein Ziel ist es, professioneller zu werden und mein Wissen zu erweitern. Ich hoffe, es hat euch gefallen.-->
+
+<!-- Update 05.11.2025  .... 
+
+Folgende Fehler wurden behoben und Verbesserungen vorgenommen:
+
+•Der HTML-Code wurde an nahezu alle Tablet-Größen angepasst
+
+•Wiedergabefehler des Audios im Schlangenspiel wurden behoben
+
+•Automatische Anpassung im Canvas wurde korrigiert
+
+•Einige Syntaxfehler wurden verbessert und behoben
+
+•Offline-Icons wurden hinzugefügt
+
+•Hintergrundfehler im Schlangenspiel nach "GameOver" wurde korrigiert
+
+•Der Balken für die Menüleiste wurde verbessert und eine Funktion hinzugefügt
+
+•Die neuen Swipe-Funktionen für iPads wurden programmiert
+
+•Die Hintergrundfarbe wurde angepasst und Fehler wurden behoben
+
+•Die Scroll-Reveal-Funktion, die Fehler auf iPads verursachte, wurde gefixxt
+
+•Eine 3D-Cyber-Erde wurde implementiert
+
+•Anpassungen für das Querformat wurden vorgenommen
+
+•Die zuvor fehlerhafte Hintergrundfarbe wurde korrigiert
+
+•Alte Bilder wurden durch neue ersetzt
+
+•GIFs wurden integriert
+
+•Der Registrierungs-Button wurde überarbeitet
+
+• Eine Datenschutzrichtlinie steht nun zur Verfügung
+
+• Ein Code-img, der zeigt, wie HTML-, CSS- und JavaScript-Code aussehen, wurde hinzugefügt
+
+• Das Swal-Popup Problem wurde gefixxt, und ein neues Design wurde hinzugefügt
+
+Folgende wichtige Links, die für die Entwicklung dieser Webseite beigetragen haben:
+
+https://github.com/crc137/fontawesome-free-pro/tree/main/Core-Styles
+
+https://fonts.google.com/
+
+https://fontawesome.com/
+
+https://scrollrevealjs.org/
+
+https://swiperjs.com
+
+https://www.emailjs.com/
+
+-->
+
+  <!--Der Anfang vom Head-Bereich-->
+<head>
+  <!-- Meta-Tags für Suchmaschinen und Webdienste -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cybersecurity</title>
+  
+  <!-- CSS-Datei -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <!-- Javascript-Dateien -->
+  <script src="js-funktione/email.min.js"></script>
+  <script src="js-funktione/scrollreveal.min.js"></script>
+  <script src="js-funktione/typed.js"></script>
+  <script src="js-funktione/swal.js"></script>
+  <script src="js-funktione/three.js"></script>
+  <script src="js-funktione/swiper-bundle.min.js"></script>
+
+  <!-- CDN-Links -->
+  <link rel="stylesheet" href="fontawesome-pro-6.5.1-web/css/all.css">
+  <link rel="stylesheet" href="css-funktione/swiper/swiper-bundle.min.css"/>
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="google-fonts/Fonts/permanent-marker1.css">
+  <link rel="stylesheet" href="google-fonts/Fonts/permanent-marker.css">
+  <link rel="stylesheet" href="google-fonts/Fonts/jersey-15.css">
+  <link rel="stylesheet" href="google-fonts/Fonts/jacquard-24.css">
+</head>
+
+<!--Das Ende vom Head-Bereich-->
+
+<body>
+
+ <header>
+  <a href="#" class="logo">K-379</a>
+
+  <nav>
+    <!-- Drawer / Seitenmenü -->
+    <div class="navmenu" id="site-drawer" aria-hidden="true">
+      <div class="aboveheader">
+        <p>Menü</p>
+      </div>
+
+      <!-- Scrollbarer Bereich für die Links -->
+      <div class="navmenu-scroll">
+        <ul>
+          <li><a href="#start"><i class="fa-solid fa-house"></i> Startseite</a></li>
+          <li><a href="#sicher"><i class="fa-solid fa-lock"></i> Sicherheit</a></li>
+          <li><a href="#uber-mich"><i class="fa-solid fa-info"></i> Über mich</a></li>
+          <li><a href="#anmeldung"><i class="fa-solid fa-user"></i> Kontakt</a></li>
+          <li><a href="#program"><i class="fa-solid fa-laptop-code"></i> P-G</a></li>
+          <li><a href="#preis"><i class="fa-solid fa-store"></i> Store</a></li>
+          <li class="li-ex">
+            <a href="https://go.screenpal.com/watch/cZfr25VMhhJ">
+              <i class="fa-regular fa-file-video"></i> Video
+            </a>
+          </li>
+          <li class="policy-link">
+            <a href="multiple1/datenschutzrichtlinien.html">
+              <i class="fa-duotone fa-file-lock"></i> Policy
+            </a>
+          </li>
+          <li class="caneys">
+            <a href="multiple2/pishing.html">
+              <i class="fa-sharp fa-regular fa-user-cowboy"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Footer im Drawer bleibt unten -->
+      <div class="underheader">
+        <p>&copy; 2024 Merdo</p>
+      </div>
+    </div>
+  </nav>
+
+  <div class="navmenu-right">
+    <!-- öffnet dein Register-Modal -->
+    <a href="#" class="nav-btn" id="authOpen">Register</a>
+
+    <!-- Hamburger (gleiche Klasse für dein bestehendes JS) -->
+    <button
+      type="button"
+      class="hamburger-effekt"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="site-drawer"
+    >
+      <div class="menu-leiste">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </div>
+</header>
+
+<!-- Das Ende vom Header-Bereich -->
+
+  <!-- Scroll Effekt -->
+  <div id="scrolling"></div>
+  <div id="scrolling-path"></div>
+  <!-- Ende vom Scroll Effekt -->
+  
+ <!--========== Start ============-->
+  <section class="start" id="start">
+    <div class="start-text">
+      <span>Cybersecurity
+      </span>
+      <h5># Lernprogramm</h5>
+      <h1>Software-</h1>
+      <p class="p1">Hier hast du die Möglichkeit, deine Informatikkenntnisse im Bereich Softwareentwicklung zu vertiefen und sich unserem Team anzuschließen, um eine nachhaltige Sicherheit für die Zukunft zu gewährleisten. ( Wenn Du auf das Video unten klickst, kannst Du sehen, wie ich diese Seite programmiert habe )</p>
+      <p class="p2"> Hier hast du die Möglichkeit, deine Informatikkenntnisse im Bereich Softwareentwicklung zu vertiefen und sich unserem Team anzuschließen, um eine nachhaltige Sicherheit für die Zukunft zu gewährleisten. ( Klicke bitte auf die Balken in der oberen rechten Ecke der Menüleiste, um das Video zu sehen, in dem ich zeige, wie ich diese Seite programmiert habe )</p>
+      <div class="start-btn">
+        <a href="#sicher" class="btn2">Lies mehr<i class="fa-solid fa-arrow-right"></i></a>
+        <a href="https://go.screenpal.com/watch/cZfr25VMhhJ" class="btn2">Video sehen<i class="fa-solid fa-play"></i></a>
+      </div>
+    </div>
+    <div class="cyber-r">
+      <img class="cyber" src="bilder/hacker.png" alt="cyber">
+    </div>
+  </section>
+ <!--========== Ende von Start ============-->
+ <hr>
+  <!--========== Hauptteil ============-->
+  <main id="Hauptteil">
+    <!--========== Sicherheit ============-->
+   <section id="sicher" class="sicher">
+    <div class="all-box" data-aos="fade-up">
+      <div class="heading-effekt">
+        <h2>Sicherheit</h2>
+      </div> 
+      <div class="row1">
+        <div class="box1" data-aos="fade-up" data-aos-delay="100">
+       <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h1>Sicherung</h1>
+      <p>• Regelmäßige Backups sind entscheidend, um Datenverlust durch Hardwarefehler, Ransomware oder andere Katastrophen zu vermeiden. Backup-Daten sollten an einem sicheren Ort aufbewahrt werden, vorzugsweise offline oder in einer Cloud mit starken Sicherheitsvorkehrungen.</p>
+    </div>
+    <div class="box1" data-aos="fade-up" data-aos-delay="100">
+       <div class="icon"><i class="fas fa-lock"></i> </div>
+      <h1>Verschlüsselung</h1>
+      <p>• Verschlüsselung schützt Daten vor unbefugtem Zugriff, indem sie in einen nicht lesbaren Code umgewandelt werden, der ohne den entsprechenden Schlüssel nicht entschlüsselt werden kann. Vollständige Festplattenverschlüsselung (FDE) und Verschlüsselung von Daten während der Übertragung sind bewährte Praktiken.</p>
+    </div>
+    <div class="box1" data-aos="fade-up" data-aos-delay="100">
+     <div class="icon"><i class="fas fa-desktop"></i></div>
+      <h1>Cyberspace</h1>
+      <p>• Antivirensoftware erkennt und entfernt schädliche Software, um den Computer vor Malware zu schützen. Firewalls überwachen und kontrollieren den Netzwerkverkehr, um unerwünschte Zugriffe zu verhindern.</p>
+    </div>
+    </div>
+    </div>
+  </section>
+   <!--========== Ende von Sicherheit ============-->
+    <hr>
+    <!--========== Über mich ============-->
+    <section class="uber-sec">
+      <div class="heading-effekt2">
+        <h2>Über mich</h2>
+      </div>
+    </section>
+      <section class="uber-mich" id="uber-mich">
+      <div>
+        <img class="uber-img" src="bilder/anonym.png" alt="anonym"> 
+      </div>
+      <div class="uber-text">
+        <h5># White-Hat-Hacker</h5>
+        <h1>Mr. <span id="element"></span></h1>
+        <p>Hallo zusammen, ich bin Merdo. Meine Leidenschaft gilt dem Programmieren, und aus diesem Grund habe ich diese Seite ins Leben gerufen, um im Bereich Cybersecurity an verschiedenen Verbesserungen und Sicherheitsmaßnahmen zu arbeiten. Es würde mich freuen, wenn ihr Teil meines Teams werden würdet. Wir könnten Gruppen bilden, Institutionen gründen und damit erfolgreich sein und Geld verdienen. Um sich erfolgreich zu bewerben, müsst Ihr alle erforderlichen Informationen angeben. Bitte stellt sicher, dass Ihr euren vollständigen Namen, eure Telefonnummer, euer Alter und alle weiteren angeforderten Daten korrekt und vollständig eingibt.</p>
+      </div>
+    </section>
+    <!--========== Ende von Über mich ============-->
+ <hr>
+    <!--========== Anmeldung ============-->
+   <section class="uber-sec">
+      <div class="heading-effekt2">
+        <h2>Kontakt</h2>
+      </div>
+    </section>
+      <section id="anmeldung" class="anmeldung">
+      <div class="container">
+        <div class="anmelde">
+          <p>Sende hier deine Daten<br>&#8659;</p>
+        </div>
+
+        <form class="formular">
+          <div class="row">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+            </div>
+            
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
+            </div>
+
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Telefon">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-mds-4 form-group mt-3">
+              <input type="datetime-local" name="date" class="form-control datepicker" id="date">
+            </div>
+            <div class="select-edi">
+            <div class="col-md-4 form-group mt-3">
+              <select name="age" id="age" class="form-select">
+                <option value="">-- Alter --</option>
+                <option value="unter 18">unter 18</option>
+                <option value="18-32">18-32</option>
+                <option value="Über 40">Über 40</option>
+              </select>
+              
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="richtung" id="richtung" class="form-select">
+                <option value="">-- Richtung --</option>
+                <option value="Software">Software</option>
+                <option value="Hardware">Hardware</option>
+              </select>  
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+           <textarea class="form-control" name="message" id="textarea" rows="5" cols="55" placeholder="Nachricht (Bewerbung)"></textarea>
+           </div>
+          <div class="text-center"><button onclick="sendMail(); return false;" class="button2">Senden</button></div>
+          </form>
+      </div>
+      <div>
+        <img src="bilder/register.png" alt="register" class="anmeldung-img">
+      </div> 
+    </section>
+    <!--========== Ende von Anmeldung ============-->
+ <hr>
+     <!--========== Programmiersprachen ============-->
+    <section class="program" id="program">
+      <div class="heading-effekt">
+        <h2>Programmiersprachen</h2>
+        <p>Hier ist eine kleine Übersicht über die Kosten für verschiedene Programmiersprachen. Je nach deinen Präferenzen kannst Du das entsprechende Paket auswählen und teilnehmen.</p>
+      </div>
+      <div class="menu-content">
+        <div class="rowis">
+          <div class="rowis-img">
+         <img src="bilder/html.png" alt="html">
+          </div>
+          <h5>Html</h5>
+          <h6>€ 20</h6> 
+          <div class="ratings">
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+          </div>
+        </div>
+        
+        <div class="rowis">
+          <div class="rowis-img">
+            <img src="bilder/java.png" alt="java">
+          </div>
+          <h5>Java</h5>
+          <h6>€ 35.99</h6>
+          <div class="ratings">
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-regular fa-star-half-stroke"></i></a>
+          </div>
+        </div>
+        
+        <div class="rowis">
+          <div class="rowis-img">
+            <img src="bilder/c-sharp.png" alt="c-sharp">
+          </div>
+          <h5>C Sharp</h5>
+          <h6>€ 42.99</h6>
+          <div class="ratings">
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+          </div>
+        </div>
+        
+        <div class="rowis">
+          <div class="rowis-img">
+          <img src="bilder/python.png" alt="python">
+          </div>
+          <h5>Python</h5>
+          <h6>€ 50</h6>
+          <div class="ratings">
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+          </div>
+        </div>
+      </div> 
+    </section>
+     <!--========== Ende von Programmiersprachen ============-->
+ <hr>
+ 
+      <!--========== Spiel ============-->
+
+      
+  <section class="game" id="game">
+      <div class="canvas-container" id="canvas-container">
+        <h1>Mein Spiel</h1>
+        <p>Hier ist meine kleine programmierte Version eines Schlangenspiels. Es dient als Testversion, um kleine Experimente mit JavaScript durchzuführen und zu erforschen, wie man damit interagiert.</p>
+        <canvas class="field" id='field'></canvas>
+        <p class="game-p">Keep enjoying the game !</p>
+      </div> 
+      <div class="keys">
+        <a class="up arr" onclick="Snake.action('up')">
+          <i class="chevron up"></i></a>
+        <br />
+        <a class="left arr" onclick="Snake.action('left')">
+          <i class="chevron left"></i></a>
+        <a class="down arr" onclick="Snake.action('down')">
+          <i class="chevron down"></i></a>
+        <a class="right arr" onclick="Snake.action('right')">
+          <i class="chevron right"></i></a>
+      </div>
+    </section>
+         <!--========== Ende vom Spiel ============-->
+  <hr>
+
+         <!--========== Erde ============-->
+     <section>
+    <div class="heading-effekt">
+      <h2>Cyber-Earth</h2>
+      <p>Die Welt wird zunehmend moderner und visueller. Es ist an der Zeit, eine Vielzahl von Sicherheitsmaßnahmen zu implementieren und den Fokus verstärkt auf die Weiterentwicklung zu legen.</p>
+    </div>
+      </section>
+      <section class="earth">
+    <canvas class="erde" id="erde"></canvas>
+  </section>
+  <section class="earth-2">
+    <div class="earth-text" data-aos="fade-up" data-aos-delay="100">
+      <div class="earth-row">
+      <div>
+      <img src="gifs/pc.gif" alt="pc" class="pc">
+    </div> 
+    <div>
+      <h1>Die Welt der Anonymität</h1>
+    </div>
+    <div>
+      <img src="gifs/pc.gif" alt="pc" class="pc">
+    </div>
+    </div>
+    <div>
+      <p>Cybersecurity ist von entscheidender Bedeutung für die Sicherheit unserer Welt in der heutigen digitalen Ära. In einer zunehmend vernetzten Gesellschaft sind wir ständig mit Bedrohungen konfrontiert, die von Cyberkriminellen, Hackern und sogar staatlich unterstützten Akteuren ausgehen können. Der Schutz unserer digitalen Infrastruktur, sei es in Regierungsbehörden, Unternehmen oder persönlichen Geräten, ist daher unerlässlich, um die Integrität, Vertraulichkeit und Verfügbarkeit von Daten zu gewährleisten.</p>
+      </div>
+  </section>
+ <!--========== Ende von der Erde ============-->
+  <hr>
+  <!-- Code-Bilder-->
+  <section class="code-bild">
+      <div class="heading-effekt">
+      <h2>Code-img</h2>
+      <p>Die Technologie hat es ermöglicht, dass immer leistungsfähigere Apps und Tools für mobile Entwicklung bereitstehen. Apps wie "Spck-Editor" für Android und iOS bieten Funktionen wie Code-Editoren, Terminalzugriff und sogar Compiler für verschiedene Programmiersprachen, alles bequem auf einem Smartphone oder Tablet.</p>
+      </div>
+    <div class="code-img">
+      <div>
+        <h2>Html</h2>
+      <img src="bilder/Html.jpg" alt="Html.jpg">
+    </div>
+    <div>
+      <h2>Css</h2>
+      <img src="bilder/Css.jpg" alt="Css.jpg">
+    </div>
+    <div>
+      <h2>JS</h2>
+      <img src="bilder/Java.jpg" alt="Java.jpg">
+    </div>
+    </div>
+  </section>
+  <!-- Ende von Code-Bilder-->
+  <hr>
+   <!-- Anfang von Swipe -->
+    <section>
+    <div class="heading-effekt">
+      <h2>User-Agents</h2>
+      <p>Im Schatten der digitalen Ära operieren Agenten, die in der Lage sind, sich nahtlos in alle Systeme einzuschleichen. Diese hochgeschulten Spezialisten bewegen sich geschickt durch verschlüsselte Netzwerke und Sicherheitsprotokolle, um Informationen zu beschaffen oder Operationen auszuführen, die für gewöhnliche Benutzer undurchführbar wären. Mit einer Mischung aus technischem Know-how, Tarnung und strategischem Denken durchdringen sie scheinbar undurchdringliche Barrieren, um ihre Ziele zu erreichen. Doch während ihr Talent bewundert wird, bleiben ihre Identitäten und ihre Arbeit oft im Dunkeln verborgen, im Dienste einer unsichtbaren Agenda.</p>
+      </div>
+        </section>
+
+  
+  <section class="swipe-user">
+    <div class="user-container swiper">
+       <div class="user-content">
+          <div class="swiper-wrapper">
+             <article class="user-article swiper-slide">
+                <div class="user-image">
+                   <img src="bilder/user1.png" alt="image" class="user-img">
+                   <div class="user-shadow"></div>
+                </div>
+ 
+                <div class="user-data">
+                   <h3 class="user-name">User 1</h3>
+                   <p class="user-description">
+                     Dieser Hacker hat die Fähigkeit, sich in Systeme guter Organisationen einzuhacken, um kriminelle Aktivitäten zu unterbinden.
+                   </p>
+
+                </div>
+             </article>
+ 
+             <article class="card__article swiper-slide">
+                <div class="user-image">
+                   <img src="bilder/user2.png" alt="image" class="user-img">
+                   <div class="user-shadow"></div>
+                </div>
+ 
+                <div class="user-data">
+                   <h3 class="user-name">User 2</h3>
+                   <p class="user-description">
+                      Dieser Hacker verfügt über umfangreiche Kenntnisse in der Identifizierung von Sicherheitslücken und der Entwicklung von maßgeschneiderten Lösungen zur Stärkung der digitalen Infrastruktur.
+                   </p>
+ 
+                </div>
+             </article>
+ 
+             <article class="card__article swiper-slide">
+                <div class="user-image">
+                   <img src="bilder/user3.png" alt="image" class="user-img">
+                   <div class="user-shadow"></div>
+                </div>
+ 
+                <div class="user-data">
+                   <h3 class="user-name">User 3</h3>
+                   <p class="user-description">
+                      Dieser Hacker ist spezialisiert auf die Entwicklung von fortschrittlichen Angriffstechniken, um Schwachstellen in Netzwerken aufzudecken und zu beheben.
+                   </p>
+ 
+                </div>
+             </article>
+ 
+             <article class="card__article swiper-slide">
+                <div class="user-image">
+                   <img src="bilder/user4.png" alt="image" class="user-img">
+                   <div class="user-shadow"></div>
+                </div>
+ 
+                <div class="user-data">
+                   <h3 class="user-name">User 4</h3>
+                   <p class="user-description">
+                      Dieser Hacker ist bekannt für seine Fähigkeit, innovative Technologien und Tools zu nutzen, um Sicherheitsprotokolle zu analysieren und zu verbessern, um so vor potenziellen Bedrohungen zu schützen.
+                   </p>
+ 
+                </div>
+             </article>
+
+             <article class="card__article swiper-slide">
+                <div class="user-image">
+                   <img src="bilder/user5.png" alt="image" class="user-img">
+                   <div class="user-shadow"></div>
+                </div>
+ 
+                <div class="user-data">
+                   <h3 class="user-name">User 5</h3>
+                   <p class="user-description">
+                      Dieser Hacker zeichnet sich durch seine Fähigkeit aus, komplexe Sicherheitssysteme zu umgehen und vertrauliche Daten sicher zu extrahieren.
+                   </p>
+ 
+                 
+                </div>
+             </article>
+          </div>
+       </div>
+
+          <div class="swiper-btn">
+          <div class="swiper-button-next">
+            <i class="ri-arrow-right-s-line"></i>
+         </div>
+         
+         <div class="swiper-button-prev">
+            <i class="ri-arrow-left-s-line"></i>
+         </div>
+          </div>
+
+
+         <!-- Pagination -->
+         <div class="swiper-pagination"></div>
+        </div>
+     </section>
+       <!-- Ende von Swipe-->
+  <hr>
+      <!--========== Kauf ============-->
+    <section class="preis" id="preis">
+      <div class="heading-effekt">
+        <h2>Store</h2>
+      </div>
+      <div class="abo">
+        <h1>Abo-Mitglied</h1>
+        <p>Wähle jetzt zwischen meiner Mitgliedschaftsangeboten - Premium, Standard oder Basis - und erhalte Zugang zu einer Vielzahl exklusiver Funktionen. Mit der Mitgliedschaft kannst du nicht nur bestimmte Inhalte programmieren, sondern bekommst auch individuelle Unterstützung von mir, um deine Projekte auf das nächste Level zu bringen.</p>
+      </div>
+      <div class="all-buttons">
+          <div class="buttons monat-btn active">Monatlich</div>
+          <div class="buttons jahr-btn">Jährlich</div>
+      </div>
+      <div class="all-preis">
+          <div class="preis-box">
+              <h3> Standard</h3>
+              <div class="preise monat"><span>€ 9.99 / </span><span>Monatlich</span></div>
+              <div class="preise jahrlich"><span>€ 19.99 / </span><span>Jährlich</span></div>
+              <div class="preis-liste">
+                  <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
+                  <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
+                  <p><i class="fas fa-circle-xmark"></i><span>Praktische Übungen</span></p>
+                  <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
+                  <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
+              </div>
+              <a href="#" class="prs">Preis wählen</a>
+          </div>
+          <div class="preis-box">
+              <h3>Premium</h3>
+              <div class="preise monat"><span>€ 24.99 / </span><span>Monatlich</span></div>
+              <div class="preise jahrlich"><span>€ 49.99 / </span><span>Jährlich</span></div>
+              <div class="preis-liste">
+                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Spezielle Support</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Full learning</span></p>
+              </div>
+              <a href="#" class="prs">Preis wählen</a>
+          </div> 
+          <div class="preis-box">
+              <h3>Basis</h3>
+              <div class="preise monat"><span>€ 19.99 / </span><span>Monatlich</span></div>
+              <div class="preise jahrlich"><span>€ 29.99 / </span><span>Jährlich</span></div>
+              <div class="preis-liste">
+                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
+                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
+                <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
+                <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
+              </div>
+              <a href="#" class="prs">Preis wählen</a>
+          </div>
+          </div>
+        </section>  
+         <!--========== Ende vom Kauf ============-->
+  </main> 
+   <!--========== Ende vom Hauptteil ============-->
+  <!--========== Footer ============-->
+  <footer> 
+    <div class="all-footer">
+      <div class="footer-content">
+        <h3>Information</h3>
+        <p>Adresse:<br>Anonym 111</p>
+            <p>Telefon:<br>Keins</p>
+            <p>Email:<br>merdoscr<br>@hotmai.cr</p>
+        </div>
+        <div class="footer-content">
+          <h3>Kurze Links</h3>
+          <ul class="list">
+            <li><a href="#start">Startseite</a></li>
+            <li><a href="#sicher">Sicherheit</a></li>
+            <li><a href="#uber-mich">Über mich</a></li>
+            <li><a href="#anmeldung">Kontakt</a></li>
+            <li><a href="multiple2/pishing.html">Caney</a></li>
+            <li><a href="multiple1/datenschutzrichtlinien.html">Policy</a></li>
+            <li><a href="multiple3/impressum.html">Impressum</a></li>
+          </ul>
+        </div> 
+        <div class="footer-content">
+          <h3>Folge mir</h3>
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://web.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 created by Merdo</p>
+    </div>
+  </footer>
+  
+  <!--========== Ende von Footer ============-->
+
+ <!-- Auth-Modal-Container (muss existieren) -->
+<div id="authModal" class="auth-modal">
+  <div class="auth-card">
+    <button class="auth-close" aria-label="Schließen">✕</button>
+
+    <!-- Login -->
+    <form class="auth-form auth-form--login" id="loginForm" novalidate>
+      <h2 class="auth-title">Anmelden</h2>
+      <div class="auth-field"><input id="loginEmail" type="email" placeholder="E-Mail"></div>
+      <div class="auth-field"><input id="loginPass"  type="password" placeholder="Passwort"></div>
+      <button id="loginBtn" class="auth-btn" type="submit">Bestätigen</button>
+      <p class="auth-switch">Noch kein Konto?
+        <button type="button" class="auth-link" id="toRegister">Registrieren</button>
+      </p>
+    </form>
+
+    <!-- Register -->
+    <form class="auth-form auth-form--register" id="registerForm" novalidate>
+      <h2 class="auth-title">Registrieren</h2>
+      <div class="auth-field"><input id="regEmail" type="email" placeholder="E-Mail"></div>
+      <div class="auth-field"><input id="regPass"  type="password" placeholder="Passwort"></div>
+      <button id="registerBtn" class="auth-btn" type="submit">Konto anlegen</button>
+      <p class="auth-switch">Schon ein Konto?
+        <button type="button" class="auth-link" id="toLogin">Anmelden</button>
+      </p>
+    </form>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+  <script src="schlangenspiel/snake.js"></script>
+  <script src="erde/erde-cyb.js"></script>
+  <script src="register/register.js"></script>
+</body>
+</html>

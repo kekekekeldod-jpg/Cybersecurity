@@ -1,0 +1,552 @@
+/* ==================== VARIABLEN / ROOT ==================== */
+:root{
+  --bg: #2F3359;
+  --accent-a: #03B1AA;
+  --accent-b: #00ffe7;
+  --muted: rgba(255,255,255,0.05);
+  --card-bg: rgb(2,30,46);
+}
+
+/* =============== GLOBAL RESET (entschärft) =============== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none; border: none;
+  text-decoration: none;
+}
+
+/* Grund-Body */
+html{ /* Basis-Schriftgröße kann der Benutzer im Browser überschreiben */
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Permanent Marker', cursive;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+}
+
+/* Nur Überschriften mit Permanent Marker */
+h1, h2, .title-marker {
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* ==================== SCROLL-BAR VISUAL ==================== */
+#scrolling-path{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: clamp(6px, 1.4vw, 20px); /* dynamisch */
+  height: 100%;
+  background: var(--muted);
+}
+
+#scrolling{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: clamp(6px, 1.4vw, 20px);
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  animation: scrollingY 5s linear infinite;
+}
+
+@keyframes scrollingY{
+  0%,100%{ filter: hue-rotate(0deg); }
+  50%{ filter: hue-rotate(360deg); }
+}
+
+#scrolling:before,
+#scrolling:after{
+  content: '';
+  position: absolute;
+  inset: 0; /* top:0;right:0;bottom:0;left:0; */
+  background: linear-gradient(to top, #008aff, #00ffe7);
+}
+#scrolling:before{ filter: blur(8px); }
+#scrolling:after{ filter: blur(24px); }
+
+/* =============== TYPOGRAPHIE (flexibel mit clamp) =============== */
+h1 {
+  font-size: clamp(1.6rem, 5.5vw, 3.2rem);
+}
+h2 {
+  font-size: clamp(1.1rem, 3.5vw, 2.6rem);
+}
+
+/* Fliesstext */
+p, li, a, span {
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+}
+
+/* Buttons / kleine Labels */
+.small {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-weight: 600;
+}
+
+/* =============== UNIVERSAL CONTAINERS =============== */
+section{
+  padding: clamp(1.2rem, 2.5vw, 3.5rem);
+}
+
+/* ==================== HEADER (GRID-basiert, immer symmetrisch) ==================== */
+/* Grid sorgt dafür, dass links + rechts gleiche max-breite haben und mitte zentriert */
+header {
+  display: grid;
+  grid-template-columns: minmax(60px, clamp(60px, 9vw, 140px)) 1fr minmax(60px, clamp(60px, 9vw, 140px));
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 2rem);
+  width: 100%;
+  padding: clamp(0.8rem, 2vw, 1.6rem) clamp(1rem, 4vw, 6%);
+  background: linear-gradient(250.59deg, #3d1a61, #1a1536 48.53%, #7e064c 75.52%);
+}
+
+/* linke & rechte Box zentriert */
+header .header-left,
+header .header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bilder im Header: gleiche Max-Breite, skalierbar */
+header .header-left img,
+header .header-right img {
+  width: 100%;
+  max-width: clamp(60px, 9vw, 120px); /* gleiche Max-Breite auf beiden Seiten */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mitte zentriert, Titel skaliert */
+header .header-center {
+  justify-self: center;
+  text-align: center;
+}
+
+/* Titel: permanent marker + dynamisch */
+header .header-center h2 {
+  font-size: clamp(1.4rem, 5vw, 4.5rem);
+  color: var(--accent-a);
+  margin: 0;
+  text-shadow: 0 0 clamp(2px, 0.4vw, 8px) rgba(0,255,230,0.12);
+}
+
+/* kleines Untertitelchen */
+.header-sub {
+  font-family: monospace;
+  font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+  color: var(--accent-b);
+  opacity: 0.9;
+  margin-top: .25rem;
+}
+
+/* ==================== DATEN BOX (gleichbleibend) ==================== */
+.daten-s div {
+  text-align: center;
+  margin: clamp(.5rem, 1.2vw, 1rem);
+}
+
+.daten-s div h2{
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+  color: var(--accent-a);
+}
+
+.daten-s div p{
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.6rem);
+  font-weight: 700;
+  margin-top: .6rem;
+  color: rgb(1, 247, 144);
+  margin-bottom: .6rem;
+}
+
+/* ==================== CANEY SEKTION (GRID: auto-fit -> 1 oder 2 Spalten) =============== */
+/* auto-fit + minmax sorgt dafür, dass es automatisch von 2 auf 1 Spalte wechselt */
+.caney {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 3.5vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+  padding: clamp(1.2rem, 2.5vw, 3.5rem) clamp(3.5%, 8vw, 10%);
+}
+
+/* Textbereich nimmt 1fr (flexibel) */
+.caney-text {
+  order: 0; /* bei grid nicht nötig, aber bleibt lesbar */
+}
+
+/* Überschrift mit Farb-Gradient und clamp */
+.caney-text h1 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(1.8rem, 6vw, 3.3rem);
+  margin-bottom: clamp(.6rem, 1.6vw, 2rem);
+  background: linear-gradient(90deg, #ff0000, #ffff00, #ff00f3, #0033ff, #ff00c4, #ff0000);
+  background-size: 400%;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: effect 10s linear infinite;
+}
+
+/* Fließtext */
+.caney-text p {
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+  line-height: 1.6;
+  color: rgb(8, 134, 192);
+  text-align: justify;
+  margin-right: 0;
+}
+
+.caney-text span{
+  font-size: clamp(1.8rem, 4vw, 3.3rem);
+}
+
+/* Bildbereich: rechts auf breiten Layouts, mittig auf schmalen */
+.caney-img-wrapper {
+  justify-self: end; /* bei zwei Spalten rechts ausrichten */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Bild skaliert innerhalb seiner Box, max-width limitiert */
+.caney-img {
+  width: 100%;
+  max-width: clamp(220px, 32vw, 420px);
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Animation Background-Gradient */
+@keyframes effect {
+  0% { background-position: 0%; }
+  100% { background-position: 450%; }
+}
+
+/* Caney Audio */
+
+.audio {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(2rem, 8vw, 4rem);
+  width: 100%;
+  align-items: center;
+  padding: clamp(1.2rem, 2.5vw, 3.5rem) clamp(3.5%, 8vw, 10%);
+
+}
+
+.audio .audioarea{
+  background: url("../bilder/scooby.webp") no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 7vw, 7rem);
+}
+
+.audio .btnaudio{
+  font-size: clamp(1.2rem, 1.8vw, 5rem);
+  color: rgb(156, 2, 2);
+  display:block;
+  background: #03B1AA;
+  cursor: pointer;
+  border: 3px solid black;
+  border-radius: clamp(6px, 8px, 12px);
+  padding: clamp(0.4rem, 0.7vw, 2rem);
+  transition: all .6s;
+}
+
+.audio .btnaudio:hover{
+  transform: translateY(-5px);
+}
+
+.audio .btnaudio span{
+  font-family: 'Sixtyfour';
+  font-weight: 800;
+  font-size: clamp(1.2rem, 1.8vw, 5rem);
+  color: rgb(156, 2, 2);
+}
+
+.audio .audioarea .player-ui{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(5px, 10px, 20px);
+  align-items: center;
+}
+
+.audio .audioarea .tracklist{
+  padding: clamp(5px, 10px, 15px);
+  background: rgba(44, 42, 146, 0.35);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius:12px;
+  text-align:start;
+  backdrop-filter: blur(2px);
+}
+
+.audio .audioarea .tracklist .track a{
+  font-size: clamp(10px, 18px, 30px);
+  font-family: 'Sixtyfour';
+  font-weight: 900;
+  color: #74b808;
+  cursor: pointer;
+  transition: all .6s ease;
+}
+
+.audio .audioarea .tracklist .track a:hover{
+  text-decoration: underline 3px solid red;
+}
+
+.audio .caney-img-audio-wrapper{
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.audio .caney-img-audio{
+  width: 100%;
+  max-width: clamp(220px, 32vw, 420px);
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+/* ==================== FOOTER ==================== */
+footer{
+    background: rgb(2, 30, 46);
+    padding-top: 50px;
+    margin-top: 50px;
+  }
+
+
+  .all-footer{
+    width: 100%;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    height: 210px;
+  }
+  
+  .footer-content{
+    width: 33.3%;
+  }
+  
+.footer-content h3{
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: ghostwhite;
+  }
+  
+  .footer-content p{
+    width: 130px;
+    margin: auto;
+    padding: 7px;
+    font-size: 15px;
+    color: ghostwhite;
+  }
+  
+  .footer-content ul{
+    text-align: center;
+  }
+  
+  .list{
+    padding: 0;
+  }
+
+  .list li a{
+    color: ghostwhite;
+  }
+  
+  .list li{
+    width: auto;
+    text-align: center;
+    list-style-type: none;
+    padding: 7px;
+    position: relative;
+  }
+  
+  .list li::before{
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 100%;
+    width: 0;;
+    height: 3px;
+    background: rgba(11, 220, 228, 0.37);
+    transition-duration: .5s;
+    transition: width .3s ease;
+    -webkit-transition: width .3s ease;
+    
+  }
+  
+  .list li:hover::before{
+    width: 70px;
+    background-color: #7C0505;
+  }
+  
+
+.social-icons{
+  text-align: center;
+  padding: 0;
+}
+
+.social-icons li{
+  display:block;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.social-icons i{
+  color: ghostwhite;
+  font-size: 25px;
+}
+  
+.social-icons a{
+  text-decoration: none;
+  color: ghostwhite;
+}
+  
+.social-icons a:hover{
+  color: #f18930;
+}
+
+.social-icons i:hover{
+  color: #f18930;
+}
+
+.footer-copy{   
+  background: linear-gradient(250.59deg, #3d1a61, #1a1536 48.53%, #7e064c 75.52%);
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 85px;
+  color: ghostwhite;
+}
+
+@media (max-width:576px) {
+  
+   .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+  .list li::before{
+   content: "";
+   position: none;
+   transform: translate(-50%, -50%);
+   left: 0;
+   top: 0;
+   width: 0;;
+   height:0;
+   background: rgba(12, 12, 66, 0.37);
+   transition-duration: .5s;
+   
+ }
+ 
+ .list li:hover::before{
+   width: none;
+ }
+  
+
+ .list li a{
+   font-size: 12px;
+ }
+ 
+
+.social-icons li{
+ padding: 2px;
+}
+
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 80px;
+ font-size: 9px;
+}
+}
+
+@media (max-height: 576px) and (orientation: landscape) {
+   .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+
+ .list li a{
+   font-size: 12px;
+ }
+ 
+
+.social-icons li{
+ padding: 2px;
+}
+
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 93px;
+ font-size: 12px;
+}
+
+}
