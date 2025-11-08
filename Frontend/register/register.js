@@ -1,112 +1,105 @@
-// === AUTH MODAL + BACKEND-KOMMUNIKATION ===
 document.addEventListener('DOMContentLoaded', () => {
-  // ---- UI-Elemente ----
-  const openRegisterBtn = document.querySelector('.nav-btn');      // Header-Button (optional)
-  const authModal       = document.getElementById('authModal');
-  const authCard        = authModal.querySelector('.auth-card');
-  const closeAuthBtn    = authModal.querySelector('.auth-close');
-  const toRegister      = authModal.querySelector('#toRegister');
-  const toLogin         = authModal.querySelector('#toLogin');
+  const authModal = document.getElementById('authModal');
+  const authCard  = authModal?.querySelector('.auth-card');
+  const closeAuthBtn = authModal?.querySelector('.auth-close');
+  const toRegister = authModal?.querySelector('#toRegister');
+  const toLogin    = authModal?.querySelector('#toLogin');
+  const openAuthBtn = document.getElementById('openAuth') || document.querySelector('.nav-btn');
 
-  // Formulare + Eingaben (IDs wie in index.html)
-  const loginForm = document.getElementById('loginForm');
-  const loginEmail = document.getElementById('loginEmail');
-  const loginPass  = document.getElementById('loginPass');
+  const loginForm    = document.getElementById('loginForm');
+  const loginEmail   = document.getElementById('loginEmail');
+  const loginPass    = document.getElementById('loginPass');
   const registerForm = document.getElementById('registerForm');
-  const regEmail  = document.getElementById('regEmail');
-  const regPass   = document.getElementById('regPass');
+  const regEmail     = document.getElementById('regEmail');
+  const regPass      = document.getElementById('regPass');
 
-  // ---- Basis-URL (gleiches Origin) ----
-  const API = ''; // leer = gleicher Server (http://localhost:3000)
+  const API = ''; // gleicher Origin (http://localhost:3000)
 
-  // ---- API-Helper ----
-  async function apiRegister(username, password) {
+  async function apiRegister(email, password) {
     const r = await fetch(`${API}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ email, password })
     });
-    return r.json();
+    const data = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, ...data };
   }
 
-  async function apiLogin(username, password) {
+  async function apiLogin(email, password) {
     const r = await fetch(`${API}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ email, password })
     });
-    return r.json();
+    const data = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, ...data };
   }
 
-  async function apiLogout() {
-    await fetch(`${API}/auth/logout`, { method: 'POST', credentials: 'include' });
-  }
-
-  // ---- Modal Steuerung ----
   function openAuth(mode = 'login') {
+    if (!authModal || !authCard) return;
     authModal.classList.add('open');
-    document.body.classList.add('no-scroll');
+    if (window.innerWidth <= 800){
+       document.body.classList.add('no-scroll');
+    }
+    else{
+        document.body.classList.remove('no-scroll');
+    }
     if (mode === 'register') authCard.classList.add('show-register');
     else authCard.classList.remove('show-register');
   }
-
   function closeAuth() {
-    authModal.classList.remove('open');
+    authModal?.classList.remove('open');
     document.body.classList.remove('no-scroll');
   }
 
-  // Header-Button (optional) öffnet Login
-  openRegisterBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    openAuth('login');
+  openAuthBtn?.addEventListener('click', (e) => { e.preventDefault(); openAuth('login'); });
+  authModal?.addEventListener('click', (e) => {
+    if (e.target === authModal || e.target === closeAuthBtn || e.target?.closest('.auth-close')) closeAuth();
   });
+  toRegister?.addEventListener('click', () => authCard?.classList.add('show-register'));
+  toLogin?.addEventListener('click', () => authCard?.classList.remove('show-register'));
 
-  // Overlay-Klick schließt (Hintergrund oder X)
-  authModal.addEventListener('click', (e) => {
-    if (e.target === authModal || e.target === closeAuthBtn || e.target.closest('.auth-close')) {
-      closeAuth();
-    }
-  });
-
-  // Wechsel Login <-> Register
-  toRegister.addEventListener('click', () => authCard.classList.add('show-register'));
-  toLogin.addEventListener('click', () => authCard.classList.remove('show-register'));
-
-  // ESC zum Schließen
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && authModal.classList.contains('open')) closeAuth();
+    if (e.key === 'Escape' && authModal?.classList.contains('open')) closeAuth();
   });
 
-  // ---- LOGIN ----
+  // LOGIN
   loginForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = loginEmail.value.trim();
-    const pass  = loginPass.value;
-    if (!email || !pass) return alert('Bitte E-Mail und Passwort eingeben.');
-    const res = await apiLogin(email, pass);
-    if (res.ok) {
-      closeAuth();
-      // Nach Login: geschützte Seite anfordern
-      window.location.href = '/member/anime';
-    } else {
-      alert(res.error || 'Login fehlgeschlagen');
-    }
+    const password = loginPass.value;
+    if (!email || !password) return alert('Bitte E-Mail und Passwort eingeben.');
+    const btn = loginForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      const res = await apiLogin(email, password);
+      if (res.ok) {
+        closeAuth();
+        window.location.href = '/protected/caney.html'; // <- deine geschützte Seite
+      } else {
+        alert(res.error || 'Login fehlgeschlagen');
+      }
+    } finally { btn.disabled = false; }
   });
 
-  // ---- REGISTRIERUNG ----
+  // REGISTER
   registerForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = regEmail.value.trim();
-    const pass  = regPass.value;
-    if (!email || !pass) return alert('Bitte E-Mail und Passwort eingeben.');
-    const res = await apiRegister(email, pass);
-    if (res.ok) {
-      alert('Registriert! Jetzt einloggen.');
-      authCard.classList.remove('show-register'); // zurück zum Login-Screen
-    } else {
-      alert(res.error || 'Registrierung fehlgeschlagen');
-    }
+    const password = regPass.value;
+    if (!email || !password) return alert('Bitte E-Mail und Passwort eingeben.');
+    const btn = registerForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      const res = await apiRegister(email, password);
+      if (res.ok) {
+        alert('Registriert! Jetzt einloggen.');
+        authCard?.classList.remove('show-register');
+      } else {
+        alert(res.error || 'Registrierung fehlgeschlagen');
+      }
+    } finally { btn.disabled = false; }
   });
 });

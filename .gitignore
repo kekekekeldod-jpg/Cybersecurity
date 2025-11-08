@@ -1,5 +1,6 @@
 # Backend
 Backend/node_modules/
+Backend/data/
 Backend/.env
 dist/
 build/

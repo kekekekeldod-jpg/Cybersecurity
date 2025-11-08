@@ -640,16 +640,35 @@ https://www.emailjs.com/
   
   <!--========== Ende von Footer ============-->
 
- <!-- Auth-Modal-Container (muss existieren) -->
-<div id="authModal" class="auth-modal">
-  <div class="auth-card">
+<!-- Auth-Modal-Container (muss existieren) -->
+<div id="authModal" class="auth-modal" aria-hidden="true">
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
     <button class="auth-close" aria-label="Schließen">✕</button>
 
     <!-- Login -->
     <form class="auth-form auth-form--login" id="loginForm" novalidate>
-      <h2 class="auth-title">Anmelden</h2>
-      <div class="auth-field"><input id="loginEmail" type="email" placeholder="E-Mail"></div>
-      <div class="auth-field"><input id="loginPass"  type="password" placeholder="Passwort"></div>
+      <h2 class="auth-title" id="authTitle">Anmelden</h2>
+      <div class="auth-field">
+        <input
+          id="loginEmail"
+          name="email"
+          type="email"
+          placeholder="E-Mail"
+          autocomplete="email"
+          inputmode="email"
+          required
+        />
+      </div>
+      <div class="auth-field">
+        <input
+          id="loginPass"
+          name="password"
+          type="password"
+          placeholder="Passwort"
+          autocomplete="current-password"
+          required
+        />
+      </div>
       <button id="loginBtn" class="auth-btn" type="submit">Bestätigen</button>
       <p class="auth-switch">Noch kein Konto?
         <button type="button" class="auth-link" id="toRegister">Registrieren</button>
@@ -659,8 +678,28 @@ https://www.emailjs.com/
     <!-- Register -->
     <form class="auth-form auth-form--register" id="registerForm" novalidate>
       <h2 class="auth-title">Registrieren</h2>
-      <div class="auth-field"><input id="regEmail" type="email" placeholder="E-Mail"></div>
-      <div class="auth-field"><input id="regPass"  type="password" placeholder="Passwort"></div>
+      <div class="auth-field">
+        <input
+          id="regEmail"
+          name="email"
+          type="email"
+          placeholder="E-Mail"
+          autocomplete="email"
+          inputmode="email"
+          required
+        />
+      </div>
+      <div class="auth-field">
+        <input
+          id="regPass"
+          name="password"
+          type="password"
+          placeholder="Passwort"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        />
+      </div>
       <button id="registerBtn" class="auth-btn" type="submit">Konto anlegen</button>
       <p class="auth-switch">Schon ein Konto?
         <button type="button" class="auth-link" id="toLogin">Anmelden</button>
@@ -668,6 +707,7 @@ https://www.emailjs.com/
     </form>
   </div>
 </div>
+
 
   <script src="script.js"></script>
   <script src="schlangenspiel/snake.js"></script>

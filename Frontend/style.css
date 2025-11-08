@@ -64,8 +64,13 @@
     color: var(--text-color);
     background: #2F3359;
     overflow-x: hidden;
+    overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    }
+
+    body.no-scroll{
+      overflow: hidden;
     }
     
     header {
