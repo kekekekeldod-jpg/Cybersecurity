@@ -23,7 +23,7 @@ const PROTECTED_ROOT = path.resolve(__dirname, "../Frontend/protected");
 
 const PORT = process.env.PORT || 3000;
 const DB_PATH = process.env.DB_PATH || "./data/user.db";
-const SESSION_SECRET = process.env.SESSION_SECRET || "absolute_sicherheit_ih_wichser";
+const SESSION_SECRET = process.env.SESSION_SECRET || "please_change_me_super_secret";
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
 
 
