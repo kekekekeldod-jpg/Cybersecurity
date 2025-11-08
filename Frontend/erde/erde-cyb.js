@@ -4,7 +4,7 @@
         let scene;
         let camera; 
         let renderer;
-        let earthmesh; 
+        let earthmesh;
 
         let canvasWidth, canvasHeight, canvasColor;
 
