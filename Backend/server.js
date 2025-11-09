@@ -66,7 +66,11 @@ db.exec(`
 const app = express();
 
 // Helmet: HSTS aus (kein HTTPS noch), CSP angepasst
-app.use(helmet({                                                    hsts: false,                                                      crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },  crossOriginResourcePolicy: { policy: "same-origin" },
+app.use(helmet({
+  hsts: false,
+  crossOriginOpenerPolicy: false,
+  originAgentCluster: false,
+  crossOriginResourcePolicy: { policy: "same-origin" },
   contentSecurityPolicy: {
     useDefaults: true,
     directives: {
@@ -85,7 +89,6 @@ app.use(helmet({                                                    hsts: false,
     }
   }
 }));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

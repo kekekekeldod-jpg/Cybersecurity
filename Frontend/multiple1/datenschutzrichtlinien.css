@@ -2,10 +2,11 @@
   --h2-color: ghostwhite; 
   --h3-color: rgb(206, 211, 207); 
   --p-color: rgb(199, 113, 0);
-  --strong-color: rgb(201, 141, 141); 
+  --strong-color: rgb(212, 73, 73); 
   --a-color: #008aff;
   --blur-color:  rgba(44, 42, 146, 0.35);
   --border-color: rgba(255,255,255,.2);
+  --li-color: rgb(148, 51, 140);
 }
 
 
@@ -148,6 +149,10 @@ section strong{
 section a{
   color: var(--a-color);
   text-decoration: underline;
+}
+
+section li{
+  color: var(--li-color);
 }
 
 /* Footer */
