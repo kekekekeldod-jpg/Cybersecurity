@@ -1,9 +1,10 @@
 # Backend
 Backend/node_modules/
 Backend/data/
-
+Backend/.env
 dist/
 build/
 *.log
 .DS_Store
 Thumbs.db
+Nginxcode.txt
