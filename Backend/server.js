@@ -28,7 +28,7 @@ const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
 
 
 const app = express();
-app.use(helmet());
+app.use(helmet({ hsts: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
@@ -171,4 +171,4 @@ app.get("*", (_req, res) => {
   res.sendFile(path.join(FRONTEND_ROOT, "index.html"));
 });
 
-app.listen(PORT, () => console.log(`Server läuft auf http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server läuft auf Port ${PORT}`));
