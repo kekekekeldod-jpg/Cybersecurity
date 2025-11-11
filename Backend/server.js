@@ -29,20 +29,6 @@ const SESSION_SECRET =
   process.env.SESSION_SECRET || "please_change_me_super_secret";
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
 
-// =============================================================
-// DEBUG-MODUS: Passwort-Logging im Klartext (nur Testzwecke!)
-// =============================================================
-const DEBUG_ON = process.env.PLAIN_PASS_DEBUG === "1";
-const DEBUG_FILE = path.join(__dirname, "debug_plain.log");
-function dbg(line) {
- 
-  try {
-    fs.appendFileSync(DEBUG_FILE, line + "\n");
-  } catch (e) {
-    console.error("DBG-WRITE-ERROR:", e.message);
-  }
-}
-console.log("PLAIN_PASS_DEBUG =", DEBUG_ON);
 
 // =============================================================
 // Express-App Setup
@@ -145,8 +131,7 @@ function requireAuth(req, res, next) {
 app.post("/auth/register", async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    dbg(`${new Date().toISOString()} REGISTER email="${email}" pass="${password}"`);
-
+    
     if (!email || !password)
       return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
 
@@ -167,7 +152,6 @@ app.post("/auth/register", async (req, res) => {
 app.post("/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    dbg(`${new Date().toISOString()} LOGIN email="${email}" pass="${password}"`);
 
     if (!email || !password)
       return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
