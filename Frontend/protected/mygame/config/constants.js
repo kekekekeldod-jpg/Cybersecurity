@@ -14,17 +14,18 @@ const left  = { x: 16, y: (FIELD_H - PADDLE_H) / 2, w: PADDLE_W, h: PADDLE_H };
 const right = { x: FIELD_W - 16 - PADDLE_W, y: (FIELD_H - PADDLE_H) / 2, w: PADDLE_W, h: PADDLE_H };
 const ball  = { x: FIELD_W / 2, y: FIELD_H / 2, r: BALL_R, vx: 0, vy: 0 };
 
-const keys = { KeyW:false, KeyS:false, ArrowUp:false, ArrowDown:false };
-
 canvas.width = FIELD_W;
 canvas.height = FIELD_H;
+
+const keys = { KeyW:false, KeyS:false, ArrowUp:false, ArrowDown:false };
+
 
 let last = performance.now();
 let state = 'ready'; // 'ready' | 'playing' | 'failed' | 'gameOver'
 
 let scoreL = 0;
 let scoreR = 0;
-let WIN_COINS = 3;
+let WIN_COINS = 5;
 let winner = null;
 
 let backgroundMusic = new Audio('mygame/audio/backgroundMusic.mp3');
@@ -41,7 +42,14 @@ gameOverMusic.loop = false;
 
 let missFailed = new Audio ('mygame/audio/missFailed.mp3');
 missFailed.currentTime = 0;
-missFailed.volume = 0.3;
+missFailed.volume = 0.7;
+
+const backgroundImage = new Image();
+backgroundImage.src = './bilder/backgroundImage.png'; 
+backgroundImage.onload = () => console.log('Bild ist geladen!');
+
+
+
 
 
 // --- Input
@@ -65,10 +73,40 @@ document.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
 
+function setupCanvas(cssW, cssH) {
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+  canvas.style.width = cssW + 'px';
+
+  canvas.style.height = cssH + 'px';
+
+  canvas.width = Math.round(FIELD_W * dpr);
+
+  canvas.height = Math.round(FIELD_H * dpr);
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function setupResponsiveMode() {
+  if (window.innerWidth < 600){
+
+    setupCanvas(300, 200);
+
+  } else {
+
+    setupCanvas(FIELD_W, FIELD_H);
+
+  }
+}
+
 // --- Helpers
 function clearField() {
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if(backgroundImage.complete) {
+  ctx.drawImage(backgroundImage, 0, 0, FIELD_W, FIELD_H);
+  }else {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, FIELD_W, FIELD_H);
+  }
 }
 
 function drawPaddle(x, y, w, h) {
@@ -83,6 +121,7 @@ function drawBall(x, y, r) {
   ctx.fill();
 }
 
+
 function drawCenterLine() {
   ctx.strokeStyle = '#333';
   ctx.setLineDash([10, 12]);
@@ -93,6 +132,7 @@ function drawCenterLine() {
   ctx.stroke();
   ctx.setLineDash([]);
 }
+
 
 function clampPaddle(p) {
   if (p.y < 0) p.y = 0;
@@ -212,7 +252,7 @@ function draw() {
   ctx.fillText(`${scoreL} : ${scoreR}`, FIELD_W / 2, 12);
 
   // messages
-  ctx.textAgameoverlign = 'center';
+  ctx.textAlign= 'center';
   ctx.textBaseline = 'middle';
 
   if (state === 'ready') {
@@ -240,6 +280,10 @@ function draw() {
     ctx.fillText('Leertaste: Neues Match', FIELD_W/2, FIELD_H/2 + 16);
   }
 }
+
+window.addEventListener('resize', setupResponsiveMode);
+setupResponsiveMode();
+
 
 // --- Loop
 function loop(t) {
