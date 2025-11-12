@@ -451,7 +451,7 @@ footer{
   justify-content: center;
   width: 100%;
   height: auto;
-  padding: clamp(2rem, 9vw, 8rem);
+  padding: clamp(1rem, 8vw, 7rem);
   text-align: center;
   align-items: center;
   inset: 10px;
@@ -567,5 +567,11 @@ footer{
  margin-top: 93px;
  font-size: 12px;
 }
+
+.canvas{
+  display: block;
+  overflow: hidden;
+}
+
 
 }

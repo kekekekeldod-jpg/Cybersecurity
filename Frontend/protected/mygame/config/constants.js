@@ -1,3 +1,5 @@
+window.addEventListener('DOMContentLoaded', () => {
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -48,7 +50,12 @@ const backgroundImage = new Image();
 backgroundImage.src = './bilder/backgroundImage.png'; 
 backgroundImage.onload = () => console.log('Bild ist geladen!');
 
+let isMobile = false;
 
+let touchL = null;
+let touchR = null;
+
+canvas.style.touchAction = 'none';
 
 
 
@@ -73,6 +80,27 @@ document.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
 
+canvas.addEventListener('pointerdown', handlePointer, { passive: false });
+canvas.addEventListener('pointermove', handlePointer, { passive: false });
+canvas.addEventListener('pointerup', handlePointerEnd, { passive: false });
+canvas.addEventListener('pointercancel', handlePointerEnd, { passive: false });
+
+function handlePointer(e) {
+  const rect = canvas.getBoundingClientRect();
+  const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
+  const cy = (e.clientY - rect.top) * (FIELD_H / rect.height);
+
+  if (cx < FIELD_W/2) touchL = cy; else touchR = cy;
+  e.preventDefault();
+} 
+
+function handlePointerEnd(e) {
+  const rect = canvas.getBoundingClientRect();
+  const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
+  if (cx < FIELD_W/2) touchL = null; else touchR = null;
+  e.preventDefault();
+}
+
 function setupCanvas(cssW, cssH) {
   const dpr = Math.max(1, window.devicePixelRatio || 1);
 
@@ -90,9 +118,13 @@ function setupCanvas(cssW, cssH) {
 function setupResponsiveMode() {
   if (window.innerWidth < 600){
 
-    setupCanvas(300, 200);
+    isMobile = true;
+
+    setupCanvas(320, 220);
 
   } else {
+
+    isMobile = false;
 
     setupCanvas(FIELD_W, FIELD_H);
 
@@ -149,6 +181,11 @@ function update(dt) {
   const vyR = (keys.ArrowUp ? -PADDLE_SPEED : 0) + (keys.ArrowDown ? PADDLE_SPEED : 0);
   right.y += vyR * dt;
   clampPaddle(right);
+
+if (touchL !== null) left.y  = touchL - left.h/2;
+if (touchR !== null) right.y = touchR - right.h/2;
+clampPaddle(left);
+clampPaddle(right);
 
   if (state !== 'playing') return;
 
@@ -295,3 +332,5 @@ function loop(t) {
 }
 
 requestAnimationFrame(loop);
+
+});
