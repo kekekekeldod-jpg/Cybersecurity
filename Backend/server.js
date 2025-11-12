@@ -123,9 +123,6 @@ db.exec(`
   );
 `);
 
-// Express app
-const app = express();
-
 app.use(helmet({
   hsts: false,
   crossOriginOpenerPolicy: false,
