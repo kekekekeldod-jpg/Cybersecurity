@@ -55,10 +55,6 @@ let isMobile = false;
 let touchL = null;
 let touchR = null;
 
-canvas.style.touchAction = 'none';
-
-
-
 // --- Input
 document.addEventListener('keydown', (e) => {
   if (['KeyW','KeyS','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
@@ -80,24 +76,31 @@ document.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
 
-canvas.addEventListener('pointerdown', handlePointer, { passive: false });
-canvas.addEventListener('pointermove', handlePointer, { passive: false });
-canvas.addEventListener('pointerup', handlePointerEnd, { passive: false });
-canvas.addEventListener('pointercancel', handlePointerEnd, { passive: false });
 
 function handlePointer(e) {
+  if (!isMobile) return;                 // Nur im Mobile-Modus
+  if (e.pointerType !== 'touch') return; // Maus & Stift ignorieren
+
   const rect = canvas.getBoundingClientRect();
   const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
-  const cy = (e.clientY - rect.top) * (FIELD_H / rect.height);
+  const cy = (e.clientY - rect.top)  * (FIELD_H / rect.height);
 
-  if (cx < FIELD_W/2) touchL = cy; else touchR = cy;
+  if (cx < FIELD_W/2) touchL = cy;
+  else                touchR = cy;
+
   e.preventDefault();
 } 
 
 function handlePointerEnd(e) {
+  if (!isMobile) return;
+  if (e.pointerType !== 'touch') return;
+
   const rect = canvas.getBoundingClientRect();
   const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
-  if (cx < FIELD_W/2) touchL = null; else touchR = null;
+
+  if (cx < FIELD_W/2) touchL = null;
+  else                touchR = null;
+
   e.preventDefault();
 }
 
@@ -116,19 +119,34 @@ function setupCanvas(cssW, cssH) {
 }
 
 function setupResponsiveMode() {
-  if (window.innerWidth < 600){
 
-    isMobile = true;
+  const wasMobile = isMobile;
+  isMobile = window.innerWidth < 600;
+  if (isMobile && !wasMobile){
+
+    canvas.style.touchAction = 'none';
+
+    canvas.addEventListener('pointerdown', handlePointer,   { passive: false });
+    canvas.addEventListener('pointermove', handlePointer,   { passive: false });
+    canvas.addEventListener('pointerup',   handlePointerEnd,{ passive: false });
+    canvas.addEventListener('pointercancel', handlePointerEnd,{ passive: false });
 
     setupCanvas(320, 220);
 
-  } else {
+  } else if (!isMobile && wasMobile) {
+ 
+    canvas.style.touchAction = 'auto';
 
-    isMobile = false;
+    canvas.removeEventListener('pointerdown', handlePointer);
+    canvas.removeEventListener('pointermove', handlePointer);
+    canvas.removeEventListener('pointerup', handlePointerEnd);
+    canvas.removeEventListener('pointercancel', handlePointerEnd);
+
+    touchL = null;
+    touchR = null
 
     setupCanvas(FIELD_W, FIELD_H);
-
-  }
+  } 
 }
 
 // --- Helpers

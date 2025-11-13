@@ -454,14 +454,15 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .game-canvas {
   display: block;
-  margin: 0 auto;
+  margin: clamp(1rem, 3vw, 2rem) auto;
   max-width: 100%;
   height: auto;
-
+ 
 }
 
 @media (max-width:576px) {
