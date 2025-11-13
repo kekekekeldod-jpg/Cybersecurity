@@ -446,23 +446,22 @@ footer{
   color: ghostwhite;
 }
 
-.div-class{
-  display: block;
+.game-section{
+  padding: clamp(1rem, 4vw, 6rem);
+}
+
+.game-wrapper {
+  display: flex;
   justify-content: center;
-  width: 100%;
-  height: auto;
-  padding: clamp(1rem, 8vw, 7rem);
-  text-align: center;
   align-items: center;
-  inset: 10px;
 }
 
-.div-class h1{
-  color: var(--card-bg);
-}
+.game-canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 
-.canvas{
-  margin: clamp(1rem, 3vw, 3rem);
 }
 
 @media (max-width:576px) {
@@ -567,11 +566,5 @@ footer{
  margin-top: 93px;
  font-size: 12px;
 }
-
-.canvas{
-  display: block;
-  overflow: hidden;
-}
-
 
 }
