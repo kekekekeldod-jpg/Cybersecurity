@@ -55,4 +55,11 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
       z: 300
     }
   });
+  sr.reveal('.game-wrapper', {
+    rotate: {
+      x: 200,
+      y: 300,
+      z: 0
+    }
+  })
 };
