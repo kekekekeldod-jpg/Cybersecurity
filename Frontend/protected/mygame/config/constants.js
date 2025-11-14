@@ -80,6 +80,9 @@ document.addEventListener('keyup', (e) => {
 function handlePointer(e) {
   if (!isMobile) return;                 // Nur im Mobile-Modus
   if (e.pointerType !== 'touch') return; // Maus & Stift ignorieren
+  if(state !== 'playing'){
+    serve(); 
+  } 
 
   const rect = canvas.getBoundingClientRect();
   const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
@@ -94,6 +97,12 @@ function handlePointer(e) {
 function handlePointerEnd(e) {
   if (!isMobile) return;
   if (e.pointerType !== 'touch') return;
+  if(state === 'gameOver' || scoreL >= WIN_COINS || scoreR >= WIN_COINS){
+    scoreL = 0;
+    scoreR = 0;
+    winner = null;
+    return;
+  } 
 
   const rect = canvas.getBoundingClientRect();
   const cx = (e.clientX - rect.left) * (FIELD_W / rect.width);
@@ -313,13 +322,21 @@ function draw() {
   if (state === 'ready') {
     ctx.font = '26px Arial';
     ctx.fillStyle = '#1bad69';
+    if(window.innerWidth > 600){
     ctx.fillText('Drücke die Leertaste, um das Spiel zu starten', FIELD_W/2, FIELD_H/2);
+    }else {
+    ctx.fillText('Drücke auf das Bildschirm, um das Spiel zu starten' , FIELD_W/2, FIELD_H/2);
+    }
   }
 
   if (state === 'failed') {
     ctx.font = '23px Arial';
     ctx.fillStyle = '#10a1bb';
+    if(window.innerWidth > 600){
     ctx.fillText('Punkt! Drücke Leertaste für den nächsten Aufschlag', FIELD_W/2, FIELD_H/2);
+    } else {  
+    ctx.fillText('Punkt! Drücke aufs Bildschirm für den nächsten Aufschlag', FIELD_W/2, FIELD_H/2);
+    }
   }
 
   if (state === 'gameOver') {
@@ -330,9 +347,13 @@ function draw() {
       winner === 'R' ? 'Spiel vorbei – Rechts gewinnt!' :
       'Spiel vorbei!';
     ctx.fillText(text, FIELD_W/2, FIELD_H/2 - 24);
-
+  
     ctx.font = '18px Arial';
+    if(window.innerWidth > 600){
     ctx.fillText('Leertaste: Neues Match', FIELD_W/2, FIELD_H/2 + 16);
+    } else { 
+     ctx.fillText('Drücke Bildschirm: Neues Match', FIELD_W/2, FIELD_H/2 + 16);
+    }
   }
 }
 
