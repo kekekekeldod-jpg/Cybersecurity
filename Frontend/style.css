@@ -1064,6 +1064,12 @@
     background: linear-gradient(65deg, deeppink, coral);
     color: ghostwhite;
     border-radius: 5rem;
+    transition: all .6s ease;
+    }
+
+    .prs:hover{
+      transform: translateY(-4px);
+      background: linear-gradient(65deg, rgb(138, 25, 85), rgb(134, 50, 19));
     }
     
     .preis .all-preis .preis-box .prs {
@@ -1760,10 +1766,11 @@
     
     .uber-text h1{
     font-size: 32px;
+    margin-bottom: 20px;
     }
     
     .uber-text p{
-    font-size: 14px;
+    font-size: 17px;
     }
     
     .menu-content{
