@@ -177,9 +177,9 @@ header .header-center h2 {
   margin-bottom: .6rem;
 }
 
-/* ==================== CANEY SEKTION (GRID: auto-fit -> 1 oder 2 Spalten) =============== */
+/* ==================== White-Hat-Hacker SEKTION (GRID: auto-fit -> 1 oder 2 Spalten) =============== */
 /* auto-fit + minmax sorgt dafür, dass es automatisch von 2 auf 1 Spalte wechselt */
-.caney {
+.white-hat-hacker {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(1rem, 3.5vw, 4.5rem);
@@ -189,12 +189,12 @@ header .header-center h2 {
 }
 
 /* Textbereich nimmt 1fr (flexibel) */
-.caney-text {
+.white-hat-hacker-text {
   order: 0; /* bei grid nicht nötig, aber bleibt lesbar */
 }
 
 /* Überschrift mit Farb-Gradient und clamp */
-.caney-text h1 {
+.white-hat-hacker-text h1 {
   font-family: 'Permanent Marker', cursive;
   font-size: clamp(1.8rem, 6vw, 3.3rem);
   margin-bottom: clamp(.6rem, 1.6vw, 2rem);
@@ -207,7 +207,7 @@ header .header-center h2 {
 }
 
 /* Fließtext */
-.caney-text p {
+.white-hat-hacker-text p {
   font-size: clamp(0.95rem, 1.6vw, 1.4rem);
   line-height: 1.6;
   color: rgb(8, 134, 192);
@@ -215,12 +215,12 @@ header .header-center h2 {
   margin-right: 0;
 }
 
-.caney-text span{
+.white-hat-hacker-text span{
   font-size: clamp(1.8rem, 4vw, 3.3rem);
 }
 
 /* Bildbereich: rechts auf breiten Layouts, mittig auf schmalen */
-.caney-img-wrapper {
+.white-hat-hacker-img-wrapper {
   justify-self: end; /* bei zwei Spalten rechts ausrichten */
   display: flex;
   align-items: center;
@@ -229,7 +229,7 @@ header .header-center h2 {
 }
 
 /* Bild skaliert innerhalb seiner Box, max-width limitiert */
-.caney-img {
+.white-hat-hacker-img {
   width: 100%;
   max-width: clamp(220px, 32vw, 420px);
   height: auto;
@@ -244,7 +244,7 @@ header .header-center h2 {
   100% { background-position: 450%; }
 }
 
-/* Caney Audio */
+/* white-hat-hacker Audio */
 
 .audio {
   display:grid;
@@ -257,7 +257,7 @@ header .header-center h2 {
 }
 
 .audio .audioarea{
-  background: url("../bilder/scooby.webp") no-repeat center center / cover;
+  background: url("./bilder/white-hack.jpg") no-repeat center center / cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,23 +287,23 @@ header .header-center h2 {
   color: rgb(156, 2, 2);
 }
 
-.audio .audioarea .player-ui{
+.audio .audioarea .hack-list{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(5px, 10px, 20px);
   align-items: center;
 }
 
-.audio .audioarea .tracklist{
+.audio .audioarea .hackes{
   padding: clamp(5px, 10px, 15px);
   background: rgba(44, 42, 146, 0.35);
   border: 1px solid rgba(255,255,255,.2);
   border-radius:12px;
-  text-align:start;
+  text-align:center;
   backdrop-filter: blur(2px);
 }
 
-.audio .audioarea .tracklist .track a{
+.audio .audioarea .hackes .hack a{
   font-size: clamp(10px, 18px, 30px);
   font-family: 'Sixtyfour';
   font-weight: 900;
@@ -312,11 +312,11 @@ header .header-center h2 {
   transition: all .6s ease;
 }
 
-.audio .audioarea .tracklist .track a:hover{
+.audio .audioarea .hackes .hack a:hover{
   text-decoration: underline 3px solid red;
 }
 
-.audio .caney-img-audio-wrapper{
+.audio .white-hat-hacker-audio-wrapper{
   justify-self: end;
   display: flex;
   align-items: center;
@@ -324,9 +324,9 @@ header .header-center h2 {
   width: 100%;
 }
 
-.audio .caney-img-audio{
+.audio .white-hat-hacker-img-audio{
   width: 100%;
-  max-width: clamp(220px, 32vw, 420px);
+  max-width: clamp(300px, 52vw, 500px);
   height: auto;
   border-radius: 10px;
   object-fit: cover;

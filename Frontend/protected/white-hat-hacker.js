@@ -18,7 +18,7 @@ window.addEventListener('scroll', updateScrollbar);
 updateScrollbar();
 
   let typed = new Typed('#element', {
-    strings:["Fick-Meister", "Weihnachtsmann", "Berlin", "Schimpanse"],
+    strings:["JavaScript", "Python", "C / C++", "SQL"],
   typeSpeed:100,
   backSpeed:100,
   loop: true
@@ -37,8 +37,9 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('.header-center', {delay:200, origin:'bottom'});
   sr.reveal('.header-right', {delay:200, origin:'right'});
   sr.reveal('.daten-s', {delay:200, interval: 600, origin:'bottom'});
-  sr.reveal('.caney-text', {delay:200, origin:'bottom'});
-  sr.reveal('.caney-img-wrapper', { delay: 200, origin:'right'});
+  sr.reveal('.white-hat-hacker-text', {delay:200, origin:'bottom'});
+  sr.reveal('.white-hat-hacker-img-wrapper', { delay: 200, origin:'right'});
+  sr.reveal('.white-hat-hacker-img-audio', { delay: 200, origin:'right'});
   sr.reveal('.audioarea', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
   sr.reveal('.player-ui', {
