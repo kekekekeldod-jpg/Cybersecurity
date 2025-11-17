@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await apiLogin(email, password);
       if (res.ok) {
         closeAuth();
-        window.location.href = '/member/caney'; // <- deine geschützte Seite
+        window.location.href = '/member/white-hat-hacker'; // <- deine geschützte Seite
       } else {
         alert(res.error || 'Login fehlgeschlagen');
       }

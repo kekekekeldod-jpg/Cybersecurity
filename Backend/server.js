@@ -217,9 +217,9 @@ app.use("/member", requireAuth, noCache,
   express.static(PROTECTED_ROOT, { index: false, etag: false, maxAge: 0 })
 );
 
-// Schöne URL für Caney:
-app.get("/member/caney", requireAuth, noCache, (_req, res) => {
-  res.sendFile(path.join(PROTECTED_ROOT, "caney.html"));
+// Schöne URL für White-hat-hacker:
+app.get("/member/white-hat-hacker", requireAuth, noCache, (_req, res) => {
+  res.sendFile(path.join(PROTECTED_ROOT, "white-hat-hacker.html"));
 });
 
 // Public static (Frontend)
