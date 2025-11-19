@@ -46,6 +46,10 @@ let missFailed = new Audio ('MyGame/audio/missFailed.mp3');
 missFailed.currentTime = 0;
 missFailed.volume = 0.7;
 
+let hitMusic = new Audio ('MyGame/audio/hitMusic.mp3');
+hitMusic.currentTime = 0;
+hitMusic.volume = 1;
+
 const backgroundImage = new Image();
 backgroundImage.src = 'MyGame/bilder/backgroundImage.png'; 
 backgroundImage.onload = () => console.log('Bild ist geladen!');
@@ -125,7 +129,7 @@ function setupCanvas(cssW, cssH) {
   canvas.height = Math.round(FIELD_H * dpr);
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
+} 
 
 function setupResponsiveMode() {
 
@@ -224,10 +228,12 @@ clampPaddle(right);
   if (ball.y - ball.r <= 0) {
     ball.y = ball.r;
     ball.vy *= -1;
+    hitMusic.play();
   }
   if (ball.y + ball.r >= FIELD_H) {
     ball.y = FIELD_H - ball.r;
-    ball.vy *= -1;
+    ball.vy *=  -1;
+    hitMusic.play();
   }
 
   // left side: hit or miss
