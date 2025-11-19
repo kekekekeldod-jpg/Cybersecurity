@@ -42,6 +42,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('.white-hat-hacker-img-audio', { delay: 200, origin:'right'});
   sr.reveal('.audioarea', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
+  sr.reveal('.physikMath-text', { interval: 600, origin:'top'});
   sr.reveal('.player-ui', {
     rotate: {
       x: 180,
@@ -60,6 +61,13 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
     rotate: {
       x: 200,
       y: 300,
+      z: 0
+    }
+  })
+  sr.reveal('.physikMath-wrapper-album', {
+    rotate: {
+      x: 100,
+      y: 200,
       z: 0
     }
   })
