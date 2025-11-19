@@ -6,6 +6,7 @@
   --muted: rgba(255,255,255,0.05);
   --card-bg: rgb(2,30,46);
   --blur-effect-color: rgba(44, 42, 146, 0.35);
+  --p-color: rgb(6, 178, 184);
 }
 
 /* =============== GLOBAL RESET (entschärft) =============== */
@@ -107,7 +108,9 @@ p, li, a, span {
 
 /* =============== UNIVERSAL CONTAINERS =============== */
 section{
-  padding: clamp(1.2rem, 2.5vw, 3.5rem);
+  padding: clamp(2rem, 5vw, 6rem);
+  gap: clamp(2rem, 4vw, 6rem);
+  margin: 0 auto;
 }
 
 img {
@@ -226,10 +229,8 @@ header .header-center h2 {
 .white-hat-hacker {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1rem, 3.5vw, 4.5rem);
   align-items: center;
-  width: 100%;
-  padding: clamp(1.2rem, 2.5vw, 3.5rem) clamp(3.5%, 8vw, 10%);
+  max-width: 1400px;
   background: var(--blur-effect-color);
   backdrop-filter: blur(3px);
   border-radius: 15px;
@@ -298,12 +299,10 @@ header .header-center h2 {
 /* white-hat-hacker Audio */
 
 .audio {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(2rem, 8vw, 4rem);
-  width: 100%;
+  max-width: 1400px;
   align-items: center;
-  padding: clamp(1.2rem, 2.5vw, 3.5rem) clamp(3.5%, 8vw, 10%);
   background: var(--blur-effect-color);
   backdrop-filter: blur(3px);
   border-radius: 15px;
@@ -390,6 +389,92 @@ header .header-center h2 {
 }
 
 
+/* ==================== MATH & Since ==================== */
+
+.physikMath {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  background: var(--blur-effect-color);
+  backdrop-filter: blur(3px);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(2px);
+  margin-top: 50px;
+
+}
+
+.physikMath-text {
+  flex: 1;
+  max-width: 550px;
+}
+
+.physikMath-text h2{
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  animation: header-h2 3s linear infinite;
+}
+
+@keyframes header-h2{
+  0% {
+    color: #08552b;
+  }
+  50%{
+    color: #0d0142;
+  }
+  100%{
+    color: #552a05;
+  }
+}
+
+.physikMath-text p {
+  font-family: 'Jacquard 24';
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.6;
+  opacity: 0.85;
+  color: var(--p-color);
+}
+
+.physikMath-wrapper-album{
+  flex: 1;
+  position: relative;
+  height: clamp(300px, 40vw, 550px);
+}
+
+.img{
+  position: absolute;
+  width: clamp(130px, 25vw, 260px);
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 15px 40px rgba(160, 15, 15, 0.25);
+  transition: transform 0.3 ease, box-shadow 0.3s ease;
+}
+
+.mathImg{
+  top: 0;
+  left: 0;
+  transform: rotate(-4deg);
+  z-index: 1;
+}
+
+.physikImg{
+  top: 10%;
+  left: 20%;
+  transform: rotate(-20deg);
+  z-index: 3;
+}
+
+.physikImg2{
+  top: 8%;
+  left: 50%;
+  transform: rotate(8deg);
+  z-index: 4;
+}
+
+/* ==================== End of MATH & Since ==================== */
 
 
 /* ==================== FOOTER ==================== */
@@ -537,7 +622,7 @@ header .header-center h2 {
  
 }
 
-@media (max-width:576px) {
+@media (max-width:650px) {
   
    .all-footer{
    height: 150px;
@@ -591,6 +676,27 @@ header .header-center h2 {
 .social-icons i{
  font-size: 14px;
 }
+
+.physikMath{
+  flex-direction: column;
+  text-align: center;
+}
+
+.physikMath-wrapper-album{
+  position: static;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.img{
+  position: static;
+  transform: none;
+  width: clamp(120px, 40vw, 200px);
+  }
 
 .footer-copy{
  margin-top: 80px;
