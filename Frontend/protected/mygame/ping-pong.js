@@ -21,6 +21,10 @@ canvas.height = FIELD_H;
 
 const keys = { KeyW:false, KeyS:false, ArrowUp:false, ArrowDown:false };
 
+const backgroundImage = new Image();
+backgroundImage.src = 'MyGame/bilder/backgroundImage.png'; 
+backgroundImage.onload = () => console.log('Bild ist geladen!');
+
 
 let last = performance.now();
 let state = 'ready'; // 'ready' | 'playing' | 'failed' | 'gameOver'
@@ -50,14 +54,25 @@ let hitMusic = new Audio ('MyGame/audio/hitMusic.mp3');
 hitMusic.currentTime = 0;
 hitMusic.volume = 1;
 
-const backgroundImage = new Image();
-backgroundImage.src = 'MyGame/bilder/backgroundImage.png'; 
-backgroundImage.onload = () => console.log('Bild ist geladen!');
+const sounds = [
+  backgroundMusic,
+  crashMusic,
+  hitMusic,
+  gameOverMusic,
+  missFailed
+];
+
+const originalVolumes = new Map();
+sounds.forEach(sound => originalVolumes.set(sound, sound.volume));
+
+let isMuted = false;
 
 let isMobile = false;
 
 let touchL = null;
 let touchR = null;
+
+let btn = document.getElementById('btn');
 
 // --- Input
 document.addEventListener('keydown', (e) => {
@@ -79,6 +94,24 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
+
+function toggleMute(){
+  isMuted = !isMuted;
+  if (isMuted) {
+    sounds.forEach(sound => {
+      sound.volume = 0;
+    });
+    btn.textContent = '🔇 Sound aus';
+  } else {
+    sounds.forEach(sound => {
+      const vol = originalVolumes.get(sound);
+      sound.volume = vol !== undefined ? vol : 0.5;
+    });
+    btn.textContent = '🔊 Sound an';
+  }
+}
+
+btn.addEventListener('click', toggleMute);
 
 
 function handlePointer(e) {
