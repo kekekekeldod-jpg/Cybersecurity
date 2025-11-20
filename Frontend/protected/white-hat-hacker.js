@@ -71,4 +71,11 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
       z: 0
     }
   })
+   sr.reveal('.game-btn-wrapper', {
+    rotate: {
+      x: 100,
+      y: 100,
+      z: 0
+    }
+  })
 };
