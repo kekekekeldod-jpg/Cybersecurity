@@ -702,7 +702,7 @@ header .header-center h2 {
 }
 
 
-@media (max-width:650px) {
+@media (max-width:576px) {
   
    .all-footer{
    height: 150px;
@@ -777,6 +777,11 @@ header .header-center h2 {
   transform: none;
   width: clamp(120px, 40vw, 200px);
   }
+  
+   .cursor-light {
+      display: none;
+    }
+    
 
 .footer-copy{
  margin-top: 80px;
