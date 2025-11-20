@@ -2201,6 +2201,10 @@
     --h1-font: 3.5rem;
     --p-font: 14px;
     }
+
+    .cursor-light {
+      display: none;
+    }
     
     .swal-modal {
     width: 270px;
