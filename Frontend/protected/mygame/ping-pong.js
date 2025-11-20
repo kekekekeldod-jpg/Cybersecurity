@@ -98,7 +98,7 @@ document.addEventListener('keyup', (e) => {
 function toggleMute(){
   isMuted = !isMuted;
   if (isMuted) {
-    sounds.forEach(sound => {
+    sounds.forEach(sound => {  
       sound.volume = 0;
     });
     btn.textContent = '🔇 Sound aus';
