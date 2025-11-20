@@ -174,7 +174,7 @@
     }
     
     #scrolling-path{
-    z-index: 9999;
+    z-index: 5000;
     position: fixed;
     top: 0;
     right: 0;
@@ -184,7 +184,7 @@
     }
     
     #scrolling{
-    z-index: 9999;
+    z-index: 5000;
     position: fixed;
     top: 0;
     right: 0;
@@ -2241,6 +2241,7 @@
     justify-content: center;
     transform: rotate(0);
     transition: transform 0.3s;
+    z-index: 2;
   
     }
     
@@ -2324,6 +2325,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: right 1s ease;
+    z-index: 1;
     }
     
     .navmenu a {
@@ -2936,6 +2938,7 @@
     -webkit-backdrop-filter: blur(10px);
     transition: right 1s ease;
     overflow: auto;
+  
     }
     
     .navmenu a {
