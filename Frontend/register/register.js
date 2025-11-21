@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const regEmail     = document.getElementById('regEmail');
   const regPass      = document.getElementById('regPass');
 
-  const API = ''; // gleicher Origin (http://localhost:3000)
+  const API = ''; // gl
 
   async function apiRegister(email, password) {
     const r = await fetch(`${API}/auth/register`, {
@@ -54,9 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('no-scroll');
   }
 
-  openAuthBtn?.addEventListener('click', (e) => { e.preventDefault(); openAuth('login'); });
+  openAuthBtn?.addEventListener('click', (e) => { e.preventDefault(); openAuth('login'); 
+    authCard.classList.remove('rotate-in'); void authCard.offSetWidth; authCard.classList.add('rotate-in');
+  });
+
   authModal?.addEventListener('click', (e) => {
     if (e.target === authModal || e.target === closeAuthBtn || e.target?.closest('.auth-close')) closeAuth();
+    authCard.classList.remove('rotate-in');
   });
   toRegister?.addEventListener('click', () => authCard?.classList.add('show-register'));
   toLogin?.addEventListener('click', () => authCard?.classList.remove('show-register'));

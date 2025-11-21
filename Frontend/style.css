@@ -323,6 +323,21 @@
   box-shadow: 0 20px 50px rgba(189, 17, 17, 0.35);
 }
 
+@keyframes rotateIn {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0) scale(1);
+  }
+}
+
+.auth-card.rotate-in{
+  animation: rotateIn 0.5s ease-out;
+}
+
 /* Dunkler Overlay über dem Hintergrundbild */
 .auth-card::before {
   content: "";
