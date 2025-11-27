@@ -78,4 +78,20 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
       z: 0
     }
   })
+  sr.reveal('.kaliWrapper', {
+    rotate: {
+      x: 342,
+      y: 34,
+      z: 0
+    }
+  })
+  sr.reveal('.kaliImage', {
+    rotate: {
+      x: 143,
+      y: 234,
+      z: 0
+    }
+  })
 };
+
+ 
