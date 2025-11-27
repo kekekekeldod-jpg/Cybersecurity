@@ -51,6 +51,8 @@ Font Awesome
 
 Google Fonts
 
+Kali Linux
+
 # 🕹️ Future Plans
 
 Add interactive cybersecurity mini-games
@@ -77,3 +79,4 @@ Merdo Daniel
 
 
 *“Security is not a product — it’s a mindset.”*
+
