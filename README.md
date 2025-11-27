@@ -69,7 +69,7 @@ Integrate database support (MongoDB or PostgreSQL)
 
 # 📄 License
 
-This project is licensed under the MIT License — you’re free to use, modify, and share it as long as proper credit is given.
+This project is licensed under the MIT License, you’re free to use, modify, and share it as long as proper credit is given.
 
 # 👤 Author
 
@@ -79,4 +79,5 @@ Merdo Daniel
 
 
 *“Security is not a product — it’s a mindset.”*
+
 
