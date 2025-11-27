@@ -526,6 +526,26 @@
     margin-bottom: 40px;
     display: block;
     }
+
+    .start-text .p1 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 3px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.4rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+    .start-text .p1 a:hover{
+    transform: none;
+    text-decoration: underline blueviolet 3px;
+    border: none;
+    }
     
     .start-text .p2{
     display: none;
@@ -2434,6 +2454,26 @@
     line-height: 30px;
     margin-bottom: 20px;
     display: block;
+    }
+
+    .start-text .p2 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 1px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.3rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+    .start-text .p2 a:hover{
+    transform: none;
+    text-decoration: underline blueviolet 1px;
+    border: none;
     }
     
     .start-text{
