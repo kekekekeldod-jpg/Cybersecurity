@@ -23,7 +23,7 @@ Focus on security-aware coding and clean structure
 
 # 🧠 Purpose
 
-This project is not only about web design — it’s a personal journey into cybersecurity, front-end logic, and back-end architecture.
+This project is not only about web design, it’s a personal journey into cybersecurity, front-end logic, and back-end architecture.
 It serves as both a portfolio and an educational playground, connecting creativity with technical depth.
 As a full-stack developer, I work on:
 
@@ -74,5 +74,6 @@ This project is licensed under the MIT License — you’re free to use, modify,
 Merdo Daniel
  💻 Full-Stack Developer — Cybersecurity & Creative Coding
  📧 Contact: caney-phisher@gmail.com
+
 
 *“Security is not a product — it’s a mindset.”*
