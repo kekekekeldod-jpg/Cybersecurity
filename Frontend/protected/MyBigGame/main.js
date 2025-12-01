@@ -5,12 +5,17 @@ import { Background } from "./background.js";
 import { Start } from "./start.js";
 import { GameOver } from "./gameOver.js";
 import { PlayerFish} from "./player2.js";
+import { setupMobileControls } from "./inputSmartphone.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
 const DESIGN_HEIGHT = 2000;
  
 window.addEventListener('load', function () {
+
+       // Smartphone-Steuerung initialisieren    
+       setupMobileControls();  
+       
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
@@ -42,8 +47,8 @@ window.addEventListener('load', function () {
             this.speed = 3;
             this.backgroundMusic = new Audio('./MyBigGame/audios/backgroundMusic.mp3');
             this.backgroundMusic.loop = true;     
-            this.backgroundMusic.volume = 1
-            ; 
+            this.backgroundMusic.volume = 1;
+
             this.gameOverMusic = new Audio('./MyBigGame/audios/gameOverMusic.mp3');
             this.gameOverMusic.volume = 1;
             this.jumpMusic = new Audio('./MyBigGame/audios/jumpMusic.mp3');

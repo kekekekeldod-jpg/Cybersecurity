@@ -628,10 +628,106 @@ header .header-center h2 {
 .canvas {
   display: block;
   margin: clamp(1rem, 5vw, 3rem) auto;
-  width: clamp(22rem, 80vw, 50rem);
+  width: clamp(21rem, 80vw, 50rem);
   height: auto;
   cursor: crosshair;
 }
+
+.keys {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 110px;
+    margin-bottom: 11px;
+    display: none;
+    }
+    
+    
+    .chevron::before {
+    border-style: solid;
+    border-width: 8px 8px 0 0;
+    content: '';
+    display: inline-block;
+    height: 21px;
+    width: 21px;
+    top: -10px;
+    position: relative;
+    transform: rotate(-45deg);
+    }
+    
+    .chevron.up::before {
+    position: relative;
+    top: -9px;
+    left: -2px;
+    }
+    
+    .chevron.down::before {
+    transform: rotate(135deg);
+    top: -14px;
+    left: -1px;
+    }
+    
+    .chevron.right::before {
+    transform: rotate(45deg);
+    top: -12px;
+    left: -3px;
+    }
+    
+    .chevron.left::before {
+    transform: rotate(225deg);
+    top: -12px;
+    left: -1px;
+    }
+    
+    .arr {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 25px;
+    background: rgb(9, 59, 105);
+    color: rgb(124, 10, 109);
+    font-size: 65px;
+    border-right: 10px solid red;
+    border-bottom: 10px solid orange;
+    border-left: 10px solid darkcyan;
+    border-top: 10px solid darkolivegreen;
+    display: inline-block;
+    margin: 2px;
+    transition: all .05s linear;
+    user-select: none;
+    }
+
+    .arr.enter{
+    cursor: pointer;
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    line-height: 8px;
+    background: rgb(9, 59, 105);
+    color: rgb(124, 10, 109);
+    font-size: 50px;
+    border-right: 10px solid red;
+    border-bottom: 10px solid orange;
+    border-left: 10px solid darkcyan;
+    border-top: 10px solid darkolivegreen;
+    display: inline-block;
+    margin: 3px;
+    transition: all .05s linear;
+    user-select: none;
+    }
+
+    .enter {
+    font-size: 23px;
+    font-weight: 900;
+    }
+    
+    .arr:active {
+    background: rgb(0, 236, 32);
+    }
+    
 
 /* ==================== End of Merdo of Caney ==================== */
 /* ==================== FOOTER ==================== */
@@ -829,6 +925,10 @@ header .header-center h2 {
   position: static;
   transform: none;
   width: clamp(120px, 40vw, 200px);
+  }
+
+  .keys {
+    display: block;
   }
   
    .cursor-light {
