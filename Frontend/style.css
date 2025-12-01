@@ -1432,7 +1432,7 @@
     }
     
     .earth-text{
-    padding: 40px;
+    padding: 30px;
     width: 100%;
     height: auto;
     position: relative;
@@ -2116,6 +2116,10 @@
     
     .heading-effekt h2{
     font-size: 25px;
+    }
+
+    .heading-effekt p {
+      font-size: 18px;
     }
     
     .box3 h2{
