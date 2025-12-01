@@ -1,4 +1,5 @@
-// server.js (gef ixt) ----------------------------------------------------
+// MEGA DDOS-ATTACK PROTECTION
+
 import dotenv from "dotenv";
 import helmet from "helmet";
 import Database from "better-sqlite3";
@@ -8,6 +9,8 @@ import session from "express-session";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import rateLimit from "express-rate-limit";
+import slowDown from "express-slow-down";
 
 dotenv.config();
 
@@ -62,9 +65,11 @@ db.exec(`
   );
 `);
 
-// Express app
 const app = express();
 
+/**
+ * 1) SICHERHEIT: Helmet (CSP etc.)
+ */
 app.use(helmet({
   hsts: false,
   crossOriginOpenerPolicy: false,
@@ -82,19 +87,98 @@ app.use(helmet({
       "object-src": ["'none'"],
       "base-uri": ["'self'"],
       "frame-ancestors": ["'self'"],
-
-      // >>> Schaltet die automatische HTTPS-Hochstufung AUS <<<
+      // KEIN auto-upgrade, damit du selbst entscheidest:
       "upgrade-insecure-requests": null
     }
   }
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+/**
+ * 2) Body-Limits (Schutz gegen riesige JSON- oder Form-Requests)
+ */
+app.use(express.json({ limit: "64kb" }));
+app.use(express.urlencoded({ extended: true, limit: "64kb" }));
 
-// Wenn Nginx als reverse-proxy davor ist:
-app.set('trust proxy', 1);
+/**
+ * 3) Proxy-Vertrauen (damit IP über X-Forwarded-For korrekt ist – wichtig für Rate-Limit!)
+ *    Das sollte VOR allen Limitern sein.
+ */
+app.set("trust proxy", 1);
 
+/**
+ * 4) Rate-Limiter & Slow-Down (app-seitiger DDoS-/Abuse-Schutz)
+ */
+
+// Globaler “Soft”-Limiter für alle Requests
+const globalLimiter = rateLimit({
+  windowMs: 60 * 1000,        // 1 Minute
+  max: 200,                   // max. 200 Requests / Minute / IP
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// "Bremsen" bei Spikes: nach X Requests pro Minute wird jede weitere Request verzögert
+const speedLimiter = slowDown({
+  windowMs: 60 * 1000,        // 1 Minute
+  delayAfter: 100,            // ab 100 Requests / Minute / IP
+  delayMs: 500,               // jede weitere Request +500ms Delay
+});
+
+// Spezieller, harter Limiter nur für /auth (Login/Register)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,   // 15 Minuten
+  max: 20,                    // max. 20 Login/Register-Requests / 15 Minuten / IP
+  message: { error: "Zu viele Versuche. Bitte in ein paar Minuten erneut versuchen." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Einfacher “Shield” für brutale Spikes (Sliding-Window, in-memory)
+const SHIELD_WINDOW_MS = 30 * 1000; // 30 Sekunden
+const SHIELD_MAX_REQ = 400;        // mehr als 400 Requests/30s = 429
+const ipBuckets = new Map();
+
+/**
+ * Shield-Middleware:
+ * - zählt Requests pro IP in einem 30s-Fenster
+ * - wenn > SHIELD_MAX_REQ → 429 Too Many Requests
+ * - schützt vor "aus Versehen k6 ultra" von einer einzigen IP
+ */
+app.use((req, res, next) => {
+  const now = Date.now();
+  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
+
+  let bucket = ipBuckets.get(ip);
+  if (!bucket || now - bucket.start > SHIELD_WINDOW_MS) {
+    bucket = { start: now, count: 0 };
+    ipBuckets.set(ip, bucket);
+  }
+  bucket.count++;
+
+  if (bucket.count > SHIELD_MAX_REQ) {
+    // Du kannst hier auch ein spezielles JSON schicken
+    return res.status(429).send("Too many requests from this IP. Please slow down.");
+  }
+
+  // gelegentlich alte Einträge entfernen
+  if (ipBuckets.size > 10000) {
+    for (const [k, v] of ipBuckets) {
+      if (now - v.start > SHIELD_WINDOW_MS * 2) {
+        ipBuckets.delete(k);
+      }
+    }
+  }
+
+  next();
+});
+
+// SlowDown & globales Rate-Limit aktivieren
+app.use(speedLimiter);
+app.use(globalLimiter);
+
+/**
+ * 5) Session / Cookies
+ */
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
@@ -102,27 +186,27 @@ app.use(session({
   cookie: {
     httpOnly: true,
     sameSite: "lax",
-    // secure: true // erst aktivieren, wenn HTTPS da ist
-    maxAge: 1000 * 60 * 60 * 24
+    // WICHTIG: Wenn du Nginx mit HTTPS davor nutzt, hier auf true setzen
+    // secure: true,
+    maxAge: 1000 * 60 * 60 * 24 // 1 Tag
   }
 }));
 
-// Request-Logger -> in DB (access_logs)
+/**
+ * 6) Request-Logger -> in DB (access_logs)
+ */
 app.use((req, res, next) => {
-  const start = Date.now();
-  const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || "").toString();
+  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
   const ua = (req.get("User-Agent") || "").slice(0, 1000);
 
-  // After response, insert a row with status
-  res.on('finish', () => {
+  res.on("finish", () => {
     try {
       db.prepare(
         `INSERT INTO access_logs (ip, path, method, user_agent, status)
          VALUES (?, ?, ?, ?, ?)`
       ).run(ip, req.originalUrl || req.url, req.method, ua, res.statusCode || 0);
     } catch (e) {
-      // don't kill the app bei DB-Fehlern
-      console.error("DB log error:", e && e.message ? e.message : e);
+      console.error("DB log error:", e?.message || e);
     }
   });
 
@@ -144,7 +228,7 @@ function logLogin({ userId = null, emailAttempt = null, success = 0, ip = "", ua
        VALUES (?, ?, ?, ?, ?)`
     ).run(userId, emailAttempt, success, ip, ua);
   } catch (e) {
-    console.error("logLogin DB error:", e && e.message ? e.message : e);
+    console.error("logLogin DB error:", e?.message || e);
   }
 }
 
@@ -154,14 +238,22 @@ function requireAuth(req, res, next) {
   return res.status(401).json({ error: "Keine Berechtigung" });
 }
 
-// ===== AUTH API =====
+/**
+ * 7) AUTH-API (mit eigenem Rate-Limiter)
+ */
+app.use("/auth", authLimiter);
+
 app.post("/auth/register", async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    if (!email || !password) return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+    if (!email || !password) {
+      return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+    }
 
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
-    const info = db.prepare(`INSERT INTO users (email, password_hash) VALUES (?, ?)`).run(email, hash);
+    const info = db
+      .prepare(`INSERT INTO users (email, password_hash) VALUES (?, ?)`)
+      .run(email, hash);
 
     res.json({ ok: true, userId: info.lastInsertRowid });
   } catch (e) {
@@ -176,16 +268,22 @@ app.post("/auth/register", async (req, res) => {
 app.post("/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    if (!email || !password) return res.status(400).json({ error: "email and password required" });
+    if (!email || !password) {
+      return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+    }
 
-    const row = db.prepare(`SELECT id, password_hash FROM users WHERE email = ?`).get(email);
-    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || "").toString();
+    const row = db
+      .prepare(`SELECT id, password_hash FROM users WHERE email = ?`)
+      .get(email);
+
+    const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
     const ua = req.get("User-Agent") || "";
 
     if (!row) {
       logLogin({ emailAttempt: email, success: 0, ip, ua });
       return res.status(401).json({ error: "Ungültige Eingabe" });
     }
+
     const ok = await bcrypt.compare(password, row.password_hash);
     if (!ok) {
       logLogin({ userId: row.id, emailAttempt: email, success: 0, ip, ua });
@@ -207,13 +305,19 @@ app.post("/auth/logout", (req, res) => {
 });
 
 app.get("/auth/whoami", (req, res) => {
-  if (req.session?.userId) return res.json({ ok: true, email: req.session.email });
+  if (req.session?.userId) {
+    return res.json({ ok: true, email: req.session.email });
+  }
   res.json({ ok: false });
 });
 
-// ===== STATIC / ROUTING =====
-// Protected static
-app.use("/member", requireAuth, noCache,
+/**
+ * 8) PROTECTED STATIC
+ */
+app.use(
+  "/member",
+  requireAuth,
+  noCache,
   express.static(PROTECTED_ROOT, { index: false, etag: false, maxAge: 0 })
 );
 
@@ -222,27 +326,34 @@ app.get("/member/white-hat-hacker", requireAuth, noCache, (_req, res) => {
   res.sendFile(path.join(PROTECTED_ROOT, "white-hat-hacker.html"));
 });
 
-// Public static (Frontend)
-app.use(express.static(FRONTEND_ROOT, {
-  index: "index.html",
-  extensions: ["html"]
-}));
+/**
+ * 9) PUBLIC STATIC
+ */
+app.use(
+  express.static(FRONTEND_ROOT, {
+    index: "index.html",
+    extensions: ["html"],
+  })
+);
 
-// Fallback: nur für "seiten"-routen ohne Punkt (d.h. keine Assets)
-app.get('*', (req, res, next) => {
-  // Wenn Pfad eine Dateiendung enthält, weitergeben an next (damit static-Handler es kann)
-  if (req.path.includes('.')) return next();
-  res.sendFile(path.join(FRONTEND_ROOT, 'index.html'));
+// Fallback: nur für "seiten"-routen ohne Punkt (keine Assets)
+app.get("*", (req, res, next) => {
+  if (req.path.includes(".")) return next();
+  res.sendFile(path.join(FRONTEND_ROOT, "index.html"));
 });
 
-// Error handler (Fallback)
+/**
+ * 10) Error-Handler (Fallback)
+ */
 app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err && err.stack ? err.stack : err);
+  console.error("Unhandled error:", err?.stack || err);
   if (!res.headersSent) res.status(500).send("Interner Serverfehler");
   else next();
 });
 
-// Start server
-app.listen(PORT, '0.0.0.0', () => {
+/**
+ * 11) Start server
+ */
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🌐 HTTP-Server läuft unter http://localhost:${PORT}`);
 });
