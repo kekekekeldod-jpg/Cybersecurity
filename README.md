@@ -53,6 +53,8 @@ Google Fonts
 
 Kali Linux
 
+Krita (For Game Design Sprite-sheets)
+
 # 🕹️ Future Plans
 
 Add interactive cybersecurity mini-games
