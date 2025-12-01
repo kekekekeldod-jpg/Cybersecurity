@@ -121,7 +121,8 @@ const globalLimiter = rateLimit({
 const speedLimiter = slowDown({
   windowMs: 60 * 1000, // 1 Minute
   delayAfter: 100,    // ab 100 Requests / Minute / IP
-  delayMs: 500,      // jede weitere Request +500ms Delay
+  delayMs: () => 500,      // jede weitere Request +500ms Delay
+  validate: { delayMs: false } // Warnung abschalten
 });
 
 // Spezieller, harter Limiter nur für /auth (Login/Register)
