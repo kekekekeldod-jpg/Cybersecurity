@@ -24,7 +24,8 @@ const PROTECTED_ROOT = path.resolve(__dirname, "../Frontend/protected");
 
 const PORT = Number(process.env.PORT || 3000);
 const DB_PATH = process.env.DB_PATH || "./data/user.db";
-const SESSION_SECRET = process.env.SESSION_SECRET || "please_change_me_super_secret";
+const SESSION_SECRET =
+  process.env.SESSION_SECRET || "please_change_me_super_secret";
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
 
 // --- DB: Ordner anlegen falls nötig
@@ -70,28 +71,27 @@ const app = express();
 /**
  * 1) SICHERHEIT: Helmet (CSP etc.)
  */
-app.use(helmet({
-  hsts: false,
-  crossOriginOpenerPolicy: false,
-  originAgentCluster: false,
-  crossOriginResourcePolicy: { policy: "same-origin" },
-  contentSecurityPolicy: {
-    useDefaults: true,
-    directives: {
-      "default-src": ["'self'"],
-      "script-src": ["'self'"],
-      "script-src-attr": ["'unsafe-inline'"],
-      "style-src": ["'self'", "https:", "'unsafe-inline'"],
-      "img-src": ["'self'", "data:"],
-      "font-src": ["'self'", "https:", "data:"],
-      "object-src": ["'none'"],
-      "base-uri": ["'self'"],
-      "frame-ancestors": ["'self'"],
-      // KEIN auto-upgrade, damit du selbst entscheidest:
-      "upgrade-insecure-requests": null
-    }
-  }
-}));
+app.use(
+  helmet({
+    hsts: false,
+    crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+    crossOriginResourcePolicy: { policy: "same-origin" },
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        "default-src": ["'self'"],
+        "script-src": ["'self'"],
+        "script-src-attr": ["'unsafe-inline'"],
+        "style-src": ["'self'", "https:", "'unsafe-inline'"],
+        "img-src": ["'self'", "data:"],
+        "font-src": ["'self'", "https:", "data:"],
+        "object-src": ["'none'"],
+        "base-uri": ["'self'"],
+        "frame-ancestors": ["'self'"],
+      },
+    },
+  })
+);
 
 /**
  * 2) Body-Limits (Schutz gegen riesige JSON- oder Form-Requests)
@@ -111,32 +111,35 @@ app.set("trust proxy", 1);
 
 // Globaler “Soft”-Limiter für alle Requests
 const globalLimiter = rateLimit({
-  windowMs: 60 * 1000,        // 1 Minute
-  max: 200,                   // max. 200 Requests / Minute / IP
+  windowMs: 60 * 1000, // 1 Minute
+  max: 200,           // max. 200 Requests / Minute / IP
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 // "Bremsen" bei Spikes: nach X Requests pro Minute wird jede weitere Request verzögert
 const speedLimiter = slowDown({
-  windowMs: 60 * 1000,        // 1 Minute
-  delayAfter: 100,            // ab 100 Requests / Minute / IP
-  delayMs: 500,               // jede weitere Request +500ms Delay
+  windowMs: 60 * 1000, // 1 Minute
+  delayAfter: 100,    // ab 100 Requests / Minute / IP
+  delayMs: 500,      // jede weitere Request +500ms Delay
 });
 
 // Spezieller, harter Limiter nur für /auth (Login/Register)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,   // 15 Minuten
-  max: 20,                    // max. 20 Login/Register-Requests / 15 Minuten / IP
-  message: { error: "Zu viele Versuche. Bitte in ein paar Minuten erneut versuchen." },
+  max: 20,                   // max. 20 Login/Register-Requests / 15 Minuten / IP
+  message: {
+    error: "Zu viele Versuche. Bitte in ein paar Minuten erneut versuchen.",
+  },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 // Einfacher “Shield” für brutale Spikes (Sliding-Window, in-memory)
-const SHIELD_WINDOW_MS = 30 * 1000; // 30 Sekunden
-const SHIELD_MAX_REQ = 400;        // mehr als 400 Requests/30s = 429
+const SHIELD_WINDOW_MS = 30 * 1000;
+const SHIELD_MAX_REQ = 400;
 const ipBuckets = new Map();
+
 
 /**
  * Shield-Middleware:
@@ -146,7 +149,11 @@ const ipBuckets = new Map();
  */
 app.use((req, res, next) => {
   const now = Date.now();
-  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
+  const ip = (
+    req.headers["x-forwarded-for"] ||
+    req.socket.remoteAddress ||
+    ""
+  ).toString();
 
   let bucket = ipBuckets.get(ip);
   if (!bucket || now - bucket.start > SHIELD_WINDOW_MS) {
@@ -156,11 +163,11 @@ app.use((req, res, next) => {
   bucket.count++;
 
   if (bucket.count > SHIELD_MAX_REQ) {
-    // Du kannst hier auch ein spezielles JSON schicken
-    return res.status(429).send("Too many requests from this IP. Please slow down.");
+    return res
+      .status(429)
+      .send("Too many requests from this IP. Please slow down.");
   }
 
-  // gelegentlich alte Einträge entfernen
   if (ipBuckets.size > 10000) {
     for (const [k, v] of ipBuckets) {
       if (now - v.start > SHIELD_WINDOW_MS * 2) {
@@ -172,31 +179,35 @@ app.use((req, res, next) => {
   next();
 });
 
-// SlowDown & globales Rate-Limit aktivieren
 app.use(speedLimiter);
 app.use(globalLimiter);
 
 /**
  * 5) Session / Cookies
  */
-app.use(session({
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    sameSite: "lax",
-    // WICHTIG: Wenn du Nginx mit HTTPS davor nutzt, hier auf true setzen
-    // secure: true,
-    maxAge: 1000 * 60 * 60 * 24 // 1 Tag
-  }
-}));
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      // secure: true, // bei HTTPS + Proxy aktivieren
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 
 /**
  * 6) Request-Logger -> in DB (access_logs)
  */
 app.use((req, res, next) => {
-  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
+  const ip = (
+    req.headers["x-forwarded-for"] ||
+    req.socket.remoteAddress ||
+    ""
+  ).toString();
   const ua = (req.get("User-Agent") || "").slice(0, 1000);
 
   res.on("finish", () => {
@@ -215,13 +226,22 @@ app.use((req, res, next) => {
 
 // Hilfsfunktionen
 function noCache(_req, res, next) {
-  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, private"
+  );
   res.setHeader("Pragma", "no-cache");
   res.setHeader("Expires", "0");
   next();
 }
 
-function logLogin({ userId = null, emailAttempt = null, success = 0, ip = "", ua = "" }) {
+function logLogin({
+  userId = null,
+  emailAttempt = null,
+  success = 0,
+  ip = "",
+  ua = "",
+}) {
   try {
     db.prepare(
       `INSERT INTO login_logs (user_id, email_attempt, success, ip, user_agent)
@@ -247,7 +267,9 @@ app.post("/auth/register", async (req, res) => {
   try {
     const { email, password } = req.body || {};
     if (!email || !password) {
-      return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+      return res
+        .status(400)
+        .json({ error: "E-Mail und Passwort erforderlich" });
     }
 
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
@@ -269,14 +291,20 @@ app.post("/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
     if (!email || !password) {
-      return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+      return res
+        .status(400)
+        .json({ error: "E-Mail und Passwort erforderlich" });
     }
 
     const row = db
       .prepare(`SELECT id, password_hash FROM users WHERE email = ?`)
       .get(email);
 
-    const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").toString();
+    const ip = (
+      req.headers["x-forwarded-for"] ||
+      req.socket.remoteAddress ||
+      ""
+    ).toString();
     const ua = req.get("User-Agent") || "";
 
     if (!row) {
@@ -305,9 +333,7 @@ app.post("/auth/logout", (req, res) => {
 });
 
 app.get("/auth/whoami", (req, res) => {
-  if (req.session?.userId) {
-    return res.json({ ok: true, email: req.session.email });
-  }
+  if (req.session?.userId) return res.json({ ok: true, email: req.session.email });
   res.json({ ok: false });
 });
 
@@ -321,7 +347,6 @@ app.use(
   express.static(PROTECTED_ROOT, { index: false, etag: false, maxAge: 0 })
 );
 
-// Schöne URL für White-hat-hacker:
 app.get("/member/white-hat-hacker", requireAuth, noCache, (_req, res) => {
   res.sendFile(path.join(PROTECTED_ROOT, "white-hat-hacker.html"));
 });
@@ -336,7 +361,7 @@ app.use(
   })
 );
 
-// Fallback: nur für "seiten"-routen ohne Punkt (keine Assets)
+// Fallback: nur für "Seiten"-Routen ohne Punkt
 app.get("*", (req, res, next) => {
   if (req.path.includes(".")) return next();
   res.sendFile(path.join(FRONTEND_ROOT, "index.html"));
