@@ -31,23 +31,23 @@
     .swal-modal {
     width: 500px;
     height: auto;
-    background: linear-gradient(250.59deg, #585304, #0F5043 48.53%, #5B1907 75.52%);
+    background: url("./bilder/swalBackground.jpg") center / cover no-repeat;
     }
     
     .swal-title{
     font-family: "Jacquard 24", system-ui;
-    font-weight: 400;
+    font-weight: 900;
     font-style: normal;
     font-size: 55px;
     color: #02F381;
     }
     
     .swal-text{
-    font-family: "Jacquard 24", system-ui;
-    font-weight: 400;
+     font-family: 'Jersey 15';
+    font-weight: 900;
     font-style: normal;
     font-size: 30px;
-    color: #F30198;
+    color: #861950;
     text-decoration: underline;
     }
     
