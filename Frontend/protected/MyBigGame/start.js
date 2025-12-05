@@ -34,6 +34,6 @@ export class Start {
         context.textBaseline = 'top';
         context.font = 'italic normal 600 170px Arial';
         context.fillStyle = '#770443';
-        context.fillText('Klicke Enter zum Start', this.width / 2, this.height / 2 + 200);
+        context.fillText('Klicke Enter zum Start', this.width / 2, this.height / 2 + 600);
     }
 };

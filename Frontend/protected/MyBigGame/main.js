@@ -6,6 +6,7 @@ import { Start } from "./start.js";
 import { GameOver } from "./gameOver.js";
 import { PlayerFish} from "./player2.js";
 import { setupMobileControls } from "./inputSmartphone.js";
+import { Enemy } from "./enemy.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -58,6 +59,9 @@ window.addEventListener('load', function () {
             this.runningMusic = new Audio('./MyBigGame/audios/running.mp3');
             this.runningMusic.loop = true;
             this.runningMusic.volume = 0.4;
+            this.hitMusic = new Audio('././MyBigGame/audios/hitMusic.mp3');
+            this.hitMusic.volume = 1;
+            this.hitMusic.currentTime = 0.6;
 
             // 'start' | 'playing' | 'gameOver'
             this.state = 'start';
@@ -68,9 +72,18 @@ window.addEventListener('load', function () {
             this.background = new Background(this);
             this.startScreen = new Start(this);
             this.gameOverScreen = new GameOver(this);
+            this.enemy = new Enemy(this);
         }
 
         update(deltaTime) {
+
+            // Q = Startbildschirn
+
+            if (this.input.keys.includes('q')) {
+                this.goToStart();
+                return;
+            }
+
             // START SCREEN
             if (this.state === 'start') {
                 if (this.input.keys.includes('Enter')) {
@@ -89,9 +102,11 @@ window.addEventListener('load', function () {
 
             // PLAYING
             if (this.state === 'playing') {
+                 this.gameOverMusic.pause();
                  this.backgroundMusic.play();
                  this.background.update(deltaTime);
                  this.playerFish.update(deltaTime);
+                 this.enemy.update(deltaTime);
                  this.player.update(this.input.keys, deltaTime);
             }
         }
@@ -104,17 +119,22 @@ window.addEventListener('load', function () {
             }
 
             this.background.draw(context);
+            this.enemy.draw(context);
             this.playerFish.draw(context);
             this.player.draw(context);
 
             if (this.state === 'gameOver') {
                 this.gameOverScreen.draw(context);
+                this.backgroundMusic.pause();
+                this.runningMusic.pause();
+                this.hitMusic.pause();
             }
         }
 
          restart() {
             console.log('RESTART');
-            this.backgroundMusic.currentTime = 0;
+            this.gameOverMusic.currentTime = 0;
+            this.enemy.reset();
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();
@@ -122,7 +142,20 @@ window.addEventListener('load', function () {
             console.log('STATE NACH RESTART:', this.state, this.player.x, this.player.y);
         }
 
+        goToStart(){
+            this.backgroundMusic.pause();
+            this.feedLanding.pause();
+            this.gameOverMusic.pause();
+            this.jumpMusic.pause();
+            this.runningMusic.pause();
+            
+            this.restart();
+
+            this.state = 'start';
+        }
+
     }
+    
 
     const game = new Game(DESIGN_WIDTH, DESIGN_HEIGHT);
     let lastTime = 0;

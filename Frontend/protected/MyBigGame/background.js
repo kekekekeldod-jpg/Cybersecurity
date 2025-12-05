@@ -12,8 +12,9 @@ export class Background {
  
     update(deltaTime){
         // Optional: scrollenden Hintergrund machen
-        // this.x -= this.speed;
-        // if (this.x <= -this.width) this.x = 0;
+        this.x -= this.speed;
+        if (this.x <= -this.width) this.x = 0;
+        
     }
 
     reset() {
@@ -24,6 +25,6 @@ export class Background {
     draw(context){
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         // Für Endlos-Scroll:
-        // context.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
     } 
 }
