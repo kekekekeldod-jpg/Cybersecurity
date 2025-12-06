@@ -11,8 +11,9 @@ export class Background {
     }
  
     update(deltaTime){
+        const dt = deltaTime / 16.67;
         // Optional: scrollenden Hintergrund machen
-        this.x -= this.speed;
+        this.x -= this.speed * dt;
         if (this.x <= -this.width) this.x = 0;
         
     }

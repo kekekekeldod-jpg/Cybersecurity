@@ -61,7 +61,6 @@ window.addEventListener('load', function () {
             this.runningMusic.volume = 0.4;
             this.hitMusic = new Audio('././MyBigGame/audios/hitMusic.mp3');
             this.hitMusic.volume = 1;
-            this.hitMusic.currentTime = 0.6;
 
             // 'start' | 'playing' | 'gameOver'
             this.state = 'start';
@@ -106,8 +105,9 @@ window.addEventListener('load', function () {
                  this.backgroundMusic.play();
                  this.background.update(deltaTime);
                  this.playerFish.update(deltaTime);
-                 this.enemy.update(deltaTime);
                  this.player.update(this.input.keys, deltaTime);
+                 this.enemy.update(deltaTime);
+                
             }
         }
 

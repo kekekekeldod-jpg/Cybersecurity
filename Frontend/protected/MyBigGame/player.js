@@ -58,11 +58,12 @@ export class Player {
     }
 
     update(input, deltaTime) {
+        const dt = deltaTime / 16.67;
         // State-Logik
         this.currentState.handleInput(input);
 
         // --- Horizontale Bewegungen ---
-        this.x += this.speed;
+        this.x += this.speed * dt;
 
         if (input.includes('ArrowRight')) {
           this.speed = this.maxSpeed;
@@ -88,13 +89,13 @@ export class Player {
 
         // --- Sprung: nur wenn am Boden ---
         if (input.includes('ArrowUp') && this.isOnGround()) {
-            this.vy = -40;              // nach oben
+            this.vy = -45;              // nach oben
             this.jumpMusic.currentTime = 0;
             this.jumpMusic.play();
         }
 
         // --- Vertikale Physik ---
-        this.y += this.vy;
+        this.y += this.vy * dt;
 
         // Schwerkraft nur in der Luft
         if (!this.isOnGround()) {

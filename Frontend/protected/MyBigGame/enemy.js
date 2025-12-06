@@ -14,7 +14,7 @@ export class Enemy {
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 9;
-        this.fps = 20;
+        this.fps = 14;
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
         this.gameOverMusic = this.game.gameOverMusic;
@@ -33,7 +33,7 @@ export class Enemy {
     }
 
     update(deltaTime) {
-
+        const dt = deltaTime / 16.67;
         if (this.state === 'HIT') {
             this.hitState.update(deltaTime);
             return;
@@ -41,7 +41,7 @@ export class Enemy {
 
 
      // Bewegung des Spielers
-     this.x -= this.speed;
+     this.x -= this.speed * dt;
 
 
     //Kollision = Game 
@@ -61,24 +61,20 @@ export class Enemy {
         const hitOver = playerBottom <= enemyTop + this.height * 0.9 &&
         player.vy > 0;
 
-        const onlyHeadMusic = playerBottom <= enemyTop + this.height;
-
 
         if(hitOver && this.state === 'ALIVE') {
-            player.vy = -30;
+            player.vy = -40;
             this.state = 'HIT';
-            this.hitMusic.play();
             this.hitState.enter();
+
+            this.hitMusic.pause();
+            this.hitMusic.currentTime = 0;
+            this.hitMusic.play();
 
         } else {
             this.game.state = 'gameOver';
+            this.gameOverMusic.currentTime = 0;
             this.gameOverMusic.play();
-            this.hitMusic.pause();
-        }
-
-        if (onlyHeadMusic) {
-        this.hitMusic.play();
-        this.hitMusic.currentTime = 0;
         }
     }
 

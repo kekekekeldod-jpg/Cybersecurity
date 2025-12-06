@@ -18,7 +18,7 @@ export class PlayerFish {
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 0;
-        this.fps = 20;
+        this.fps = 14;
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0;
 
@@ -43,12 +43,14 @@ export class PlayerFish {
     }
 
     update(deltaTime) {
+        const dt =deltaTime / 16.67;
         // Bewegung
-        this.x += this.speedX;
+        this.x += this.speedX * dt;
 
         // Wände checken / State wechseln
         this.currentState.random();
 
+        
         // Sprite Animation
         this.frameTimer += deltaTime;
         if (this.frameTimer > this.frameInterval) {
