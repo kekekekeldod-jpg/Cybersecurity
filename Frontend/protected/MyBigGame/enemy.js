@@ -30,6 +30,9 @@ export class Enemy {
     reset(){
         this.x = this.game.width - this.width;
         this.y = this.game.height - this.height;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.maxFrame = 9;
     }
 
     update(deltaTime) {

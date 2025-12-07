@@ -97,6 +97,30 @@ export class Player {
         // --- Vertikale Physik ---
         this.y += this.vy * dt;
 
+        //Kollision = Game 
+    const player = this.game.player;
+    const playerSecond = this.game.playerFish;
+
+    const collsion = 
+    player.x < playerSecond.x + playerSecond.width &&
+    player.x + player.width > playerSecond.x &&
+    player.y < playerSecond.y + playerSecond.height &&
+    player.y + player.height > playerSecond.y;
+
+    if (collsion) {
+
+        let hitManger = 220;
+        const playerHead = player.y;
+        const playerSecondBottom = playerSecond.y + playerSecond.height - hitManger;
+
+        const playerHitSecondPlayer = playerHead < playerSecondBottom;
+
+        if (playerHitSecondPlayer) {
+            this.game.state = 'gameOver';
+            this.gameOverMusic.play();
+        }
+    }
+
         // Schwerkraft nur in der Luft
         if (!this.isOnGround()) {
             this.vy += this.weight;

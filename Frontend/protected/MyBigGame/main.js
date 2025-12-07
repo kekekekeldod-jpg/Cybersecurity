@@ -133,6 +133,7 @@ window.addEventListener('load', function () {
 
          restart() {
             console.log('RESTART');
+            this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
             this.enemy.reset();
             this.playerFish.reset();
@@ -144,6 +145,7 @@ window.addEventListener('load', function () {
 
         goToStart(){
             this.backgroundMusic.pause();
+            this.backgroundMusic.currentTime = 0;
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
@@ -161,8 +163,10 @@ window.addEventListener('load', function () {
     let lastTime = 0;
 
     function animate(timeStamp) {
-        const deltaTime = timeStamp - lastTime;
+        let deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
+
+        if (deltaTime > 100) deltaTime = 100;
 
         // kompletten Kontext skalieren
         ctx.save();
