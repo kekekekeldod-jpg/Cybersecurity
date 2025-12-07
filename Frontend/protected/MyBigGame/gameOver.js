@@ -17,7 +17,7 @@ export class GameOver{
         context.textBaseline = 'top';
         context.font = "italic small-caps 600 200px Montserrat";
         context.fillStyle = '#ff0000ff';
-        context.fillText('Cracked Inject', this.width / 2, 100);
+        context.fillText('﷽', this.width / 2, 100);
 
         // Hinweis unten mittig
         context.textAlign = 'center';

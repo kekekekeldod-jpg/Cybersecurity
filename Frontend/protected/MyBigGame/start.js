@@ -10,6 +10,7 @@ export class Start {
 
    draw(context){
  
+ 
         // Hintergrund
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -19,13 +20,13 @@ export class Start {
         context.font = "italic small-caps 600 200px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('Crack Iphone', this.width / 2, this.height / 2 - 800);
+        context.fillText('مَرْدُوٓ هَكَرٰ ﷻ', this.width / 2, this.height / 2 - 800);
 
         // Untertitel
         context.textAlign = 'center';
         context.textBaseline = 'middle';   // y-Koordinate ist Mitte des Textes
         context.font = "italic small-caps 600 200px Montserrat";
-        context.fillStyle = '#045c63';
+        context.fillStyle = '#266d74ff';
         context.textAlign = 'center';
         context.fillText('Merdo of Caney', this.width / 2, this.height / 2 - 50);
 
@@ -34,6 +35,6 @@ export class Start {
         context.textBaseline = 'top';
         context.font = 'italic normal 600 170px Arial';
         context.fillStyle = '#770443';
-        context.fillText('Klicke Enter zum Start', this.width / 2, this.height / 2 + 600);
+        context.fillText('Klicke Enter zum Start ', this.width / 2, this.height / 2 + 600);
     }
 };
