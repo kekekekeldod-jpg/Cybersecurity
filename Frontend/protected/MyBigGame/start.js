@@ -20,7 +20,27 @@ export class Start {
         context.font = "italic small-caps 600 200px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('مَرْدُوٓ هَكَرٰ ﷻ', this.width / 2, this.height / 2 - 800);
+        context.fillText('مَرْدُوٓ هَكَرٰ ﷻ', this.width / 2, this.height / 2 - 850);
+
+
+        //Q-Erklärung 
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+        context.font = "italic small-caps 600 50px Montserrat";
+        context.fillStyle = '#8d6715ff';
+        context.textAlign = 'right';
+        context.fillText('Klicke die q-Taste, um wieder auf', this.width / 2 - 600, this.height / 2 - 500);
+        context.fillText('den Start-Screen zurückzukommen', this.width / 2 - 565, this.height / 2 - 450);
+
+         //I-Erlärung 
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+        context.font = "italic small-caps 600 50px Montserrat";
+        context.fillStyle = '#8d6715ff';
+        context.textAlign = 'left';
+        context.fillText('Klicke die i-Taste, um die Regeln des', this.width / 2 + 550, this.height / 2 - 500);
+        context.fillText('Spieles zu lesen und zu kennen', this.width / 2 + 550, this.height / 2 - 450);
+
 
         // Untertitel
         context.textAlign = 'center';

@@ -7,6 +7,8 @@ import { GameOver } from "./gameOver.js";
 import { PlayerFish} from "./player2.js";
 import { setupMobileControls } from "./inputSmartphone.js";
 import { Enemy } from "./enemy.js";
+import { Info } from "./info.js";
+import { Score } from "./score.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -72,9 +74,17 @@ window.addEventListener('load', function () {
             this.startScreen = new Start(this);
             this.gameOverScreen = new GameOver(this);
             this.enemy = new Enemy(this);
+            this.info = new Info(this);
+            this.score = new Score(this);
         }
 
         update(deltaTime) {
+
+            // i = InfoScreen
+            if (this.input.keys.includes('i')){
+                this.infoScreen();
+                return;
+            }
 
             // Q = Startbildschirn
 
@@ -113,6 +123,11 @@ window.addEventListener('load', function () {
 
         
         draw(context) {
+
+            if (this.state === 'info'){
+                this.info.draw(context);
+                return;
+            }
             if (this.state === 'start') {
                 this.startScreen.draw(context);
                 return;
@@ -122,6 +137,7 @@ window.addEventListener('load', function () {
             this.enemy.draw(context);
             this.playerFish.draw(context);
             this.player.draw(context);
+            this.score.draw(context);
 
             if (this.state === 'gameOver') {
                 this.gameOverScreen.draw(context);
@@ -139,6 +155,7 @@ window.addEventListener('load', function () {
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();
+            this.score.reset();
             this.state = 'playing';
             console.log('STATE NACH RESTART:', this.state, this.player.x, this.player.y);
         }
@@ -155,7 +172,24 @@ window.addEventListener('load', function () {
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();
+            this.score.reset();
             this.state = 'start';
+        }
+
+        infoScreen(){
+            this.backgroundMusic.currentTime = 0;
+            this.gameOverMusic.currentTime = 0;
+            this.backgroundMusic.pause();
+            this.feedLanding.pause();
+            this.gameOverMusic.pause();
+            this.jumpMusic.pause();
+            this.runningMusic.pause();
+            this.enemy.reset();
+            this.playerFish.reset();
+            this.player.reset();
+            this.background.reset();
+            this.score.reset();
+            this.state = 'info';
         }
 
     }

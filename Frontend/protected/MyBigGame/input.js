@@ -10,7 +10,8 @@ export class InputHandler {
                    e.key === 'ArrowRight' ||
                    e.key === 'ArrowLeft' ||
                    e.key === 'Enter' ||
-                   e.key === 'q' 
+                   e.key === 'q' ||
+                   e.key === 'i'
             ) {
                 // Browser-Standardverhalten (Scrollen etc.) immer blockieren
                 e.preventDefault();
@@ -30,7 +31,8 @@ export class InputHandler {
                    e.key === 'ArrowRight' ||
                    e.key === 'ArrowLeft' ||
                    e.key === 'Enter' ||
-                   e.key === 'q') {
+                   e.key === 'q' ||
+                   e.key === 'i') {
 
                 // Auch beim Loslassen Standardverhalten blockieren
                 e.preventDefault();

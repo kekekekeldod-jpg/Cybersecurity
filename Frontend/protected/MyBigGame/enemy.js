@@ -46,6 +46,8 @@ export class Enemy {
      // Bewegung des Spielers
      this.x -= this.speed * dt;
 
+     //Punkte 
+     const punkte = this.game.score;
 
     //Kollision = Game 
     const player = this.game.player;
@@ -67,6 +69,7 @@ export class Enemy {
 
         if(hitOver && this.state === 'ALIVE') {
             player.vy = -40;
+            punkte.scoreState += 5;
             this.state = 'HIT';
             this.hitState.enter();
 
