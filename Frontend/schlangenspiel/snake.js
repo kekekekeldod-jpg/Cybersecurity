@@ -327,7 +327,6 @@
 
     // Fenster-Resize
     window.addEventListener('resize', function () {
-      canvasInitialized = false;
       adjustCanvasSize();
     });
 
