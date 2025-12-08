@@ -42,9 +42,10 @@ Das Spiel enthält humorvolle Elemente und stilisierte Pseudonamen, um dem gesam
 - **I** Spielregeln anzeigen
 
 ### ✔ Charaktere
-- **Hauptspieler** mit Lauf- und Sprunganimation  
-- **Enemy** mit Death-Animation und Respawn  
-- **Deko-Flieger** (derzeit nur dekorativ)
+- **Merdonis** – Hauptspieler mit Lauf- und Sprunganimation  
+- **JuliePie** – Enemy mit Death-Animation und Respawn  
+- **Caney-Flieger** – dekorativer Flieger, löst bei Berührung mit dem Kopf von Merdonis ein Game Over aus
+
 
 ### ✔ Musik & Soundeffekte
 - Hintergrundmusik  
@@ -60,12 +61,15 @@ Alle Sounds werden korrekt zurückgesetzt (`currentTime = 0`), damit sie beim er
 
 ## 🎮 Spielmechaniken
 - physikbasiertes Springen (Schwerkraft, Aufprall)
-- Gegner kann **nur durch einen korrekten Kopftreffer** besiegt werden
+- Gegner **JuliePie** kann nur durch einen korrekten Kopftreffer besiegt werden
+- **für jeden erfolgreichen Sprung auf JuliePie gibt es +5 Punkte**
 - Seitenkollision führt zu **Game Over**
+- Berührt der Kopf von **Merdonis** den unteren Bereich des **Caney-Fliegers**, führt das ebenfalls zu **Game Over**
 - AABB-Collision-Detection mit erweiterter Y-Achsen-Logik
 - State-Machines für Player und Enemy
-- automatischer Enemy-Respawn
-- dekorativer Flieger ohne logische Eigenschaften (derzeit)
+- automatischer JuliePie-Respawn
+- Caney-Flieger aktuell ohne weitere Logik
+
 
 ---
 
