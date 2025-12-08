@@ -15,15 +15,19 @@ Das Spiel enthält außerdem humorvolle Elemente und stilisierte Pseudonamen, um
 ## 🖥️ Spielbildschirme
 
 ### **⭐ Startbildschirm**
-- Zeigt den Titel **„Crack iPhone“**.
+- Zeigt den Titel **„مَرْدُوٓ هَكَرٰ ﷻ“**, welches Merdo Hacker auf Arabisch bedeutet.
 - Hintergrundbild: **Anonymous-Wallpaper**, passend zum apokalyptischen Spielthema.
 - Untertitel **„Merdo of Caney“** dient als stilisierter, humorvoller Projektname.
 - Aufforderung:  
   **„Press ENTER to start“**
 - ENTER beginnt das Spiel.
+**„Press q-Key für Start-Screen“**
+- Erneut zum Start-Screen zurückkehren.
+**„Press i-Key für Info“**
+- Kannst dir die Spiel regeln durch lesen.
 
 ### **⭐ Game-Over Bildschirm**
-- Zeigt groß den Schriftzug **„Cracked Inject“**.
+- Zeigt groß den Schriftzug **„﷽“** welches In Namen Gottes, des Allerbarmers des Barmmherzigen bedeutet.
 - Hintergrund: spezielles **Game-Over Wallpaper**.
 - Der Screen erscheint bei:
   - Kollision seitlich mit dem Canvas
@@ -39,6 +43,7 @@ Das Spiel enthält außerdem humorvolle Elemente und stilisierte Pseudonamen, um
 - **↑** Springen  
 - **ENTER** Spiel starten oder nach Game Over erneut starten  
 - **Q** jederzeit zurück zum Startscreen  
+- **i** Spiel-Regeln durch lesen 
 
 ### ✔ Charaktere
 - **Hauptspieler** mit Lauf- und Sprunganimation  
