@@ -1,14 +1,14 @@
 // main.js
-import { InputHandler } from "./input.js";
-import { Player } from "./player.js"; 
-import { Background } from "./background.js";
-import { Start } from "./start.js";
-import { GameOver } from "./gameOver.js";
-import { PlayerFish} from "./player2.js";
-import { setupMobileControls } from "./inputSmartphone.js";
-import { Enemy } from "./enemy.js";
-import { Info } from "./info.js";
-import { Score } from "./score.js";
+import { InputHandler } from "../input/input.js";
+import { Player } from "../entities/merdonis/player.js"; 
+import { Background } from "../core/background.js";
+import { Start } from "../ui/start.js";
+import { GameOver } from "../ui/gameOver.js";
+import { PlayerFish} from "../entities/caneyflieger/player2.js";
+import { setupMobileControls } from "../input/inputSmartphone.js";
+import { Enemy } from "../entities/juliepie/enemy.js";
+import { Info } from "../ui/info.js";
+import { Score } from "../core/score.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -48,20 +48,20 @@ window.addEventListener('load', function () {
             this.groundMargin = 0;
             this.heavyMargin = 100;
             this.speed = 3;
-            this.backgroundMusic = new Audio('./MyBigGame/audios/backgroundMusic.mp3');
+            this.backgroundMusic = new Audio('./MyBigGame/assets/audios/backgroundMusic.mp3');
             this.backgroundMusic.loop = true;     
             this.backgroundMusic.volume = 1;
 
-            this.gameOverMusic = new Audio('./MyBigGame/audios/gameOverMusic.mp3');
+            this.gameOverMusic = new Audio('./MyBigGame/assets/audios/gameOverMusic.mp3');
             this.gameOverMusic.volume = 1;
-            this.jumpMusic = new Audio('./MyBigGame/audios/jumpMusic.mp3');
+            this.jumpMusic = new Audio('./MyBigGame/assets/audios/jumpMusic.mp3');
             this.jumpMusic.volume = 1;
-            this.feedLanding = new Audio('./MyBigGame/audios/feedLanding.mp3');
+            this.feedLanding = new Audio('./MyBigGame/assets/audios/feedLanding.mp3');
             this.jumpMusic.volume = 1;
-            this.runningMusic = new Audio('./MyBigGame/audios/running.mp3');
+            this.runningMusic = new Audio('./MyBigGame/assets/audios/running.mp3');
             this.runningMusic.loop = true;
             this.runningMusic.volume = 0.4;
-            this.hitMusic = new Audio('././MyBigGame/audios/hitMusic.mp3');
+            this.hitMusic = new Audio('././MyBigGame/assets/audios/hitMusic.mp3');
             this.hitMusic.volume = 1;
 
             // 'start' | 'playing' | 'gameOver'
