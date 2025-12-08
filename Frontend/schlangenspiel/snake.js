@@ -29,11 +29,6 @@
     // Canvas-Init-Flag
     let canvasInitialized = false;
 
-    // Touch-Steuerung
-    let isTouching = false;
-    let touchStartPos = null;
-    const minTouchMoveDist = 20;
-
     // --- Hilfsfunktionen ---
 
     // Check: ist gerade ein Input-Feld aktiv?
@@ -317,47 +312,6 @@
         e.preventDefault();
         handleKeyAction(action);
       }
-    });
-
-    // Touch-Steuerung (für iPad / Smartphones)
-    const gameCanvas = canvas;
-
-    window.addEventListener('touchstart', function (e) {
-      if (isInputFocused()) return;
-      if (!gameCanvas.contains(e.target)) return;
-
-      const t = e.touches[0];
-      touchStartPos = { x: t.clientX, y: t.clientY };
-      isTouching = true;
-
-      // Wenn Spiel noch nicht gestartet: Start auslösen
-      if (!gameStarted || end) {
-        gameStarted = true;
-        if (end) resetGameState();
-      }
-    });
-
-    window.addEventListener('touchmove', function (e) {
-      if (!isTouching) return;
-      if (!gameCanvas.contains(e.target)) return;
-
-      const t = e.touches[0];
-      const dx = t.clientX - touchStartPos.x;
-      const dy = t.clientY - touchStartPos.y;
-
-      if (Math.abs(dx) < minTouchMoveDist && Math.abs(dy) < minTouchMoveDist) return;
-
-      if (Math.abs(dx) > Math.abs(dy)) {
-        // horizontal
-        handleKeyAction(dx > 0 ? 'right' : 'left');
-      } else {
-        // vertikal
-        handleKeyAction(dy > 0 ? 'down' : 'up');
-      }
-    });
-
-    window.addEventListener('touchend', function () {
-      isTouching = false;
     });
 
     // Button-Steuerung (Pfeile in HTML)
