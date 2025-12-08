@@ -21,9 +21,9 @@ Das Spiel enthält außerdem humorvolle Elemente und stilisierte Pseudonamen, um
 - Aufforderung:  
   **„Press ENTER to start“**
 - ENTER beginnt das Spiel.
-**„Press q-Key für Start-Screen“**
+  **„Press q-Key für Start-Screen“**
 - Erneut zum Start-Screen zurückkehren.
-**„Press i-Key für Info“**
+  **„Press i-Key für Info“**
 - Kannst dir die Spiel regeln durch lesen.
 
 ### **⭐ Game-Over Bildschirm**
