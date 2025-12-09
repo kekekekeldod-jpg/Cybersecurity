@@ -133,6 +133,15 @@ window.addEventListener('load', function () {
                     this.gameOverMusic.currentTime = 0;
                     this.gameOverMusic.play();
                  }
+
+                 if(this.playerHitFromSide && this.playerHitFromTop){
+                    this.enemy.hitState.enter();
+                    this.enemyTwo.hitState.enter();
+                    this.enemy.state = 'HIT';
+                    this.enemyTwo.state = 'HIT';
+                    this.enemy.reset
+                    this.score.scoreState += 5;
+                 } 
                 
             }
         }
