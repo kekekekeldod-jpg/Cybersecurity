@@ -9,6 +9,7 @@ import { setupMobileControls } from "../input/inputSmartphone.js";
 import { Enemy } from "../entities/juliepie/enemy.js";
 import { Info } from "../ui/info.js";
 import { Score } from "../core/score.js";
+import { EnemyTwo } from "../entities/juliepietwo/enemyTwo.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -48,6 +49,8 @@ window.addEventListener('load', function () {
             this.groundMargin = 0;
             this.heavyMargin = 100;
             this.speed = 3;
+            this.playerHitFromTop = false;
+            this.playerHitFromSide = false;
             this.backgroundMusic = new Audio('./MyBigGame/assets/audios/backgroundMusic.mp3');
             this.backgroundMusic.loop = true;     
             this.backgroundMusic.volume = 1;
@@ -74,6 +77,7 @@ window.addEventListener('load', function () {
             this.startScreen = new Start(this);
             this.gameOverScreen = new GameOver(this);
             this.enemy = new Enemy(this);
+            this.enemyTwo = new EnemyTwo(this);
             this.info = new Info(this);
             this.score = new Score(this);
         }
@@ -113,10 +117,22 @@ window.addEventListener('load', function () {
             if (this.state === 'playing') {
                  this.gameOverMusic.pause();
                  this.backgroundMusic.play();
+
+                 this.playerHitFromTop = false;
+                 this.playerHitFromSide = false; 
+
                  this.background.update(deltaTime);
                  this.playerFish.update(deltaTime);
                  this.player.update(this.input.keys, deltaTime);
                  this.enemy.update(deltaTime);
+                 this.enemyTwo.update(deltaTime);
+
+                 if (this.playerHitFromSide && !this.playerHitFromTop) {
+                    this.state = 'gameOver';
+                    this.background.pause();
+                    this.gameOverMusic.currentTime = 0;
+                    this.gameOverMusic.play();
+                 }
                 
             }
         }
@@ -135,6 +151,7 @@ window.addEventListener('load', function () {
 
             this.background.draw(context);
             this.enemy.draw(context);
+            this.enemyTwo.draw(context);
             this.playerFish.draw(context);
             this.player.draw(context);
             this.score.draw(context);
@@ -152,6 +169,7 @@ window.addEventListener('load', function () {
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
             this.enemy.reset();
+            this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();
@@ -169,6 +187,7 @@ window.addEventListener('load', function () {
             this.jumpMusic.pause();
             this.runningMusic.pause();
             this.enemy.reset();
+            this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();
@@ -185,6 +204,7 @@ window.addEventListener('load', function () {
             this.jumpMusic.pause();
             this.runningMusic.pause();
             this.enemy.reset();
+            this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
             this.background.reset();

@@ -1,14 +1,15 @@
-import { Hit } from "./enemyHitState.js";
+import { Hit } from "./enemyTwoHitState.js";
 
-export class Enemy {
-
+export class EnemyTwo {
     constructor(game){
         this.game = game;
+        this.player = this.game.player;
+        this.enemy = this.game.enemy;
         this.width = 500;
         this.height = 500;
-        this.image = document.getElementById('enemy');
-        this.x = this.game.width - this.width;
+        this.x = 0;
         this.y = this.game.height - this.height;
+        this.image = document.getElementById('enemyTwo');
         this.speed = 10;
 
         this.frameX = 0;
@@ -25,10 +26,12 @@ export class Enemy {
         this.hitMusic = this.game.hitMusic;
 
         this.hitState = new Hit(this);
-    }
+
+}
+
 
     reset(){
-        this.x = this.game.width - this.width;
+        this.x = 0;
         this.y = this.game.height - this.height;
         this.frameX = 0;
         this.frameY = 0;
@@ -42,9 +45,8 @@ export class Enemy {
             return;
         }
 
-
      // Bewegung des Spielers
-     this.x -= this.speed * dt;
+     this.x += this.speed * dt;
 
      //Punkte 
      const punkte = this.game.score;
@@ -76,23 +78,18 @@ export class Enemy {
             this.hitMusic.pause();
             this.hitMusic.currentTime = 0;
             this.hitMusic.play();
-            this.game.playerHitFromTop = true;
 
         } else {
             this.game.state = 'gameOver';
             this.gameOverMusic.currentTime = 0;
             this.gameOverMusic.play();
-            this.game.playerHitFromSide = true;
         }
+
     }
-
-   
-
-
 
     // Wiederhollen des Enemys
 
-    if (this.x <= -this.width) this.x = this.game.width + this.width;
+    if (this.x - this.width >= this.game.width) this.x = 0 - this.width;
 
           // Sprite Animation
         this.frameTimer += deltaTime;
@@ -107,5 +104,6 @@ export class Enemy {
     draw(context){
           context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
 }
+
 
 }
