@@ -79,10 +79,10 @@ export class EnemyTwo {
             this.hitMusic.currentTime = 0;
             this.hitMusic.play();
 
+            this.game.playerHitFromTop = true;
+
         } else {
-            this.game.state = 'gameOver';
-            this.gameOverMusic.currentTime = 0;
-            this.gameOverMusic.play();
+            this.game.playerHitFromSide = true;
         }
 
     }

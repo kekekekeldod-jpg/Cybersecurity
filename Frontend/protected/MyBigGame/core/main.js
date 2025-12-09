@@ -129,7 +129,7 @@ window.addEventListener('load', function () {
 
                  if (this.playerHitFromSide && !this.playerHitFromTop) {
                     this.state = 'gameOver';
-                    this.background.pause();
+                    this.backgroundMusic.pause();
                     this.gameOverMusic.currentTime = 0;
                     this.gameOverMusic.play();
                  }

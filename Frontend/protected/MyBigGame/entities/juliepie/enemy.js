@@ -79,9 +79,6 @@ export class Enemy {
             this.game.playerHitFromTop = true;
 
         } else {
-            this.game.state = 'gameOver';
-            this.gameOverMusic.currentTime = 0;
-            this.gameOverMusic.play();
             this.game.playerHitFromSide = true;
         }
     }
