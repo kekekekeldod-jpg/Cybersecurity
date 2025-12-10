@@ -643,6 +643,10 @@ header .header-center h2 {
     margin-bottom: 30px;
     display: none;
     }
+
+    .keys.next{
+      margin-bottom: 0;
+    }
     
     
     .chevron::before {
