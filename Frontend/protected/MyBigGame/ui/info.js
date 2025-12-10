@@ -59,13 +59,21 @@ export class Info {
         context.textAlign = 'top';
         context.fillText(' • Jeder erfolgreiche Sprung über JuliPie, ohne getroffen zu werden, bringt Punkte', this.width / 2, this.height / 2 + 50)
 
+        //Regel 5.1
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+        context.font = "italic small-caps 600 55px Montserrat";
+        context.fillStyle = '#8d6715ff';
+        context.textAlign = 'top';
+        context.fillText(' • Trifft man beide auf einmal, dann sind es Double-Punkte', this.width / 2, this.height / 2 + 150)
+
         //Regel 6.1
         context.textAlign = 'center';
         context.textBaseline = 'top';
         context.font = "italic small-caps 600 55px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('• Punkte erhöhen sich, solange der Spieler nicht:', this.width / 2, this.height / 2 + 200)
+        context.fillText('• Punkte erhöhen sich, solange der Spieler nicht:', this.width / 2, this.height / 2 + 250)
 
          //Regel 6.2
         context.textAlign = 'center';
@@ -73,7 +81,7 @@ export class Info {
         context.font = "italic small-caps 600 55px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('die Seitenbegrenzung berührt,', this.width / 2, this.height / 2 + 300)
+        context.fillText('die Seitenbegrenzung berührt,', this.width / 2, this.height / 2 + 350)
 
         //Regel 6.3
         context.textAlign = 'center';
@@ -81,7 +89,7 @@ export class Info {
         context.font = "italic small-caps 600 55px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('von JuliPie (dem Monster) getroffen wird oder', this.width / 2, this.height / 2 + 400)
+        context.fillText('von JuliPie (dem Monster) getroffen wird oder', this.width / 2, this.height / 2 + 450)
 
          //Regel 6.4
         context.textAlign = 'center';
@@ -89,7 +97,7 @@ export class Info {
         context.font = "italic small-caps 600 55px Montserrat";
         context.fillStyle = '#8d6715ff';
         context.textAlign = 'top';
-        context.fillText('vom Caney-Flieger getroffen wird', this.width / 2, this.height / 2 + 500)
+        context.fillText('vom Caney-Flieger getroffen wird', this.width / 2, this.height / 2 + 550)
 
           //Q-Zurück
         context.textAlign = 'center';
