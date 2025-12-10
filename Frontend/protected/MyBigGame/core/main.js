@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
             this.height = height;
             this.groundMargin = 0;
             this.heavyMargin = 100;
-            this.speed = 3;
+            this.speed = 200;
             this.playerHitFromTop = false;
             this.playerHitFromSide = false;
             this.backgroundMusic = new Audio('./MyBigGame/assets/audios/backgroundMusic.mp3');
