@@ -640,7 +640,7 @@ header .header-center h2 {
     padding: 10px;
     box-sizing: border-box;
     height: 110px;
-    margin-bottom: 11px;
+    margin-bottom: 30px;
     display: none;
     }
     
@@ -723,7 +723,17 @@ header .header-center h2 {
     font-size: 23px;
     font-weight: 900;
     }
-    
+
+    .qEnter {
+    font-size: 23px;
+    font-weight: 900;
+    }
+
+    .iEnter {
+    font-size: 23px;
+    font-weight: 900;
+    }
+
     .arr:active {
     background: rgb(0, 236, 32);
     }
