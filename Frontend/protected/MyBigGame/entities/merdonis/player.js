@@ -44,8 +44,11 @@ export class Player {
         this.jumpMusic = this.game.jumpMusic;
         this.feedLanding = this.game.feedLanding;
         this.runningMusic = this.game.runningMusic;
-
+     
         this.wasInAir = false;   // war im letzten Frame in der Luft?
+
+        // Merken, ob der Running-Sound am laufen ist
+        this.isRunningSoundPlaying = false;
     }
 
     reset() {
@@ -55,7 +58,13 @@ export class Player {
         this.speed = 0;
         this.frameX = 0;
         this.frameY = 0;
+        this.frameTimer = 0;
         this.wasInAir = false;
+
+        // Running-Sound sicher stoppen
+        this.isRunningSoundPlaying = false;
+        this.runningMusic.pause();
+
         this.setState(0); // STAYING
     }
 
@@ -63,20 +72,36 @@ export class Player {
         // State-Logik
         this.currentState.handleInput(input);
 
-        if (input.includes('ArrowRight')) {
-          this.speed = this.maxSpeed;
-          this.runningMusic.play();
+        // --- Horizontale Bewegungen + Running-Sound-Logik ---
+        const movingRight  = input.includes('ArrowRight');
+        const movingLeft   = input.includes('ArrowLeft');
+        const movingHorizontally = movingRight || movingLeft;
+        const onGround = this.isOnGround();
 
-        } else if (input.includes('ArrowLeft')) {
-          this.speed = -this.maxSpeed;
-          this.runningMusic.play();
-          
-        }  else {
+        if (movingRight) {
+            this.speed = this.maxSpeed;
+        } else if (movingLeft) {
+            this.speed = -this.maxSpeed;
+        } else {
             this.speed = 0;
-            this.runningMusic.pause();
-        } 
+        }
 
-         // --- Horizontale Bewegungen ---
+        // Running-Sound nur bei Zustandswechsel, nicht jedes Frame
+        if (movingHorizontally && onGround) {
+            if (!this.isRunningSoundPlaying) {
+                this.runningMusic.currentTime = 0;
+                const p = this.runningMusic.play();
+                if (p && p.catch) p.catch(() => {});
+                this.isRunningSoundPlaying = true;
+            }
+        } else {
+            if (this.isRunningSoundPlaying) {
+                this.runningMusic.pause();
+                this.isRunningSoundPlaying = false;
+            }
+        }
+
+        // --- Horizontale Bewegungen ---
         this.x += this.speed * dt;
 
         // Game Over bei Randberührung
@@ -85,6 +110,7 @@ export class Player {
             this.backgroundMusic.pause();
             this.gameOverMusic.play();
             this.runningMusic.pause();
+            this.isRunningSoundPlaying = false;
             return;
         }
 
@@ -98,11 +124,11 @@ export class Player {
         // --- Vertikale Physik ---
         this.y += this.vy * dt;
 
-           // Schwerkraft nur in der Luft
+        // Schwerkraft nur in der Luft
         if (!this.isOnGround()) {
             this.vy += this.gravity * dt;
-            // Music in der Luft stoppen
-            this.runningMusic.pause();
+            // WICHTIG: hier NICHT mehr jedes Frame runningMusic.pause()
+            // das regeln wir über isRunningSoundPlaying oben
         } else {
             // auf Boden "snappen"
             this.y = this.game.height - this.height - this.game.groundMargin;
@@ -113,29 +139,28 @@ export class Player {
         if (this.y <= 0) this.y = 0;
 
 
-        //Kollision = Game 
-    const player = this.game.player;
-    const playerSecond = this.game.playerFish;
+        // Kollision = Game 
+        const player = this.game.player;
+        const playerSecond = this.game.playerFish;
 
-    const collsion = 
-    player.x < playerSecond.x + playerSecond.width &&
-    player.x + player.width > playerSecond.x &&
-    player.y < playerSecond.y + playerSecond.height &&
-    player.y + player.height > playerSecond.y;
+        const collsion = 
+            player.x < playerSecond.x + playerSecond.width &&
+            player.x + player.width > playerSecond.x &&
+            player.y < playerSecond.y + playerSecond.height &&
+            player.y + player.height > playerSecond.y;
 
-    if (collsion) {
+        if (collsion) {
+            let hitManger = 220;
+            const playerHead = player.y;
+            const playerSecondBottom = playerSecond.y + playerSecond.height - hitManger;
 
-        let hitManger = 220;
-        const playerHead = player.y;
-        const playerSecondBottom = playerSecond.y + playerSecond.height - hitManger;
+            const playerHitSecondPlayer = playerHead < playerSecondBottom;
 
-        const playerHitSecondPlayer = playerHead < playerSecondBottom;
-
-        if (playerHitSecondPlayer) {
-            this.game.state = 'gameOver';
-            this.gameOverMusic.play();
+            if (playerHitSecondPlayer) {
+                this.game.state = 'gameOver';
+                this.gameOverMusic.play();
+            }
         }
-    }
 
         // --- Landing-Sound ---
         const currentlyOnGround = this.isOnGround();
@@ -148,7 +173,7 @@ export class Player {
         // Zustand für nächsten Frame merken
         this.wasInAir = !currentlyOnGround;
 
-     // Sprite Animation
+        // Sprite Animation
         this.frameTimer += dt;
 
         if (this.frameTimer > this.frameInterval) {

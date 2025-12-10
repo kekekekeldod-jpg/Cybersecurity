@@ -67,6 +67,8 @@ window.addEventListener('load', function () {
             this.hitMusic = new Audio('././MyBigGame/assets/audios/hitMusic.mp3');
             this.hitMusic.volume = 1;
 
+            this.isBackgroundMusic = false;
+
             // 'start' | 'playing' | 'gameOver'
             this.state = 'start';
 
@@ -80,6 +82,21 @@ window.addEventListener('load', function () {
             this.enemyTwo = new EnemyTwo(this);
             this.info = new Info(this);
             this.score = new Score(this);
+        }
+
+        playBackgroundMusicOnce() {
+            if (!this.isBackgroundMusicPlaying) {
+                const p = this.backgroundMusic.play();
+                if (p && p.catch) p.catch(() => {});
+                this.isBackgroundMusicPlaying = true;
+            }
+        }
+
+        pauseBackgroundMusic() {
+            if (this.isBackgroundMusicPlaying) {
+                this.backgroundMusic.pause();
+                this.isBackgroundMusicPlaying = false;
+            }
         }
 
         update(dt) {
@@ -115,8 +132,10 @@ window.addEventListener('load', function () {
 
             // PLAYING
             if (this.state === 'playing') {
+
                  this.gameOverMusic.pause();
-                 this.backgroundMusic.play();
+                
+                 this.playBackgroundMusicOnce();
 
                  this.playerHitFromTop = false;
                  this.playerHitFromSide = false; 
@@ -166,7 +185,7 @@ window.addEventListener('load', function () {
 
             if (this.state === 'gameOver') {
                 this.gameOverScreen.draw(context);
-                this.backgroundMusic.pause();
+                this.pauseBackgroundMusic();
                 this.runningMusic.pause();
                 this.hitMusic.pause();
             }
@@ -180,7 +199,7 @@ window.addEventListener('load', function () {
             this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
-            this.background.reset();
+            this.pauseBackgroundMusic();
             this.score.reset();
             this.state = 'playing';
             console.log('STATE NACH RESTART:', this.state, this.player.x, this.player.y);
@@ -189,7 +208,7 @@ window.addEventListener('load', function () {
         goToStart(){
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
-            this.backgroundMusic.pause();
+               this.pauseBackgroundMusic();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
@@ -206,7 +225,7 @@ window.addEventListener('load', function () {
         infoScreen(){
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
-            this.backgroundMusic.pause();
+            this.pauseBackgroundMusic();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
