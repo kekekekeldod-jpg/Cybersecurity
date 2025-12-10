@@ -16,7 +16,13 @@ export class Player {
 
         // Physik
         this.vy = 0;
-        this.weight = 1;
+        this.gravity = 3600;
+        this.jumpStrength = -2200;
+        this.jumpStrengthAfterHit = -2200;
+
+        // Bewegung
+        this.speed = 0;  
+        this.maxSpeed = 1200;
 
         // Sprite / Animation
         this.image = document.getElementById('player');
@@ -24,12 +30,8 @@ export class Player {
         this.frameY = 0;
         this.maxFrame = 0;
         this.fps = 17;
-        this.frameInterval = 1000 / this.fps;
+        this.frameInterval = 1 / this.fps;
         this.frameTimer = 0;
-
-        // Bewegung
-        this.speed = 0;  
-        this.maxSpeed = 20;
 
         // States
         this.states = [new Staying(this), new Running(this)];
@@ -57,13 +59,9 @@ export class Player {
         this.setState(0); // STAYING
     }
 
-    update(input, deltaTime) {
-        const dt = deltaTime / 16.67;
+    update(input, dt) {
         // State-Logik
         this.currentState.handleInput(input);
-
-        // --- Horizontale Bewegungen ---
-        this.x += this.speed * dt;
 
         if (input.includes('ArrowRight')) {
           this.speed = this.maxSpeed;
@@ -78,6 +76,9 @@ export class Player {
             this.runningMusic.pause();
         } 
 
+         // --- Horizontale Bewegungen ---
+        this.x += this.speed * dt;
+
         // Game Over bei Randberührung
         if (this.x <= 0 || this.x >= this.game.width - this.width) {
             this.game.state = 'gameOver';
@@ -89,13 +90,28 @@ export class Player {
 
         // --- Sprung: nur wenn am Boden ---
         if (input.includes('ArrowUp') && this.isOnGround()) {
-            this.vy = -45;              // nach oben
+            this.vy = this.jumpStrength;              // nach oben
             this.jumpMusic.currentTime = 0;
             this.jumpMusic.play();
         }
 
         // --- Vertikale Physik ---
         this.y += this.vy * dt;
+
+           // Schwerkraft nur in der Luft
+        if (!this.isOnGround()) {
+            this.vy += this.gravity * dt;
+            // Music in der Luft stoppen
+            this.runningMusic.pause();
+        } else {
+            // auf Boden "snappen"
+            this.y = this.game.height - this.height - this.game.groundMargin;
+            if (this.vy > 0) this.vy = 0;
+        }
+
+        // Nicht über den oberen Rand
+        if (this.y <= 0) this.y = 0;
+
 
         //Kollision = Game 
     const player = this.game.player;
@@ -121,20 +137,6 @@ export class Player {
         }
     }
 
-        // Schwerkraft nur in der Luft
-        if (!this.isOnGround()) {
-            this.vy += this.weight;
-            // Music in der Luft stoppen
-            this.runningMusic.pause();
-        } else {
-            // auf Boden "snappen"
-            this.y = this.game.height - this.height - this.game.groundMargin;
-            if (this.vy > 0) this.vy = 0;
-        }
-
-        // Nicht über den oberen Rand
-        if (this.y <= 0) this.y = 0;
-
         // --- Landing-Sound ---
         const currentlyOnGround = this.isOnGround();
 
@@ -146,12 +148,17 @@ export class Player {
         // Zustand für nächsten Frame merken
         this.wasInAir = !currentlyOnGround;
 
-        // --- Sprite Animationen ---
-        this.frameTimer += deltaTime;
+     // Sprite Animation
+        this.frameTimer += dt;
+
         if (this.frameTimer > this.frameInterval) {
-            this.frameTimer = 0;
-            if (this.frameX < this.maxFrame) this.frameX++;
-            else this.frameX = 0;
+            this.frameTimer -= this.frameInterval;
+
+            if (this.frameX < this.maxFrame) {
+                this.frameX++;
+            } else {
+                this.frameX = 0;
+            }
         }
     }
 

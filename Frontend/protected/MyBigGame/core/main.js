@@ -82,7 +82,7 @@ window.addEventListener('load', function () {
             this.score = new Score(this);
         }
 
-        update(deltaTime) {
+        update(dt) {
 
             // i = InfoScreen
             if (this.input.keys.includes('i')){
@@ -121,11 +121,11 @@ window.addEventListener('load', function () {
                  this.playerHitFromTop = false;
                  this.playerHitFromSide = false; 
 
-                 this.background.update(deltaTime);
-                 this.playerFish.update(deltaTime);
-                 this.player.update(this.input.keys, deltaTime);
-                 this.enemy.update(deltaTime);
-                 this.enemyTwo.update(deltaTime);
+                 this.background.update(dt);
+                 this.playerFish.update(dt);
+                 this.player.update(this.input.keys, dt);
+                 this.enemy.update(dt);
+                 this.enemyTwo.update(dt);
 
                  if (this.playerHitFromSide && !this.playerHitFromTop) {
                     this.state = 'gameOver';
@@ -139,7 +139,6 @@ window.addEventListener('load', function () {
                     this.enemyTwo.hitState.enter();
                     this.enemy.state = 'HIT';
                     this.enemyTwo.state = 'HIT';
-                    this.enemy.reset
                     this.score.scoreState += 5;
                  } 
                 
@@ -226,10 +225,25 @@ window.addEventListener('load', function () {
 
     const game = new Game(DESIGN_WIDTH, DESIGN_HEIGHT);
     let lastTime = 0;
+    let accumulator = 0;
+
+    const STEP = 1 / 60;
+    const MAX_FRAME = 0.1;
 
     function animate(timeStamp) {
-        const deltaTime = timeStamp - lastTime;
+
+        let frameTime = (timeStamp - lastTime) / 1000;
+
         lastTime = timeStamp;
+
+        if (frameTime > MAX_FRAME) frameTime = MAX_FRAME;
+
+        accumulator += frameTime;
+
+        while (accumulator >= STEP) {
+            game.update(STEP);
+            accumulator -= STEP;
+        }
 
         // kompletten Kontext skalieren
         ctx.save();
@@ -237,8 +251,6 @@ window.addEventListener('load', function () {
 
           // in Game-Koordinaten (3000x2000) wischen
         ctx.clearRect(0, 0, DESIGN_WIDTH, DESIGN_HEIGHT);
-
-        game.update(deltaTime);
         game.draw(ctx);
 
         ctx.restore();

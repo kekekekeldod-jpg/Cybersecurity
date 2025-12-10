@@ -4,6 +4,8 @@ export class Hit {
         this.enemy.frameX = 0;
         this.enemy.frameY = 0;
         this.enemy.maxFrame = 9;
+
+        this.enemy.frameTimer = 0;
     }
 
     enter(){
@@ -13,11 +15,11 @@ export class Hit {
        this.enemy.frameTimer = 0;
     }
 
-    update(deltaTime){
+    update(dt){
 
-        this.enemy.frameTimer += deltaTime;
+        this.enemy.frameTimer += dt;
         if (this.enemy.frameTimer > this.enemy.frameInterval) {
-            this.enemy.frameTimer = 0;
+            this.enemy.frameTimer -= this.enemy.frameInterval;
             if (this.enemy.frameX < this.enemy.maxFrame) {
                 this.enemy.frameX++;
             } else {

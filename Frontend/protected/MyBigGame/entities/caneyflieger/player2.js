@@ -19,10 +19,10 @@ export class PlayerFish {
         this.frameY = 0;
         this.maxFrame = 0;
         this.fps = 14;
-        this.frameInterval = 1000 / this.fps;
+        this.frameInterval = 1 / this.fps;
         this.frameTimer = 0;
 
-        this.maxSpeed = 10;
+        this.maxSpeed = 600;
         this.speedX = this.maxSpeed; // Startgeschwindigkeit nach rechts
 
         // States: Index 0 = FLYINGRIGHT, Index 1 = FLYINGLEFT
@@ -39,11 +39,16 @@ export class PlayerFish {
     reset() {
         this.x = this.startX;
         this.y = this.startY;
-        this.speed = 0;
+
+        this.frameX = 0;
+        this.frameY = 0;
+        this.frameTimer = 0;
+
+        this.currentState = this.states[states.FLYINGRIGHT];
+        this.currentState.enter();
     }
 
-    update(deltaTime) {
-        const dt =deltaTime / 16.67;
+    update(dt) {
         // Bewegung
         this.x += this.speedX * dt;
 
@@ -52,11 +57,16 @@ export class PlayerFish {
 
         
         // Sprite Animation
-        this.frameTimer += deltaTime;
+        this.frameTimer += dt;
+
         if (this.frameTimer > this.frameInterval) {
-            this.frameTimer = 0;
-            if (this.frameX < this.maxFrame) this.frameX++;
-            else this.frameX = 0;
+            this.frameTimer -= this.frameInterval;
+
+            if (this.frameX < this.maxFrame) {
+                this.frameX++;
+            } else {
+                this.frameX = 0;
+            }
         }
     }
 

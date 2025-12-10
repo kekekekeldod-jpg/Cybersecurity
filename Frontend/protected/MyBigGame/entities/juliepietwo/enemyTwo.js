@@ -10,13 +10,13 @@ export class EnemyTwo {
         this.x = 0;
         this.y = this.game.height - this.height;
         this.image = document.getElementById('enemyTwo');
-        this.speed = 10;
+         this.speed = 600;
 
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 9;
         this.fps = 14;
-        this.frameInterval = 1000 / this.fps;
+        this.frameInterval = 1 / this.fps;
         this.frameTimer = 0;
         this.gameOverMusic = this.game.gameOverMusic;
         this.runningMusic = this.game.runningMusic;
@@ -38,10 +38,9 @@ export class EnemyTwo {
         this.maxFrame = 9;
     }
 
-    update(deltaTime) {
-        const dt = deltaTime / 16.67;
+    update(dt) {
         if (this.state === 'HIT') {
-            this.hitState.update(deltaTime);
+            this.hitState.update(dt);
             return;
         }
 
@@ -61,7 +60,7 @@ export class EnemyTwo {
     player.y + player.height > this.y;
 
     if (collsion && this.state === 'ALIVE') {
-
+ 
         const playerBottom = player.y + player.height;
         const enemyTop = this.y;
 
@@ -70,7 +69,7 @@ export class EnemyTwo {
 
 
         if(hitOver) {
-            player.vy = -40;
+            player.vy = player.jumpStrengthAfterHit;
             punkte.scoreState += 5;
             this.state = 'HIT';
             this.hitState.enter();
@@ -91,13 +90,18 @@ export class EnemyTwo {
 
     if (this.x - this.width >= this.game.width) this.x = 0 - this.width;
 
-          // Sprite Animation
-        this.frameTimer += deltaTime;
+        // Sprite Animation
+        this.frameTimer += dt;
+
         if (this.frameTimer > this.frameInterval) {
-            this.frameTimer = 0;
-            if (this.frameX < this.maxFrame) this.frameX++;
-            else this.frameX = 0;
-        }
+            this.frameTimer -= this.frameInterval;
+
+            if (this.frameX < this.maxFrame) {
+                this.frameX++;
+            } else {
+                this.frameX = 0;
+            }
+    }
     }
 
 
