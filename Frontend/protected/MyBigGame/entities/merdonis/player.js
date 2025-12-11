@@ -3,6 +3,7 @@ import { Running, Staying } from "./playerStates.js";
 export class Player { 
     constructor(game) {
         this.game = game;
+        this.life = this.game.life;
         this.width = 500;
         this.height = 500;
 
@@ -168,6 +169,10 @@ export class Player {
         if (currentlyOnGround && this.wasInAir) {
             this.feedLanding.currentTime = 0;
             this.feedLanding.play();
+
+            if (this.game.life) {
+                this.game.life.loseHeart();
+            }
         }
 
         // Zustand für nächsten Frame merken

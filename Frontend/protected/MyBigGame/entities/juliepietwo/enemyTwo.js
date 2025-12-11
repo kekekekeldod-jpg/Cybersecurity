@@ -28,8 +28,6 @@ export class EnemyTwo {
         this.hitState = new Hit(this);
 
 }
-
-
     reset(){
         this.x = 0;
         this.y = this.game.height - this.height;

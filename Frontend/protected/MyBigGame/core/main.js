@@ -10,6 +10,7 @@ import { Enemy } from "../entities/juliepie/enemy.js";
 import { Info } from "../ui/info.js";
 import { Score } from "../core/score.js";
 import { EnemyTwo } from "../entities/juliepietwo/enemyTwo.js";
+import { Life } from "./life.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -64,8 +65,10 @@ window.addEventListener('load', function () {
             this.runningMusic = new Audio('./MyBigGame/assets/audios/running.mp3');
             this.runningMusic.loop = true;
             this.runningMusic.volume = 0.4;
-            this.hitMusic = new Audio('././MyBigGame/assets/audios/hitMusic.mp3');
+            this.hitMusic = new Audio('./MyBigGame/assets/audios/hitMusic.mp3');
             this.hitMusic.volume = 1;
+            this.doubleKillMusic = new Audio('./MyBigGame/assets/audios/doubleKill.mp3')
+            this.doubleKillMusic.currentTime = 1;
 
             this.isBackgroundMusic = false;
 
@@ -82,6 +85,7 @@ window.addEventListener('load', function () {
             this.enemyTwo = new EnemyTwo(this);
             this.info = new Info(this);
             this.score = new Score(this);
+            this.life = new Life(this);
         }
 
         playBackgroundMusicOnce() {
@@ -145,6 +149,7 @@ window.addEventListener('load', function () {
                  this.player.update(this.input.keys, dt);
                  this.enemy.update(dt);
                  this.enemyTwo.update(dt);
+                 this.life.update(dt);
 
                  if (this.playerHitFromSide && !this.playerHitFromTop) {
                     this.state = 'gameOver';
@@ -154,6 +159,8 @@ window.addEventListener('load', function () {
                  }
 
                  if(this.playerHitFromSide && this.playerHitFromTop){
+                    this.doubleKillMusic.play();
+                    this.hitMusic.pause();
                     this.enemy.hitState.enter();
                     this.enemyTwo.hitState.enter();
                     this.enemy.state = 'HIT';
@@ -182,6 +189,7 @@ window.addEventListener('load', function () {
             this.playerFish.draw(context);
             this.player.draw(context);
             this.score.draw(context);
+            this.life.draw(context);
 
             if (this.state === 'gameOver') {
                 this.gameOverScreen.draw(context);
@@ -201,6 +209,7 @@ window.addEventListener('load', function () {
             this.player.reset();
             this.pauseBackgroundMusic();
             this.score.reset();
+            this.life.reset();
             this.state = 'playing';
             console.log('STATE NACH RESTART:', this.state, this.player.x, this.player.y);
         }
@@ -208,7 +217,7 @@ window.addEventListener('load', function () {
         goToStart(){
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
-               this.pauseBackgroundMusic();
+            this.pauseBackgroundMusic();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
@@ -219,6 +228,7 @@ window.addEventListener('load', function () {
             this.player.reset();
             this.background.reset();
             this.score.reset();
+            this.life.reset();
             this.state = 'start';
         }
 
@@ -236,6 +246,7 @@ window.addEventListener('load', function () {
             this.player.reset();
             this.background.reset();
             this.score.reset();
+            this.life.reset();
             this.state = 'info';
         }
 
