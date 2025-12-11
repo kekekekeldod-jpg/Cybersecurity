@@ -160,6 +160,7 @@ window.addEventListener('load', function () {
 
                  if(this.playerHitFromSide && this.playerHitFromTop){
                     this.doubleKillMusic.play();
+                    this.doubleKillMusic.currentTime = 0;
                     this.hitMusic.pause();
                     this.enemy.hitState.enter();
                     this.enemyTwo.hitState.enter();
@@ -194,6 +195,7 @@ window.addEventListener('load', function () {
             if (this.state === 'gameOver') {
                 this.gameOverScreen.draw(context);
                 this.pauseBackgroundMusic();
+                this.doubleKillMusic.pause();
                 this.runningMusic.pause();
                 this.hitMusic.pause();
             }
@@ -207,6 +209,7 @@ window.addEventListener('load', function () {
             this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
+            this.doubleKillMusic.pause();
             this.pauseBackgroundMusic();
             this.score.reset();
             this.life.reset();
@@ -218,6 +221,7 @@ window.addEventListener('load', function () {
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
             this.pauseBackgroundMusic();
+            this.doubleKillMusic.pause();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
@@ -236,6 +240,7 @@ window.addEventListener('load', function () {
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
             this.pauseBackgroundMusic();
+            this.doubleKillMusic.pause();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
