@@ -67,9 +67,8 @@ window.addEventListener('load', function () {
             this.runningMusic.volume = 0.4;
             this.hitMusic = new Audio('./MyBigGame/assets/audios/hitMusic.mp3');
             this.hitMusic.volume = 1;
-            this.doubleKillMusic = new Audio('./MyBigGame/assets/audios/doubleKill.mp3')
-            this.doubleKillMusic.currentTime = 1;
-
+            this.doubleKillMusic = new Audio('./MyBigGame/assets/audios/doubleKill.mp3');
+            this.doubleKillMusic.volume = 1;
             this.isBackgroundMusic = false;
 
             // 'start' | 'playing' | 'gameOver'
