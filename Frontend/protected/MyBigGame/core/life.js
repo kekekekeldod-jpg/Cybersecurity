@@ -42,7 +42,7 @@ export class Life {
         if (this.frameY < this.maxFrameY){
             this.frameY++;
         }
-        
+
         if (this.frameY >= this.maxFrameY){
             this.game.state = 'gameOver';
             this.game.backgroundMusic.pause();
