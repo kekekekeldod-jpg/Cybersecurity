@@ -63,7 +63,10 @@ Alle Sounds werden korrekt zurückgesetzt (`currentTime = 0`), damit sie beim er
 - physikbasiertes Springen (Schwerkraft, Aufprall)
 - Gegner **JuliePie** kann nur durch einen korrekten Kopftreffer besiegt werden
 - **für jeden erfolgreichen Sprung auf JuliePie gibt es +5 Punkte**
+- **für jeden Doppelt-Treffer gibt es +10 Punkte**
 - Seitenkollision führt zu **Game Over**
+- Ebenso führt die sechste Berührung auf den      Boden zu **Game Over**
+- Man verliert pro Bodenkontakt ein Herz, man hat 6 Leben
 - Berührt der Kopf von **Merdonis** den unteren Bereich des **Caney-Fliegers**, führt das ebenfalls zu **Game Over**
 - AABB-Collision-Detection mit erweiterter Y-Achsen-Logik
 - State-Machines für Player und Enemy
