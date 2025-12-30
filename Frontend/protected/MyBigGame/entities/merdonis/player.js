@@ -174,7 +174,7 @@ export class Player {
                 this.game.life.loseHeart();
             }
         }
-
+        
         // Zustand für nächsten Frame merken
         this.wasInAir = !currentlyOnGround;
 

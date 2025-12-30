@@ -1009,28 +1009,6 @@
     background: linear-gradient(250deg, #B417BB, #1E927E, #7C0505, #B77018);
     }
     
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    
-    
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    color: coral;
-    font-size: 1.8rem;
-    font-weight: 600;
-    }
-    
-    .preis .all-preis .preis-box .preise span:last-child{
-    color: #999;
-    font-size: 0.8rem;
-    
-    }
-    
     .inputi{
     font-size: 16px;
     font-weight: 450;
@@ -1048,125 +1026,6 @@
     font-size: 20px;
     text-align: center;
     margin-bottom: 40px;
-    }
-    
-    .preis{
-    margin-top: 50px;
-    }
-    
-    .preis .all-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 1rem;
-    width: 15rem;
-    font-size: 1.8rem;
-    color: ghostwhite;
-    border-radius: .5rem;
-    background: #1c1c1e;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 60px;
-    }
-    
-    .preis .all-buttons .buttons.active,
-    .preis .all-buttons .buttons:hover {
-    background: linear-gradient(65deg, deeppink, coral);
-    }
-    
-    .preis .all-preis {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 22.7rem);
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
-    }
-    
-    .preis .all-preis .preis-box {
-    padding: 2rem 2.5rem;
-    background-color: #1c1c1e;
-    border-radius: .5rem;
-    margin: 20px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1.8rem;
-    color: ghostwhite;
-    margin-bottom: .5rem;
-    }
-    
-    .preis .all-preis .preis-box .preise {
-    animation: preis .2s linear;
-    transform-origin: top;
-    }
-    
-    @keyframes preis {
-    0% {
-    opacity: .5;
-    transform: scaleY(.5);
-    }
-    }
-    
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste {
-    border-top: .1rem solid rgba(255, 255, 255, .1);
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    padding: 1rem 0;
-    font-size: 1.3rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p i {
-    margin-right: 1rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p .fa-circle-check {
-    color: limegreen;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p .fa-circle-xmark {
-    color: tomato;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p span {
-    color: #999;
-    }
-    
-    .prs{
-    display: inline-block;
-    margin-top: 1rem;
-    cursor: pointer;
-    padding: 0.5rem 3.5rem;
-    font-size: 1.2rem;
-    background: linear-gradient(65deg, deeppink, coral);
-    color: ghostwhite;
-    border-radius: 5rem;
-    transition: all .6s ease;
-    }
-
-    .prs:hover{
-      transform: translateY(-4px);
-      background: linear-gradient(65deg, rgb(138, 25, 85), rgb(134, 50, 19));
-    }
-    
-    .preis .all-preis .preis-box .prs {
-    text-align: center;
-    border-radius: .5rem;
-    }
-    
-    .preis .all-preis .preis-box:nth-child(2) {
-    border: .1rem solid rgba(255, 255, 255, .1);
-    box-shadow: 0 .5rem 1rem #000;
     }
     
     .program{
@@ -1751,6 +1610,71 @@
     .swiper-pagination-bullet-active {
     background-color: var(--second-color);
     }
+
+    .mobileForensicWrapper{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      max-width: 1100px;
+      place-items: center;
+      margin-inline: auto;
+    }
+
+    .wrapperOne{
+      display: block;
+      width: 100%;
+      text-align: start;
+      background: #14373a;
+      padding: clamp(1rem, 3vw, 2rem);
+      border: 3px solid black;
+      border-radius: 20px;
+      box-shadow: 0px 25px 20px -20px rgba(182, 82, 82, 0.7), -25px 0px 20px -20px rgba(65, 16, 97, 0.7), 0px -20px 20px -20px rgba(255, 165, 0, 0.7), 20px 0px 20px -20px rgba(0, 255, 0, 0.7);
+    }
+
+    .wrapperOne h2{
+     font-size: clamp(1rem, 5vw, 2rem);
+     color: #a86313;
+     line-height: clamp(2rem, 5vw, 2rem);
+    }
+
+    .wrapperOne h5{
+     font-size: clamp(0.5rem, 5vw, 1rem);
+     color: #f30000;
+     line-height: clamp(2rem, 5vw, 3rem);
+    }
+
+    .wrapperOne p{
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-size: clamp(0.8rem, 3vw, 1.3rem);
+      font-weight: 900;
+    }
+
+    .wrapperOne a{
+      text-decoration: underline;
+      animation: forensicLink 3s linear infinite;
+    }
+
+    @keyframes forensicLink {
+      0% {
+        color: #0033ff;
+      }
+      50% {
+        color:red;
+      }
+      100%{
+        color: #51520C;
+      }
+    }
+
+    .wrapperTwo img{
+      width: 100%;
+      height: auto;
+      transition: all ease.8s;
+      cursor: pointer;
+    }
+
+    .wrapperTwo img:hover{
+      transform: scale(1.2);
+    }
     
     @media (max-width:1740px){
     header{
@@ -1764,7 +1688,6 @@
     font-size: 18px;
     }
     }
-    
     
     @media (max-width:1450px){
     
@@ -1939,36 +1862,6 @@
     .user-description {
       font-size: 18.4px;
       }
-    
-    .preis .all-preis {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0 auto;
-    }
-    
-    .preis .all-preis .preis-box .preise{
-    font-size: 0.8rem;
-    }
-    
-    .preis{
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    padding: 0.7rem 0;
-    font-size: 0.8rem;
-    }
-    
-    .prs{
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem 2rem;
-    font-size: 0.7rem;
-    }
     
     }
     
@@ -2179,36 +2072,6 @@
     
     .canvas-container .game-p{
     font-size: 30px;
-    }
-    
-    .preis .all-preis {
-    grid-template-columns: repeat(3, 1fr);
-    align-items: stretch;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    display: flex;
-    justify-content: flex-start;
-    padding: 3px auto;
-    font-size: 11px;
-    }
-    
-    .prs{
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 10px;
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 18px;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
     }
     
     }
@@ -2684,34 +2547,6 @@
     font-size: 15px;
     }
     
-    .preis .all-preis {
-    display: block;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1rem; 
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 1.2rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    font-size: 0.8rem; 
-    }
-    
-    .prs{
-    padding: 1rem 2.5rem;
-    font-size: 0.6rem;
-    }
-    
     .button:hover{
     background: linear-gradient(250.59deg, #3d1a61 10%, #4a0c5a 48.53%, #691546 75.52%);
     border: none;
@@ -2880,13 +2715,17 @@
     margin-bottom: 0;
     }
 
-     .navmenu-right { gap: 8px; }
-  .nav-btn{
+    .navmenu-right { gap: 8px; }
+    .nav-btn{
     display: inline-block !important;
     padding: 8px 14px;
     font-size: 14px;
     border-radius: 12px;
   }
+
+  .wrapperTwo img:hover{
+      transform: none;
+    }
     }
     
     
@@ -3291,52 +3130,12 @@
     font-size: 15px;
     }
     
-    .preis .all-preis {
-    display: block;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1rem; 
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 1.2rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    font-size: 0.8rem; 
-    }
-    
-    .preis .all-preis .preis-box {
-      width: 100;
-      height: auto;
-      max-width: 450px;
-      max-height: 450px;
-    }
-    
-    .preis .all-preis{
-      margin-left: 45px;
-    }
-    
-    .prs{
-    padding: 1rem 2.5rem;
-    font-size: 0.6rem;
-    }
-    
     .button:hover{
     background: linear-gradient(250.59deg, #3d1a61 10%, #4a0c5a 48.53%, #691546 75.52%);
     border: none;
     transform: none;
-    
     }
-    
+
     .menu-content{
     display: block;
     }

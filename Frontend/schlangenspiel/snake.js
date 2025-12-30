@@ -88,6 +88,8 @@
       snakeLength = 5;
       direction = newDirection = 1;
       gameOverMusicPlayed = false;
+      gameOverSound.currentTime = 0;
+      gameOverSound.pause();
       foods = [];
 
       // Schlange in die Mitte setzen
@@ -267,7 +269,7 @@
 
     function handleKeyAction(action) {
       // Beim ersten Mal oder nach Game Over → Neustart
-      if (!gameStarted || end) {
+      if (!gameStarted && end) {
         gameStarted = true;
         resetGameState();
       }

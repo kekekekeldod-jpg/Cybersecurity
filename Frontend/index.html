@@ -1,71 +1,96 @@
 <!DOCTYPE html>     
 <html lang="de">   
-  
-<!-- 
-Mein Name ist Mertcan, und trotz meiner aktuellen Situation habe ich mich bemüht, diese Seite vollständig eigenständig zu programmieren. Mein Ziel ist es, professionelle Web-, Sicherheits- und Spieleentwicklung zu erlernen und mich ständig weiterzuentwickeln. Ich hoffe, die Webseite gefällt euch.
--->
+<!--
+Mein Name ist Mertcan, und trotz meiner aktuellen Situation habe ich dieses Projekt vollständig selbstständig entwickelt.
+Mein Ziel ist es, professionelle Fähigkeiten in der Webentwicklung, IT-Sicherheit und Spieleentwicklung aufzubauen
+und mich kontinuierlich weiterzuentwickeln. Ich hoffe, dass euch diese Webseite gefällt.
 
-<!-- 
-=== Update 30.11.2025 – Großes System-Upgrade ===
+============================================================
+UPDATE – 30.12.2025 (Großes System- & Funktionsupdate)
+============================================================
 
-+++ Neues Game und Feature +++
-• Eine brandneue Mauszeiger-Funktion, die coole visuelle Effekte erzeugt, sobald man den Cursor bewegt.
-• Ein neues eigenes Spiel: “Merdo of Caney”, das sich derzeit aktiv in der Entwicklung befindet. Es wird regelmäßig verbessert, erweitert und mit immer besseren Updates versorgt.
+=== Allgemeine Änderungen ===
+• Der frühere „Preis“-Bereich wurde vollständig überarbeitet und in den neuen Bereich **Mobile Forensic** umbenannt.
+• Zahlreiche Bugfixes, Stabilitätsverbesserungen und strukturelle Optimierungen wurden durchgeführt.
+• Neue Farbgestaltung und visuelle Überarbeitungen im gesamten Projekt.
+• Verbesserte Performance und bessere Darstellung auf allen Endgeräten.
 
-+++ Neue Hauptfunktionen +++
-• Vollständiges Login- & Registrierungs­system (Node.js + Express + Sessions)
-• Geschützter „/member/“-Bereich mit Zugriff nur nach Anmeldung
-• Passwort-Hashing mit bcrypt (aktuell testweise abschaltbar)
-• SQLite-Datenbank mit Benutzerverwaltung & Login-Protokollierung
-• Backend-API mit sicherer Strukturierung: /auth/login, /auth/register, /auth/logout, /auth/whoami
-• Logging von IP, User-Agent und Login-Status (erfolgreich / nicht erfolgreich)
-• Erweiterte Server-Sicherheit durch Helmet-CSP und Cookie-Konfiguration
+=== Neue Sicherheits- & Schutzfunktionen ===
+• Neue eigene Seite „Website- & Geräteschutz“ zur Aufklärung über Sicherheitsmaßnahmen.
+• Integration eines Passwort-Stärke-Checkers / Validators.
+• Verbesserte clientseitige Sicherheits- und Validierungslogik.
 
-+++ Infrastruktur-Upgrade +++
-• Vollständiger eigener Cloud-Server (Ubuntu 20.04 LTS, Oracle Cloud)
-• Node.js dauerhaft online durch PM2 (Auto-Restart + Monitoring)
-• Nginx Reverse-Proxy vor Express.js eingerichtet (optimierte Performance)
-• Volle HTTPS-Verschlüsselung mit Let’s Encrypt SSL-Zertifikat
-• Eigene Domain merdocyb25.com eingerichtet und live verbunden
-• DNS-Konfiguration über Hostinger / Cloudflare vorbereitet
-• Server-Ordnerstruktur sauber aufgebaut: /srv/merdo/cy24/
+=== Spiele & interaktive Inhalte ===
+• Beide Spiele – **Snake Game** und **Merdo of Caney** – wurden erweitert und repariert.
+• Stabilitätsverbesserungen und Fehlerbehebungen im Gameplay.
+• Optimierte Darstellung, Steuerung und Benutzerführung.
+• Laufende Weiterentwicklung mit regelmäßigen Updates.
 
-+++ Neue rechtliche Dokumente +++
-• Komplettes Impressum hinzugefügt
-• Vollständige Datenschutzerklärung (DSGVO-konform)
-• Klare Informationen über Hosting, IP-Speicherung, Cookies, Logfiles
+=== Backend- & Authentifizierungssystem ===
+• Vollständig implementiertes Login- & Registrierungssystem (Node.js + Express).
+• Geschützter Bereich `/member/`, nur nach erfolgreicher Anmeldung erreichbar.
+• Passwort-Hashing mit bcrypt (testweise deaktivierbar).
+• SQLite-Datenbank mit Benutzerverwaltung und Login-Protokollierung.
+• Sichere Backend-API-Struktur:
+  - /auth/login
+  - /auth/register
+  - /auth/logout
+  - /auth/whoami
+• Protokollierung von IP-Adresse, User-Agent und Login-Status (erfolgreich / fehlgeschlagen).
+• Erweiterte Serversicherheit durch Helmet (CSP) und sichere Cookie-Einstellungen.
 
-=== Spielerische & grafische Verbesserungen ===
-• HTML-Code an nahezu alle Displaygrößen angepasst (Smartphone, Tablet, Desktop)
-• Swipe-Funktionen für iPads entwickelt
-• Fehlerhafte Hintergrundfarben korrigiert (mehrfach)
-• Cyber-3D-Erde implementiert (Three.js)
-• Scroll-Reveal-Probleme auf iPads gefixt
-• Offline-Icons hinzugefügt
-• Balken/Navigation umprogrammiert und stabilisiert
-• GIFs und neue Bilder integriert
-• Neuer Registrierungs-Button mit verbessertem UI/UX
-• Swal-Popup-Design überarbeitet und Fehler behoben
+=== Infrastruktur-Upgrade ===
+• Eigener Cloud-Server (Ubuntu 20.04 LTS auf Oracle Cloud).
+• Node.js läuft dauerhaft über PM2 (Auto-Neustart & Monitoring).
+• Nginx als Reverse Proxy vor Express zur Leistungs- und Sicherheitssteigerung.
+• Vollständige HTTPS-Verschlüsselung mit Let’s Encrypt SSL-Zertifikat.
+• Eigene Domain eingerichtet: **merdocyb25.com**
+• DNS-Konfiguration über Hostinger / Cloudflare.
+• Saubere Serverstruktur:
+  /srv/merdo/cy24/
 
-=== Spielfeatures / Snake-Game ===
-• Wiedergabefehler der Audio-Dateien beseitigt
-• Game-Over-Hintergrund wieder korrekt gesetzt
-• Neues Scaling-System im Canvas implementiert (für responsive Gameplay)
-• Verbesserte Touch-Gesten für mobile Geräte
-• Food-Rendering und Kollisionslogik optimiert
-• Bewegungslogik und UI dynamisch an Displaygrößen angepasst
+=== Rechtliches & Transparenz ===
+• Vollständiges Impressum integriert.
+• DSGVO-konforme Datenschutzerklärung hinzugefügt.
+• Klare Informationen zu:
+  - Hosting
+  - IP-Speicherung
+  - Cookies
+  - Server-Logs
 
-=== Entwicklungs-Ressourcen, die zum Aufbau dieser Seite beigetragen haben ===
-https://github.com/crc137/fontawesome-free-pro/tree/main/Core-Styles
-https://fonts.google.com/
-https://fontawesome.com/
-https://scrollrevealjs.org/
-https://swiperjs.com
+=== UI/UX & Design-Verbesserungen ===
+• Optimiert für alle Bildschirmgrößen (Smartphone, Tablet, Desktop).
+• Swipe-Gesten für Tablets implementiert.
+• Fehlerhafte Hintergrunddarstellungen korrigiert.
+• 3D-Cyber-Erde (Three.js) integriert.
+• ScrollReveal-Probleme auf iPads behoben.
+• Offline-Icons ergänzt.
+• Navigationsleiste überarbeitet und stabilisiert.
+• Neue Bilder und GIFs integriert.
+• Verbesserter Registrierungs-Button (UI/UX).
+• SweetAlert-Design überarbeitet und Fehler behoben.
+
+=== Snake-Game Verbesserungen ===
+• Audioprobleme behoben.
+• Game-Over-Hintergrund korrekt dargestellt.
+• Neues responsives Canvas-Skalierungssystem.
+• Verbesserte Touch-Steuerung für Mobilgeräte.
+• Optimierte Food-Darstellung und Kollisionslogik.
+• Bewegungs- und UI-Logik dynamisch an Bildschirmgröße angepasst.
+
+=== Verwendete Ressourcen & Tools ===
+https://github.com/crc137/fontawesome-free-pro/tree/main/Core-Styles  
+https://fonts.google.com/  
+https://fontawesome.com/  
+https://scrollrevealjs.org/  
+https://swiperjs.com  
 https://www.emailjs.com/
 
 === Hinweis ===
-Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls öffentlich auf GitHub einsehbar.
+Der vollständige Quellcode (Frontend, Backend und Datenbanklogik)
+ist öffentlich auf GitHub einsehbar.
 -->
+
 
   <!--Der Anfang vom Head-Bereich-->
 <head>
@@ -123,7 +148,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
           <li><a href="#uber-mich"><i class="fa-solid fa-info"></i> Über mich</a></li>
           <li><a href="#anmeldung"><i class="fa-solid fa-user"></i> Kontakt</a></li>
           <li><a href="#program"><i class="fa-solid fa-laptop-code"></i> P-G</a></li>
-          <li><a href="#preis"><i class="fa-solid fa-store"></i> Store</a></li>
+          <li><a href="#mobile"><i class="fa-solid fa-store"></i> Mobile</a></li>
           <li class="li-ex">
             <a href="https://go.screenpal.com/watch/cZfr25VMhhJ">
               <i class="fa-regular fa-file-video"></i> Video
@@ -179,8 +204,8 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
       </span>
       <h5># Kali Linux</h5>
       <h1>Software-</h1>
-      <p class="p1">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu erweitern und dich unserem Team anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klickst du auf das Video unten, kannst du sehen, wie ich diese Seite entwickelt habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
-      <p class="p2">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu vertiefen und dich unserem Team anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klicke bitte auf die Balken in der oberen rechten Ecke der Menüleiste, um das Video zu sehen, in dem ich zeige, wie ich diese Seite programmiert habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
+      <p class="p1">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu erweitern und dich mir anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klickst du auf das Video unten, kannst du sehen, wie ich diese Seite entwickelt habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
+      <p class="p2">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu vertiefen und dich mir anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klicke bitte auf die Balken in der oberen rechten Ecke der Menüleiste, um das Video zu sehen, in dem ich zeige, wie ich diese Seite programmiert habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
       <div class="start-btn">
         <a href="#sicher" class="btn2">Lies mehr<i class="fa-solid fa-arrow-right"></i></a>
         <a href="https://go.screenpal.com/watch/cZfr25VMhhJ" class="btn2">Video sehen<i class="fa-solid fa-play"></i></a>
@@ -554,62 +579,25 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
      </section>
        <!-- Ende von Swipe-->
   <hr>
-      <!--========== Kauf ============-->
-    <section class="preis" id="preis">
+      <!--========== Mobile Forensic ============-->
+    <section id="mobile" class="mobileforensic">
       <div class="heading-effekt">
-        <h2>Store</h2>
+        <h2>Mobiel Forensic Info</h2>
       </div>
-      <div class="abo">
-        <h1>Abo-Mitglied</h1>
-        <p>Wähle jetzt zwischen meiner Mitgliedschaftsangeboten - Premium, Standard oder Basis - und erhalte Zugang zu einer Vielzahl exklusiver Funktionen. Mit der Mitgliedschaft kannst du nicht nur bestimmte Inhalte programmieren, sondern bekommst auch individuelle Unterstützung von mir, um deine Projekte auf das nächste Level zu bringen.</p>
+      <div class="mobileForensicWrapper">
+        <div class="wrapperOne">
+          <h2>Crack-Tools</h2>
+          <h5>Cellebrite / GrayKey</h5>
+          <p>Hier findest du ausführliche Informationen rund um das Thema Mobile Forensik und Smartphone-Sicherheit. Dort wird verständlich erklärt, wie Sicherheitsmechanismen auf Android- und iOS-Geräten funktionieren und welche Maßnahmen helfen können, persönliche Daten besser zu schützen. Der Fokus liegt auf Aufklärung, Prävention und technischem Hintergrundwissen zur mobilen Sicherheit. Ziel ist es, Nutzer für Risiken zu sensibilisieren und ihnen zu zeigen, wie sie ihr eigenes Gerät wirkungsvoll absichern können. Die Inhalte dienen ausschließlich informativen und defensiven Zwecken und sind nicht für illegale oder missbräuchliche Anwendungen gedacht. Klicke hier auf den Link, um auf der Website Of Hack-Protection mehr Infos zu bekommen: 
+          <a href="forensic/forensic.html">Mobile-Protection</a>
+          </p>
+        </div>
+        <div class="wrapperTwo">
+          <img src="bilder/crackTool.png">
+        </div>
       </div>
-      <div class="all-buttons">
-          <div class="buttons monat-btn active">Monatlich</div>
-          <div class="buttons jahr-btn">Jährlich</div>
-      </div>
-      <div class="all-preis">
-          <div class="preis-box">
-              <h3> Standard</h3>
-              <div class="preise monat"><span>€ 9.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 19.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                  <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                  <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Praktische Übungen</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div>
-          <div class="preis-box">
-              <h3>Premium</h3>
-              <div class="preise monat"><span>€ 24.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 49.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Spezielle Support</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div> 
-          <div class="preis-box">
-              <h3>Basis</h3>
-              <div class="preise monat"><span>€ 19.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 29.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
-                <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
-                <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div>
-          </div>
-        </section>  
-         <!--========== Ende vom Kauf ============-->
+    </section>  
+         <!--========== Ende von Mobile Forensic ============-->
   </main> 
    <!--========== Ende vom Hauptteil ============-->
   <!--========== Footer ============-->

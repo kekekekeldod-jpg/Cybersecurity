@@ -32,7 +32,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
     duration: 2600,
     delay: 450, 
   });
-
+ 
   sr.reveal('.header-left', {delay:200, origin:'top'});
   sr.reveal('.header-center', {delay:200, origin:'bottom'});
   sr.reveal('.header-right', {delay:200, origin:'right'});

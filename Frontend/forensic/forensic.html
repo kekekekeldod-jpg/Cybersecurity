@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile-Forensic</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="forensic.css">
+
+ <!-- Cloudfare-Icons -->
+    
+<link rel="stylesheet" href="../fontawesome-pro-6.5.1-web/css/all.css">
+    
+<!--Google-fonts-->
+
+<link rel="stylesheet" href="../google-fonts/Fonts/permanent-marker.css">
+<link rel="stylesheet" href="../google-fonts/Fonts/permanent-marker1.css">
+
+<link rel="stylesheet" href="../google-fonts/Fonts/jersey-15.css">
+
+<!--Java Script Links-->
+
+<script src="../js-funktione/scrollreveal.min.js"></script>
+</head>
+
+<body>
+
+   <!-- Cursor Lighter -->
+  <div class="cursor-light"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="headerForensic">
+      <h2>Mobile-Forensic</h2>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Erklärung -->
+    <section class="forensicSecond">
+      <div class="forensicSecondWrapper">
+        <h2>Website of HACK-PROTECTION</h2>
+        <p>Diese Webseite widmet sich dem Thema Mobile Forensik sowie Sicherheitsmaßnahmen für Smartphones und dient ausschließlich der Aufklärung und dem Selbstschutz. Ziel ist es, zu erklären, wie Sicherheitsmechanismen auf Android- und iOS-Geräten funktionieren und wie Nutzer ihre eigenen Daten besser vor unbefugtem Zugriff schützen können. Die bereitgestellten Informationen und Tipps richten sich ausdrücklich an Personen, die ihr Smartphone vor Risiken wie Datenmissbrauch, Angriffen durch Hacker, Schadsoftware oder unbefugter Überwachung schützen möchten. Eine Nutzung der Inhalte für illegale oder schädliche Zwecke wird weder unterstützt noch beabsichtigt, und hierfür wird keine Haftung übernommen. In naher Zukunft werden auf dieser Webseite viele weitere Inhalte rund um IT-Sicherheit veröffentlicht, darunter verständliche Erklärungen, Hintergrundwissen und praxisnahe Tipps, um mobile Geräte möglichst stark abzusichern und das Bewusstsein für digitale Sicherheit zu erhöhen.</p>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="forensicOne">
+      <div class="forensicOneWrapper">
+        <h2>Passwort-Check</h2>
+        <p>
+        Überprüfe die Stärke deines Passworts (Score und hilfreiche Tipps), um besser einschätzen zu können, wie stark ein Passwort sein sollte, damit es nicht leicht erraten oder geknackt werden kann, etwa zum Schutz von Smartphones und persönlichen Daten. Gib dein Passwort im Feld des „Canvas“-Screens ein und drücke Enter, um es bewerten zu lassen. Alle eingegebenen Passwörter werden dabei niemals gespeichert, übertragen oder protokolliert. Die komplette Webseite ist zudem Open Source auf GitHub, sodass du jederzeit nachvollziehen und selbst überprüfen kannst, dass dies technisch auch tatsächlich so umgesetzt ist. Der Check bewertet mithilfe von Länge, Zeichenvielfalt sowie einfachen Mustern wie Wiederholungen oder Sequenzen die Passwortstärke. Das Ergebnis ist ein Score von 0 bis 100 inklusive konkreter Tipps zur Verbesserung der Sicherheit.
+        </p>
+      </div>
+    </section>
+
+    <!-- Canvas Area -->
+    <section class="forensicOne">
+      <div class="forensicTwoWrapper">
+        <!-- CanvasWrap ist der Anker für Overlay -->
+        <div id="canvasWrap">
+          <canvas id="canvas" class="canvas"></canvas>
+
+          <!-- echtes Passwortfeld (markieren/kopieren möglich) -->
+          <input id="passwordInput" type="password" autocomplete="off" spellcheck="false" inputmode="text" aria-label="Passwort eingeben"/>
+
+          <!-- Overlay Buttons -->
+          <button id="toggleBtn" type="button" aria-label="Passwort anzeigen oder verstecken">👁</button>
+          <button id="copyBtn" type="button" aria-label="Passwort kopieren">📋</button>
+
+          <!-- Start Button -->
+          <button id="canvasBtn" class="canvasBtn" type="button">Start</button>
+        </div>
+      </div>
+    </section>
+
+      <footer> 
+    <div class="all-footer">
+      <div class="footer-content">
+        <h3>Information</h3>
+        <p>Adresse:<br>Anonym 111</p>
+            <p>Telefon:<br>Keins</p>
+            <p>Email:<br>merdo_hacker<br>@hotmail.com</p>
+        </div>
+        <div class="footer-content">
+          <h3>Kurze Links</h3>
+          <ul class="list">
+            <li><a href="../index.html">Startseite</a></li>
+            <li><a href="#sicher">Sicherheit</a></li>
+            <li><a href="#uber-mich">Über mich</a></li>
+            <li><a href="#anmeldung">Kontakt</a></li>
+            <li><a href="#preis">Store</a></li>
+            <li><a href="../multiple3/impressum.html">Impressum</a></li>
+          </ul>
+        </div>
+        <div class="footer-content">
+          <h3>Folge mir</h3>
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://web.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 created by Merdo</p>
+    </div>
+  </footer>
+
+    <!-- Canvas Assets (werden per CSS versteckt) -->
+    <img id="hackDog" src="bilder/hackDog.jpg" alt="">
+    <img id="hackPhone" src="bilder/hackPhone.png" alt="">
+
+  </main>
+
+  <!-- App Script -->
+  <script src="forensic.js"></script>
+  <script src="mousePointer/mousePointer.js"></script>
+</body>
+</html>

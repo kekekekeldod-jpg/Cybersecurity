@@ -520,14 +520,14 @@ header .header-center h2 {
   top: 10%;
   left: 20%;
   transform: rotate(-20deg);
-  z-index: 3;
+  z-index: 2;
 }
 
 .physikImg2{
   top: 8%;
   left: 50%;
   transform: rotate(8deg);
-  z-index: 4;
+  z-index: 3;
 }
 
 /* ==================== End of MATH & Since ==================== */

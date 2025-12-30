@@ -71,7 +71,6 @@ export class EnemyTwo {
             punkte.scoreState += 5;
             this.state = 'HIT';
             this.hitState.enter();
-
             this.hitMusic.pause();
             this.hitMusic.currentTime = 0;
             this.hitMusic.play();

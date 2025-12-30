@@ -11,6 +11,7 @@ import { Info } from "../ui/info.js";
 import { Score } from "../core/score.js";
 import { EnemyTwo } from "../entities/juliepietwo/enemyTwo.js";
 import { Life } from "./life.js";
+import { WinScreen } from "../ui/winScreen.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
 const DESIGN_WIDTH = 3000;
@@ -70,6 +71,9 @@ window.addEventListener('load', function () {
             this.doubleKillMusic = new Audio('./MyBigGame/assets/audios/doubleKill.mp3');
             this.doubleKillMusic.volume = 1;
             this.isBackgroundMusic = false;
+            this.winMusic = new Audio('./MyBigGame/assets/audios/winMusic.mp3');
+            this.winMusic.volume = 1;
+            this.winMusic.currentTime = 0;
 
             // 'start' | 'playing' | 'gameOver'
             this.state = 'start';
@@ -85,6 +89,7 @@ window.addEventListener('load', function () {
             this.info = new Info(this);
             this.score = new Score(this);
             this.life = new Life(this);
+            this.winScreen = new WinScreen(this);
         }
 
         playBackgroundMusicOnce() {
@@ -133,6 +138,14 @@ window.addEventListener('load', function () {
                 return;
             }
 
+            if (this.state === 'win'){
+                if (this.input.keys.includes('g')) {
+                    this.restart();
+                    this.goToStart();
+
+                }
+            }
+            
             // PLAYING
             if (this.state === 'playing') {
 
@@ -149,6 +162,9 @@ window.addEventListener('load', function () {
                  this.enemy.update(dt);
                  this.enemyTwo.update(dt);
                  this.life.update(dt);
+                 this.score.getProgress01();
+                 this.score.getScorePercent();
+                 this.score.update();
 
                  if (this.playerHitFromSide && !this.playerHitFromTop) {
                     this.state = 'gameOver';
@@ -167,6 +183,12 @@ window.addEventListener('load', function () {
                     this.enemyTwo.state = 'HIT';
                     this.score.scoreState += 5;
                  } 
+
+                   if (this.score.scoreState >= this.score.maxScore) {
+                    this.state = 'win';
+                    this.backgroundMusic.pause();
+                    this.winMusic.play();
+                   }
                 
             }
         }
@@ -198,12 +220,22 @@ window.addEventListener('load', function () {
                 this.runningMusic.pause();
                 this.hitMusic.pause();
             }
+
+            if (this.state === 'win'){
+                this.winScreen.draw(context);
+                this.pauseBackgroundMusic();
+                this.gameOverMusic.pause();
+                this.doubleKillMusic.pause();
+                this.runningMusic.pause();
+                this.hitMusic.pause();
+            }
         }
 
          restart() {
             console.log('RESTART');
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
+            this.background.reset();
             this.enemy.reset();
             this.enemyTwo.reset();
             this.playerFish.reset();
@@ -213,6 +245,8 @@ window.addEventListener('load', function () {
             this.score.reset();
             this.life.reset();
             this.state = 'playing';
+            this.winMusic.pause();
+            this.winMusic.currentTime = 0;
             console.log('STATE NACH RESTART:', this.state, this.player.x, this.player.y);
         }
 

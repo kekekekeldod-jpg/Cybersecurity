@@ -23,6 +23,8 @@ Das Spiel enthält humorvolle Elemente und stilisierte Pseudonamen, um dem gesam
   - **Press Q** – zurück zum Startbildschirm  
   - **Press I** – zeigt die Spielregeln an  
 
+---
+
 ### ⭐ Game-Over-Bildschirm
 - Zeigt zentral den Schriftzug **„﷽“**, was „Im Namen Gottes, des Allerbarmers, des Barmherzigen“ bedeutet  
 - Hintergrund: spezielles Game-Over-Wallpaper  
@@ -42,10 +44,14 @@ Das Spiel enthält humorvolle Elemente und stilisierte Pseudonamen, um dem gesam
 - **Q** jederzeit zurück zum Startbildschirm  
 - **I** Spielregeln anzeigen  
 
+---
+
 ### ✔ Charaktere
 - **Merdonis** – Hauptspieler mit Lauf- und Sprunganimation  
 - **JuliePie** – Enemy mit Death-Animation und automatischem Respawn  
 - **Caney-Flieger** – dekorativer Flieger; eine Berührung mit dem Kopf von Merdonis führt zu Game Over  
+
+---
 
 ### ✔ Musik & Soundeffekte
 - Hintergrundmusik  
@@ -60,10 +66,11 @@ Alle Sounds werden korrekt zurückgesetzt (`currentTime = 0`), sodass sie beim e
 ---
 
 ## 🎮 Spielmechaniken
+
 - Physikbasiertes Springen (Schwerkraft, Aufprall)  
 - Der Gegner **JuliePie** kann nur durch einen korrekten Kopftreffer besiegt werden  
 - **+5 Punkte** für jeden erfolgreichen Sprung auf JuliePie  
-- **+10 Punkte** für einen Doppelt-Treffer  
+- **+10 Punkte** für einen Doppeltreffer  
 - Seitliche Kollisionen führen zu **Game Over**  
 - Die **sechste Bodenberührung** führt ebenfalls zu **Game Over**  
 - Pro Bodenkontakt wird **ein Herz** verloren (insgesamt 6 Leben)  
@@ -75,8 +82,22 @@ Alle Sounds werden korrekt zurückgesetzt (`currentTime = 0`), sodass sie beim e
 
 ---
 
+## 🏁 Ziel- & Punktesystem
+
+- Das Spiel besitzt ein festes **Punkteziel von 300 Punkten**
+- Jeder Punktgewinn erhöht den Fortschritt Richtung Ziel
+- Ein **Prozentbalken (Progress-Bar)** zeigt jederzeit den aktuellen Fortschritt an
+- Der Fortschritt wird prozentual berechnet (0–100 %)
+- Die Anzeige ist geglättet (smooth animation)
+- Sobald **300 Punkte erreicht sind**, gilt das Spiel als **gewonnen**
+- Der Gewinnzustand kann ein eigenes Win-Overlay auslösen
+- Nach Erreichen des Ziels werden keine weiteren Punkte mehr gezählt
+
+---
+
 ## 👤 Autor
+
 **Merdo (Mertcan)**  
 Programmierer, Designer und Illustrator  
 
-Alle Grafiken und Animationen wurden vollständig selbst erstellt.
+Alle Grafiken, Animationen und Konzepte wurden vollständig selbst erstellt.

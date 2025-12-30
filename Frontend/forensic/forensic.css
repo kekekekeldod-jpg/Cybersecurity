@@ -1,0 +1,379 @@
+/* =============== GLOBAL RESET (entschärft) =============== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all .6s;
+}
+
+body{
+  background: rgb(72, 85, 112);
+}
+
+
+  .cursor-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 45px;
+    pointer-events: none;
+    transform: translate(0,0);
+
+    background: linear-gradient(
+      90deg,
+      rgba(70, 0, 90, 0) 0%,
+      rgba(180, 0, 255, 0.8) 50%,
+      rgba(70, 0, 90, 0) 100%
+    );
+
+    filter: blur(16px);
+    opacity: 1;
+    mix-blend-mode: screen;
+    transition: transform 0.04s linear;
+    z-index: 999999;
+
+    animation: darknetShift 7s linear infinite;
+  }
+
+  @keyframes darknetShift {
+    0%   { filter: hue-rotate(0deg) blur(14px); }
+    100% { filter: hue-rotate(360deg) blur(14px); }
+  }
+
+  .sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(200,0,255,1) 0%,
+      rgba(255,255,255,0.8) 40%,
+      rgba(200,0,255,0.2) 100%
+    );
+    filter: blur(2px);
+    mix-blend-mode: screen;
+    opacity: 1;
+    z-index: 999999;
+
+    animation: sparkleFade 0.6s ease-out forwards;
+  }
+
+  @keyframes sparkleFade {  0%   { transform: scale(1); opacity: 1; }
+    
+    100% { transform: scale(0.2); opacity: 0; }
+  }
+
+
+/* NICHT mehr alle Bilder verstecken!
+   Nur die Canvas-Assets ausblenden (unten) */
+img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ================= HEADER ================= */
+header{
+  background: linear-gradient(90deg, rgb(105, 69, 69), rgb(70, 134, 84), rgb(31, 48, 18));
+  display: flex;
+  justify-content: center;
+  padding: clamp(1rem, 2vw, 2.5rem);
+  width: 100%;
+}
+
+.headerForensic{
+  display: block;
+  text-align: center;
+  background: transparent;
+}
+
+.headerForensic h2{
+  font-size: clamp(1.3rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: rgb(172, 134, 65);
+}
+
+/* ================= SECTIONS ================= */
+.forensicOne {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicOneWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+}
+
+.forensicOneWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: rgb(96, 139, 125);
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.forensicOneWrapper p{
+  font-size: clamp(0.8rem, 2vw, 1.6em);
+  font-weight: 900;
+  color: black;
+}
+
+/* ================= CANVAS AREA ================= */
+.forensicTwoWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wrapper ist der Anker für absolute Overlay-Elemente */
+#canvasWrap{
+  position: relative;
+  display: inline-block; /* nimmt Canvas-Größe an */
+}
+
+/* Canvas responsive (wie du es wolltest), aber in einem Block */
+#canvasWrap canvas.canvas{
+  display: block;
+  margin: 10px;
+  width: clamp(15rem, 80vw, 33rem);
+  height: auto;
+  border: 10px solid black;
+  cursor: pointer;
+}
+
+/* Start Button */
+.canvasBtn{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  font-size: 25px;
+  color: rgb(65, 150, 121);
+  padding: clamp(0.7rem, 2vw, 1rem);
+  background: rgb(31, 30, 30);
+  border: 2px solid rgb(28, 143, 127);
+  border-radius: 20px;
+  cursor: pointer;
+
+  z-index: 20; /* immer über Canvas */
+}
+
+.canvasBtn:hover{
+  transform: translate(-50%, -50%) scale(1.15);
+  background: rgb(59, 48, 20);
+  color: red;
+  border: 2px dashed rgb(4, 62, 252);
+}
+
+/* Overlay Input über dem Canvas */
+#passwordInput{
+  position: absolute;
+  left: 12%;
+  top: 28%;
+  width: 64%;
+  height: 34px;
+
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+
+  color: #fff;
+  font-size: 16px;
+  font-family: monospace;
+  padding: 6px 10px;
+
+  display: none; /* per JS einblenden */
+  z-index: 20;
+}
+
+/* Buttons über dem Canvas */
+#toggleBtn, #copyBtn{
+  position: absolute;
+  top: 28%;
+  width: 38px;
+  height: 34px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  cursor: pointer;
+
+  display: none; /* per JS einblenden */
+  z-index: 20;
+}
+
+/* rechts neben dem Input (prozentual, damit responsive) */
+#toggleBtn{ left: calc(12% + 64% + 8px); }
+#copyBtn  { left: calc(12% + 64% + 52px); }
+
+/* ✅ NUR die Canvas-Assets ausblenden */
+#hackDog, #hackPhone{
+  display: none;
+}
+
+/* ================= SECOND SECTION ================= */
+.forensicSecond {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1300px;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.forensicSecondWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+}
+.forensicSecondWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 900;
+  color: rgb(12, 37, 29);
+  margin-bottom: 5px;
+  width: 100%;
+  animation: forensich2 3s linear infinite;
+}
+
+@keyframes forensich2 {
+  0%{ color: red; }
+  50%{ color: antiquewhite; }
+  100%{ color: black; }
+}
+
+.forensicSecondWrapper p{
+  font-size: clamp(0.8rem, 2vw, 1.6em);
+  font-weight: 900;
+  color: black;
+}
+
+
+/* Footer */
+footer{
+    background: rgb(59, 21, 21);
+    padding-top: 50px;
+    margin-top: 50px;
+  }
+
+
+  .all-footer{
+    width: 100%;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    height: 210px;
+  }
+  
+  .footer-content{
+    width: 33.3%;
+  }
+  
+.footer-content h3{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: rgb(184, 28, 87);
+  }
+  
+  .footer-content p{
+    font-family: 'Permanent Marker', cursive;
+    width: 130px;
+    margin: auto;
+    padding: 7px;
+    font-size: 15px;
+    color: rgb(66, 180, 0);
+  }
+  
+  .footer-content ul{
+    text-align: center;
+  }
+  
+  .list{
+    padding: 0;
+  }
+
+  .list li a{
+    font-family: 'Permanent Marker', cursive;
+    color: rgb(66, 180, 0);
+  }
+  
+  .list li{
+    width: auto;
+    text-align: center;
+    list-style-type: none;
+    padding: 7px;
+    position: relative;
+  }
+  
+  .list li::before{
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 100%;
+    width: 0;;
+    height: 3px;
+    background: rgba(11, 220, 228, 0.37);
+    transition-duration: .5s;
+    transition: width .3s ease;
+    -webkit-transition: width .3s ease;
+    
+  }
+  
+  .list li:hover::before{
+    width: 70px;
+    background-color: #7C0505;
+  }
+  
+
+.social-icons{
+  text-align: center;
+  padding: 0;
+}
+
+.social-icons li{
+  display:block;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.social-icons i{
+  color: rgb(66, 180, 0);
+  font-size: 25px;
+}
+  
+.social-icons a{
+  text-decoration: none;
+  color: ghostwhite;
+}
+  
+.social-icons a:hover{
+  color: #f18930;
+}
+
+.social-icons i:hover{
+  color: #f18930;
+}
+
+.footer-copy{   
+  font-family: 'Permanent Marker', cursive;
+  background: linear-gradient(250.59deg, #41300d, #143306 48.53%, #3a0725 75.52%);
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 85px;
+  color: rgb(255, 0, 0);
+}

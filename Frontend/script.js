@@ -13,28 +13,6 @@ document.querySelectorAll('.navmenu a').forEach(link => {
     });  
 });  
 
-let monatBtn = document.querySelector('.preis .all-buttons .monat-btn');
-let jahrBtn = document.querySelector('.preis .all-buttons .jahr-btn');
-
-let monatlich = document.querySelectorAll('.preis .all-preis .preis-box .monat');
-let jahrlich = document.querySelectorAll('.preis .all-preis .preis-box .jahrlich');
-
-jahrBtn.onclick = () => {
-  monatBtn.classList.remove('active');
-  jahrBtn.classList.add('active');
-
-  monatlich.forEach(mo => {mo.style.display = 'none'});
-  jahrlich.forEach(ja => {ja.style.display = 'block'});
-}
-
-monatBtn.onclick = () => {
-  monatBtn.classList.add('active');
-  jahrBtn.classList.remove('active');
-  
-  monatlich.forEach(mo => {mo.style.display = 'block'});
-  jahrlich.forEach(ja => {ja.style.display = 'none'});
-}
-
   let typed = new Typed('#element', {
     strings:["Merdo", "Anonym", "Hacker"],
   typeSpeed:70,
@@ -122,7 +100,6 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('form', {delay:200, origin:'bottom'});
   sr.reveal('.abo', {delay:200, origin:'bottom'});
   sr.reveal('.all-buttons', {delay:200, origin:'top'});
-  sr.reveal('.all-preis', {delay:200, origin:'bottom'});
   sr.reveal('.heading-effekt p', {delay:200, scale: 2});
   sr.reveal('.box-ti h2', {delay:200, scale: 2});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
@@ -150,6 +127,13 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
         x: 2,
         y: 2,
         z: 3
+    }
+}); 
+sr.reveal('.mobileForensicWrapper',  {
+    rotate: {
+        x: 123,
+        y: 342,
+        z: 233
     }
 }); 
 };

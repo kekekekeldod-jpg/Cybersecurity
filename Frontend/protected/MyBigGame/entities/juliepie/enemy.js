@@ -73,7 +73,6 @@ export class Enemy {
             punkte.scoreState += 5;
             this.state = 'HIT';
             this.hitState.enter();
-
             this.hitMusic.pause();
             this.hitMusic.currentTime = 0;
             this.hitMusic.play();
@@ -83,10 +82,6 @@ export class Enemy {
             this.game.playerHitFromSide = true;
         }
     }
-
-   
-
-
 
     // Wiederhollen des Enemys
 

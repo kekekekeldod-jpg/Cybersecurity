@@ -99,13 +99,21 @@ export class Info {
         context.textAlign = 'top';
         context.fillText('vom Caney-Flieger getroffen wird', this.width / 2, this.height / 2 + 550)
 
+         //Regel 7
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+        context.font = "italic small-caps 600 55px Montserrat";
+        context.fillStyle = '#8d6715ff';
+        context.textAlign = 'top';
+        context.fillText('• Bei 300 P hast du gewonnen', this.width / 2, this.height / 2 + 640)
+
           //Q-Zurück
         context.textAlign = 'center';
         context.textBaseline = 'top';
         context.font = "italic small-caps 600 80px Montserrat";
         context.fillStyle = '#43ee00ff';
         context.textAlign = 'top';
-        context.fillText('Klicke die q-Taste, um zurück auf Start zu kommen', this.width / 2, this.height / 2 + 650)
+        context.fillText('Klicke die q-Taste, um zurück auf Start zu kommen', this.width / 2, this.height / 2 + 710)
 
          //Glückwunsch
         context.textAlign = 'center';
@@ -113,6 +121,6 @@ export class Info {
         context.font = "italic small-caps 600 130px Montserrat";
         context.fillStyle = '#660606ff';
         context.textAlign = 'top';
-        context.fillText('Viel Glück مَعَ ألٰسَّلَامَ 🚀🌈', this.width / 2, this.height / 2 + 800)
+        context.fillText('Viel Glück مَعَ ألٰسَّلَامَ 🚀🌈', this.width / 2, this.height / 2 + 850)
     }
 }
