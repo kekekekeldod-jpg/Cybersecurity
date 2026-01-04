@@ -21,6 +21,7 @@
     let points = 0;        // Punktestand
     let gameStarted = false;
     let gameOverMusicPlayed = false;
+    let actionBugger = false;
 
     // Audio
     const startSound = new Audio('audios/start-music.mp3');
@@ -268,27 +269,30 @@
     // --- Input-Behandlung ---
 
     function handleKeyAction(action) {
-      // Beim ersten Mal oder nach Game Over → Neustart
-      if (!gameStarted && end) {
+    if (!gameStarted) {
         gameStarted = true;
         resetGameState();
-      }
-
-      switch (action) {
-        case 'up':
-          newDirection = -2;
-          break;
-        case 'down':
-          newDirection = 2;
-          break;
-        case 'left':
-          newDirection = -1;
-          break;
-        case 'right':
-          newDirection = 1;
-          break;
-      }
+    } else if (!actionBugger && end){
+      gameStarted = true;
+      resetGameState();
     }
+
+    switch (action) {
+        case 'up':
+            newDirection = -2;
+            break;
+        case 'down':
+            newDirection = 2;
+            break;
+        case 'left':
+            newDirection = -1;
+            break;
+        case 'right':
+            newDirection = 1;
+            break;
+    }
+}
+
 
     // Keyboard-Events
     window.addEventListener('keydown', function (e) {
@@ -313,6 +317,7 @@
       if (action) {
         e.preventDefault();
         handleKeyAction(action);
+        actionBugger = true;
       }
     });
 

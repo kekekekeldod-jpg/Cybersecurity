@@ -81,7 +81,7 @@ export class Score {
         context.textAlign = 'left';
         context.textBaseline = 'top';
         context.font = "italic small-caps 800 70px Montserrat";
-        context.fillText('Gewonnen bei 250P', 18, 110);
+        context.fillText('Gewonnen bei 300P', 18, 110);
 
 
     }

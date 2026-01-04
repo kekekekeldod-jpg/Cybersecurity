@@ -366,21 +366,6 @@ footer{
     font-weight: none;
   }
   
-  header div {
-    position: relative;
-    display: inline-block;
-  }
-  
-   header div h2 {
-    font-size: 20px;
-    white-space: nowrap;
-  }
-  
-  header img {
-    width: 40%;
-    height: auto;
-  }
-  
   #scrolling-path{
     width: 4px;
   }
@@ -470,33 +455,8 @@ footer{
 }
 
 @media (max-height: 576px) and (orientation: landscape) {
-  
-  header {
-  padding: 15px 5px;
-}
-
- header div h2 {
-  font-size: 40px;
-}
-
-header img {
-  width: 30%;
-}
-
-  
-  section .daten-s div p{
-  font-family: "Jersey 15", sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  color: ghostwhite;
-  margin: 12px;
-}
-
-  section .daten-s div h2{
-    font-size: 25px;
-  }
-  
-   .all-footer{
+ 
+ .all-footer{
    height: 150px;
  }
  

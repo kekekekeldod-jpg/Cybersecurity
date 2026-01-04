@@ -15,7 +15,6 @@ body{
   background: rgb(72, 85, 112);
 }
 
-
   .cursor-light {
     position: fixed;
     top: 0;
@@ -123,6 +122,7 @@ header{
 }
 
 .forensicOneWrapper p{
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: clamp(0.8rem, 2vw, 1.6em);
   font-weight: 900;
   color: black;
@@ -254,11 +254,11 @@ header{
 }
 
 .forensicSecondWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: clamp(0.8rem, 2vw, 1.6em);
   font-weight: 900;
   color: black;
 }
-
 
 /* Footer */
 footer{
@@ -376,4 +376,139 @@ footer{
   padding: 10px 0;
   margin-top: 85px;
   color: rgb(255, 0, 0);
+}
+
+
+
+/* Media */
+@media (max-width:576px) {
+  
+  *{
+    font-weight: none;
+  }
+  
+  #scrolling-path{
+    width: 4px;
+  }
+  
+  #scrolling{
+    width: 6px;
+  }
+  
+  section .daten-s div {
+    margin: 5px;
+    margin-top: 35px;
+    
+  }
+
+  section .daten-s div h2{
+    font-size: 25px;
+  }
+  
+  section .daten-s div p{
+  font-family: "Jersey 15", sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  }
+  
+   .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+  .list li::before{
+   content: "";
+   position: none;
+   transform: translate(-50%, -50%);
+   left: 0;
+   top: 0;
+   width: 0;;
+   height:0;
+   background: rgba(12, 12, 66, 0.37);
+   transition-duration: .5s;
+   
+ }
+ 
+ .list li:hover::before{
+   width: none;
+ }
+
+ .list li a{
+   font-size: 12px;
+ }
+ 
+.social-icons li{
+ padding: 2px;
+}
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 80px;
+ font-size: 9px;
+}
+
+ .cursor-light {
+      display: none;
+    } 
+}
+
+@media (max-height: 576px) and (orientation: landscape) {
+ 
+ .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+ .list li a{
+   font-size: 12px;
+ }
+ 
+.social-icons li{
+ padding: 2px;
+}
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 93px;
+ font-size: 12px;
+}
+
 }
