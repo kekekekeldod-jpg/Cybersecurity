@@ -26,7 +26,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   });
 
   sr.reveal('.header-left, .header-right', {delay:200, origin:'top'});
-   sr.reveal('.header-center', {delay:200, origin:'bottom'});
+  sr.reveal('.header-center', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
   sr.reveal('.sec-scroll', {
     rotate: {
