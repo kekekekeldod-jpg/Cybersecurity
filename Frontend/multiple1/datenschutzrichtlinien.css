@@ -132,38 +132,52 @@ body{
     100% { transform: scale(0.2); opacity: 0; }
   }
 
-
-/* Header */
-
+/* ==================== HEADER (GRID-basiert, immer symmetrisch) ==================== */
+/* Grid sorgt dafür, dass links + rechts gleiche max-breite haben und mitte zentriert */
 header {
-  position: relative;
-  width: 100%;
-  height: auto;
-  padding: 20px 5px;
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(60px, clamp(60px, 9vw, 140px)) 1fr minmax(60px, clamp(60px, 9vw, 140px));
   align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 2rem);
+  width: 100%;
+  padding: clamp(0.8rem, 2vw, 1.6rem) clamp(1rem, 4vw, 6%);
   background: linear-gradient(250.59deg, #3d1a61, #1a1536 48.53%, #7e064c 75.52%);
 }
 
-header div {
-  position: relative;
-  display: inline-block;
+/* linke & rechte Box zentriert */
+header .header-left,
+header .header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
- header div h2 {
-  font-size: 55px;
-  color: #03B1AA;
-}
-
-header img {
-  width: 40%;
+/* Bilder im Header: gleiche Max-Breite, skalierbar */
+header .header-left img,
+header .header-right img {
+  width: 100%;
+  max-width: clamp(60px, 9vw, 120px); /* gleiche Max-Breite auf beiden Seiten */
   height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mitte zentriert, Titel skaliert */
+header .header-center {
+  justify-self: center;
+  text-align: center;
+}
+
+/* Titel: permanent marker + dynamisch */
+header .header-center h2 {
+  font-size: clamp(1.4rem, 5vw, 4rem);
+  color: var(--a-color);
+  margin: 0;
+  text-shadow: 0 0 clamp(2px, 0.4vw, 8px) rgba(0,255,230,0.12);
 }
 
 /* Header */
-
 
 section{
   position: relative;
