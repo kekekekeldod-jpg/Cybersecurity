@@ -53,6 +53,8 @@ Google Fonts
 
 Kali Linux
 
+Nginx
+
 Krita (For Game Design Sprite-sheets)
 
 # 🕹️ Future Plans
