@@ -172,7 +172,7 @@
         } else {
           ctx.font = '27px Monospace';
           ctx.fillText('Du hast verloren - Punkte: ' + points, SIZE / 2, SIZE / 2);
-          ctx.fillText('Drücke die Leertaste für Neustart', SIZE / 2, SIZE / 2 + 40);
+          ctx.fillText('Drücke die Taste B für Neustart', SIZE / 2, SIZE / 2 + 40);
         }
         return;
       }
@@ -307,17 +307,27 @@
 window.addEventListener('keydown', function (e) {
   if (isInputFocused()) return;
   if (e.code !== 'Space') return;
-  if (e.code !== 'k') return;
 
   e.preventDefault();
 
   // Start oder Neustart erst beim Loslassen der Space-Taste
-  if (end) {
+  if (!gameStarted) {
     gameStarted = true;
     resetGameState();
+    return;
   }
+});
 
+window.addEventListener('keydown', function (e) {
+  if (isInputFocused()) return;
+  if (e.code !== 'KeyB') return;
 
+  e.preventDefault();
+
+  if(end){
+    resetGameState();
+    return;
+  }
 });
 
     // Button-Steuerung (Pfeile in HTML)
