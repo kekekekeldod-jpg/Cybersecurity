@@ -12,7 +12,58 @@
 }
 
 body{
-  background: rgb(72, 85, 112);
+  background: rgb(25, 32, 48);
+}
+
+#scrolling-path{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: rgb(255, 255, 255, 0.05);
+}
+
+#scrolling{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  animation: scrollingY 5s linear infinite;
+}
+
+@keyframes scrollingY{
+  0%,100%{
+    filter: hue-rotate(0deg);
+  }
+  50%{
+    filter: hue-rotate(360deg);
+  }
+}
+
+#scrolling:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(10px);
+}
+
+#scrolling:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(30px);
 }
 
   .cursor-light {
@@ -94,7 +145,7 @@ header{
 }
 
 .headerForensic h2{
-  font-size: clamp(1.3rem, 4vw, 2.5rem);
+  font-size: clamp(1.3rem, 4vw, 3rem);
   font-weight: 900;
   color: rgb(172, 134, 65);
 }
@@ -111,21 +162,25 @@ header{
   display: block;
   text-align: center;
   max-width: 1300px;
+  background: linear-gradient(152deg, rgb(46, 23, 23), rgb(15, 15, 29), rgb(23, 41, 23));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
 }
 
 .forensicOneWrapper h2{
-  font-size: clamp(1.2rem, 4vw, 2.8rem);
+   font-size: clamp(1.2rem, 4vw, 2.4rem);
   font-weight: 900;
-  color: rgb(96, 139, 125);
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   width: 100%;
+  color: #0a6eb1;
 }
 
 .forensicOneWrapper p{
- font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: clamp(0.8rem, 2vw, 1.6em);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
   font-weight: 900;
-  color: black;
+  color:rgb(155, 120, 89)
 }
 
 /* ================= CANVAS AREA ================= */
@@ -237,12 +292,15 @@ header{
   display: block;
   text-align: center;
   max-width: 1300px;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  background: rgba(255, 255, 255, 0.2);
+  border: 4px solid black;
+  border-radius: 10px;
 }
 .forensicSecondWrapper h2 {
-  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-size: clamp(1.2rem, 4vw, 3rem);
   font-weight: 900;
-  color: rgb(12, 37, 29);
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   width: 100%;
   animation: forensich2 3s linear infinite;
 }
@@ -255,18 +313,597 @@ header{
 
 .forensicSecondWrapper p{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: clamp(0.8rem, 2vw, 1.6em);
+  font-size: clamp(0.8rem, 2vw, 1.4em);
   font-weight: 900;
-  color: black;
+  color: rgb(219, 159, 110);
 }
+
+/* ================= Cellebrite § GrayKey ================= */
+
+.forensicCellebrite{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicCellebriteWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #143306;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+.forensicCellebriteWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  animation: cellegray 1s linear infinite;
+}
+
+@keyframes cellegray{
+  0%{ color: red; }
+  100%{ color: rgba(100, 6, 155, 0.808); }
+}
+
+.forensicCellebriteWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(224, 101, 0);
+}
+
+/* ================= Wie Smartphones Daten sowohl auf der Hardware- als auch auf der Softwareebene schützen ================= */
+
+.forensicSecureSmartphone{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicSecureSmartphoneWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #11295e;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicSecureSmartphoneWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #a10f58;
+}
+
+.forensicSecureSmartphoneWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: smartphomeWrapper 4s linear infinite;
+}
+
+@keyframes smartphomeWrapper {
+  0%{ color: red; }
+  50%{ color: rgb(175, 136, 8); }
+  100%{ color: rgba(96, 69, 112, 0.808); }
+}
+
+.forensicSecureSmartphoneWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(127, 145, 138);
+}
+
+
+/* ================= BFU, AFU und Boot-State ================= */
+
+.forensicStates{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicStatesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #1b0e1f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+ .forensicStepsImg{
+  margin: 30px;
+ }
+
+.forensicStepsImg img{
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 230, 161, 0.63);
+  transition: transform 0.3 ease, box-shadow 0.3s ease;
+}
+
+.forensicStatesWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #2b6925;
+  animation: stateSwiper 2s linear infinite;
+}
+
+@keyframes stateSwiper {
+  0% { transform: translateX(0px); }
+  50% { transform: translateX(15px); }
+  100% { transform: translateX(0px); }
+}
+
+.forensicStatesWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: smartphomeWrapper 4s linear infinite;
+}
+
+@keyframes smartphomeWrapper {
+  0%{ color: rgb(223, 234, 123) }
+  50%{ color: rgb(125, 100, 3); }
+  100%{ color: rgba(23, 39, 12, 0.808); }
+}
+
+.forensicStatesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(52, 105, 87);
+}
+
+/* ================= Einleitung der forensischen Schritte ================= */
+
+.forensicSteps {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicStepsWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #3d0d0f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicStepsWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5fb358;
+}
+
+.forensicStepsWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: forensicStep 4s linear infinite;
+}
+
+@keyframes forensicStep {
+  0% { color: red; }
+   50% { color: rgb(15, 94, 61); }
+    100% { color: rgb(131, 71, 37); }
+}
+
+.forensicStepsWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(109, 143, 214);
+}
+/* ================= Einleitung der Brute-Force Schritte ================= */
+
+.forensicBruteforce{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicBruteforceWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #6b8370;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicBruteforceWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5a0c0c;
+  text-decoration: overline;
+}
+
+.forensicBruteforceWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: bruteforce 4s linear infinite;
+}
+
+@keyframes bruteforce {
+  0% { color: rgb(85, 61, 61); }
+  50% { color: rgb(30, 97, 30); }
+  100% { color: blue; }
+}
+
+.forensicBruteforceWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(4, 21, 58);
+}
+
+/* ================= AES-256-Bit-Verschlüsselung ================= */
+.forensicAes{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #557270;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAesWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #532b44;
+  text-decoration: overline;
+}
+
+.forensicAesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(36, 31, 30);
+}
+
+/* ================= Anti-Forensic ================= */
+
+.forensicAnti{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #05201f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 100px;
+}
+
+.pixel{
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel li{
+  display:flex;
+}
+
+.pixel li a{
+  font-size: clamp(0.2rem, 2vw, 1rem);
+  font-weight: 900;
+  color: rgb(88, 73, 53);
+}
+
+.samsung {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.samsung li{
+  display: flex;
+}
+
+.samsung li a{
+  font-size: clamp(0.2rem, 2vw, 1rem);
+  font-weight: 900;
+  color: rgb(88, 73, 53);
+}
+
+.forensicAntiWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin: 15px;
+  width: 100%;
+  color: #99216b;
+}
+
+.forensicAntiWrapper h4{
+  font-size: clamp(0.4rem, 2vw, 1.4rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-align: left;
+  color: #9b5052;
+  text-decoration: underline;
+}
+
+.forensicAntiWrapper p{
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-size: clamp(0.8rem, 2vw, 1.4em);
+ font-weight: 900;
+ color: rgb(139, 60, 44);
+ margin: 20px;
+}
+
+/* ================= Anti-Forensic Pixel ================= */
+
+.forensicAntiPixel {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiPixelWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #272453;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiPixelWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #9b1414;
+  text-decoration: overline;
+}
+
+.forensicAntiPixelWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #a0055f;
+}
+
+.forensicAntiPixelWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(78, 94, 64);
+}
+
+/* ================= Anti-Forensic Samsung ================= */
+
+.forensicAntiSamsung{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiSamsungWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #185240;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiSamsungWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #6f6eac;
+  text-decoration: overline;
+}
+
+.forensicAntiSamsungWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #0a2647;
+}
+
+.forensicAntiSamsungWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(11, 22, 0);
+}
+
+/* ================= Anti-Forensic Iphone ================= */
+
+.forensicAntiIphones{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiIphonesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: #232c29;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiIphonesWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5e7583;
+  text-decoration: overline;
+}
+
+.forensicAntiIphonesWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #1a569b;
+}
+
+.forensicAntiIphonesWrapper h4{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-align: center;
+  color: #9b5052;
+  text-decoration: underline;
+}
+
+.ios {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.ios li{
+  display: block;
+  text-align: center;
+}
+
+.ios li a{
+  font-size: clamp(0.2rem, 2vw, 1.3rem);
+  font-weight: 900;
+  color: rgb(175, 108, 20);
+  text-align: center;
+}
+
+.forensicAntiIphonesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgba(55, 126, 87, 0.637);
+}
+
+/* ================= Fazit ================= */
+.forensicFazit{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicFazitWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1300px;
+  background: linear-gradient(152deg, rgb(66, 56, 56), rgb(30, 30, 37), rgb(49, 56, 49));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.fazitBitch{
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 0;
+}
+
+.fazitBitch img {
+  width: 35%;
+  height: auto;
+}
+
+.forensicFazitWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #738794;
+  text-decoration: underline;
+}
+
+.forensicFazitWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color:sandybrown
+}
+
+/* ================= SECTIONS-Footer ================= */
 
 /* Footer */
 footer{
-    background: rgb(59, 21, 21);
+    background: rgb(61, 33, 33);
     padding-top: 50px;
     margin-top: 50px;
   }
-
 
   .all-footer{
     width: 100%;
@@ -285,7 +922,7 @@ footer{
     font-size: 18px;
     margin-bottom: 15px;
     text-align: center;
-    color: rgb(184, 28, 87);
+    color: rgb(255, 40, 2);
   }
   
   .footer-content p{
@@ -294,7 +931,15 @@ footer{
     margin: auto;
     padding: 7px;
     font-size: 15px;
-    color: rgb(66, 180, 0);
+    animation: footerAnimation 5s linear infinite;
+  }
+
+  @keyframes footerAnimation{
+    0% { color: #41300d;}
+    25% { color: aqua;}
+    50% { color: #549933;}
+    75% { color: rgb(47, 67, 85);}
+    100% { color: #f18930;}
   }
   
   .footer-content ul{
@@ -307,7 +952,7 @@ footer{
 
   .list li a{
     font-family: 'Permanent Marker', cursive;
-    color: rgb(66, 180, 0);
+    animation: footerAnimation 5s linear infinite;
   }
   
   .list li{
@@ -352,8 +997,8 @@ footer{
 
 
 .social-icons i{
-  color: rgb(66, 180, 0);
   font-size: 25px;
+  animation: footerAnimation 5s linear infinite;
 }
   
 .social-icons a{

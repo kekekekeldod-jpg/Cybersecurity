@@ -174,25 +174,25 @@
       const boxX = 18, boxY = 200, boxW = width, boxH = 200;
 
       ctx.save();
-      ctx.globalAlpha = 0.35;
-      ctx.fillStyle = "#25797cff";
+      ctx.globalAlpha = 0.9;
+      ctx.fillStyle = "rgb(4, 26, 19)";
       ctx.fillRect(boxX, boxY, boxW, boxH);
       ctx.restore();
 
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
-      ctx.fillStyle = "#a51212ff";
-      ctx.font = "italic small-caps 900 13px sans-serif";
-      ctx.fillText("Enter = prüfen | Esc = leeren | 👁 = anzeigen/verstecken | 📋 = kopieren", boxX + 10, boxY + 10);
-
+      ctx.fillStyle = "rgb(231, 0, 0)";
+      ctx.font = "italic small-caps 900 18px sans-serif";
+      ctx.fillText("Enter = prüfen | Esc = leeren |", boxX + 10, boxY + 10);
+      ctx.fillText("👁 = anzeigen/verstecken | 📋 = kopieren", boxX + 8, boxY + 33);
       if (!analysis) {
-        ctx.fillText("Tipp: Tippe ein Passwort ins Feld oben und drücke Enter.", boxX + 10, boxY + 40);
+        ctx.fillText("Tipp: Tippe ein Passwort ins Feld oben und drücke Enter.", boxX + 10, boxY + 57);
       } else {
-        ctx.fillText(`Score: ${analysis.score}/100`, boxX + 10, boxY + 40);
-        ctx.fillText(`Bewertung: ${analysis.label}`, boxX + 10, boxY + 60);
-        ctx.fillText("Tipps:", boxX + 10, boxY + 90);
+        ctx.fillText(`Score: ${analysis.score}/100`, boxX + 10, boxY + 60);
+        ctx.fillText(`Bewertung: ${analysis.label}`, boxX + 10, boxY + 80);
+        ctx.fillText("Tipps:", boxX + 10, boxY + 104);
         for (let i = 0; i < analysis.tips.length; i++) {
-          ctx.fillText(`- ${analysis.tips[i]}`, boxX + 10, boxY + 110 + i * 18);
+          ctx.fillText(`- ${analysis.tips[i]}`, boxX + 10, boxY + 127 + i * 18);
         }
       }
 

@@ -268,58 +268,57 @@
 
     // --- Input-Behandlung ---
 
-    function handleKeyAction(action) {
-    if (!gameStarted) {
-        gameStarted = true;
-        resetGameState();
-    } else if (!actionBugger && end){
-      gameStarted = true;
-      resetGameState();
-    }
-
-    switch (action) {
-        case 'up':
-            newDirection = -2;
-            break;
-        case 'down':
-            newDirection = 2;
-            break;
-        case 'left':
-            newDirection = -1;
-            break;
-        case 'right':
-            newDirection = 1;
-            break;
+    function handleKeyAction(action){
+      switch (action) {
+          case 'up':    newDirection = -2; break;
+          case 'down':  newDirection =  2; break;
+          case 'left':  newDirection = -1; break;
+          case 'right': newDirection =  1; break;
     }
 }
 
 
     // Keyboard-Events
-    window.addEventListener('keydown', function (e) {
-      if (isInputFocused()) return;
+   window.addEventListener('keydown', function (e) {
+  if (isInputFocused()) return;
 
-      if (e.code === 'Space') {
-        e.preventDefault();
-        // Start oder Neustart
-        gameStarted = true;
-        if (end) resetGameState();
-        return;
-      }
+  // verhindert Scrollen durch Space (aber kein Restart hier!)
+  if (e.code === 'Space') {
+    e.preventDefault();
+    return;
+  }
 
-      const keyToAction = {
-        ArrowUp: 'up',
-        ArrowDown: 'down',
-        ArrowLeft: 'left',
-        ArrowRight: 'right',
-      };
+  const keyToAction = {
+    ArrowUp: 'up',
+    ArrowDown: 'down',
+    ArrowLeft: 'left',
+    ArrowRight: 'right',
+  };
 
-      const action = keyToAction[e.key];
-      if (action) {
-        e.preventDefault();
-        handleKeyAction(action);
-        actionBugger = true;
-      }
-    });
+  const action = keyToAction[e.key];
+  if (action) {
+    e.preventDefault();
+    if (end) return;          // optional: keine Richtungswechsel im Endscreen
+    handleKeyAction(action);
+    actionBugger = true;
+  }
+});
+
+window.addEventListener('keydown', function (e) {
+  if (isInputFocused()) return;
+  if (e.code !== 'Space') return;
+  if (e.code !== 'k') return;
+
+  e.preventDefault();
+
+  // Start oder Neustart erst beim Loslassen der Space-Taste
+  if (end) {
+    gameStarted = true;
+    resetGameState();
+  }
+
+
+});
 
     // Button-Steuerung (Pfeile in HTML)
     const upBtn = document.querySelector('.up');
