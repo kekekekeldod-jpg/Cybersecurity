@@ -610,7 +610,7 @@ header{
 
 .forensicAnti{
   display: flex;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1rem, 5vw, 4rem);
   justify-content: center;
   align-items: center;
 }
