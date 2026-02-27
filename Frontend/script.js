@@ -19,67 +19,6 @@ document.querySelectorAll('.navmenu a').forEach(link => {
   backSpeed:65,
   loop: true
   });
-  
-
-  function sendMail() {
-    
-  emailjs.init("NC1PPG_x1vkOSABdg"); 
-
-  const params = { 
-    name: document.querySelector("#name").value,
-    email: document.querySelector("#email").value,
-    phone: document.querySelector("#phone").value,
-    date: document.querySelector("#date").value,
-    age: document.querySelector("#age").value,
-    richtung: document.querySelector("#richtung").value,
-    textarea: document.querySelector("#textarea").value,
-  };
-
-
-  const email = params.email.trim();
-  if (!email || !isValidEmail(email)) {
-    swal({ 
-      title: "Schade 🫤",
-      text: "Bitte gebe eine gültige E-Mail ein.",
-      icon: "error",
-      button: "Ok",
-    });
-    return;
-  }
-
-  const serviceID = "service_n794xlw"; 
-  const templateID = "template_a7cz5dp";
-  
-  emailjs.send(serviceID, templateID, params)
-    .then(res => {
-      if (res.status === 200) {
-        swal({
-          title: "Sehr gut 🙂",
-          text: "Du hast es erfolgreich gesendet",
-          icon: "info",
-          button: "Ok",
-        });
-      } else {
-        swal({ 
-          title: "Schade 🫤",
-          text: "Du hast es nicht erfolgreich gesendet",
-          icon: "error",
-          button: "Ok",
-        });
-      }
-    }) 
-    .catch(error => {
-      console.error("Error sending email:", error);
-    }) 
-    .finally(() => {
-      document.querySelector("form").reset();
-    });
-}
-
-function isValidEmail(email) {
-  
-  return email.includes("@");
-}
 
 
 if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i)) 

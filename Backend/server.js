@@ -107,14 +107,32 @@ app.use(
       useDefaults: true,
       directives: {
         "default-src": ["'self'"],
-        "script-src": ["'self'"],
-        "script-src-attr": ["'none'"],
-        "style-src": ["'self'"],
+
+        // JS erlauben (lokal + EmailJS CDN falls genutzt)
+        "script-src": [
+          "'self'",
+          "https://cdn.jsdelivr.net",
+          "https://cdn.emailjs.com"
+        ],
+
+        // EmailJS API Calls erlauben
+        "connect-src": [
+          "'self'",
+          "https://api.emailjs.com"
+        ],
+
+        // Bilder
         "img-src": ["'self'", "data:"],
-        "font-src": ["'self'"],
+
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'"
+        ],
+
         "object-src": ["'none'"],
         "base-uri": ["'self'"],
         "frame-ancestors": ["'self'"],
+        "upgrade-insecure-requests": [],
       },
     },
   })

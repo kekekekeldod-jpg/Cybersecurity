@@ -277,7 +277,7 @@ ist öffentlich auf GitHub einsehbar.
           <p>Sende hier deine Daten<br>&#8659;</p>
         </div>
 
-        <form class="formular">
+        <form id="contactForm" class="formular" action="#" method="post">
           <div class="row">
             <div class="form-group">
               <input type="text" name="name" class="form-control" id="name" placeholder="Name">
@@ -319,7 +319,7 @@ ist öffentlich auf GitHub einsehbar.
           <div class="form-group mt-3">
            <textarea class="form-control" name="message" id="textarea" rows="5" cols="55" placeholder="Nachricht (Bewerbung)"></textarea>
            </div>
-          <div class="text-center"><button onclick="sendMail(); return false;" class="button2">Senden</button></div>
+          <div class="text-center"><button type="submit" class="button2">Senden</button></div>
           </form>
       </div>
       <div>
@@ -710,6 +710,7 @@ ist öffentlich auf GitHub einsehbar.
   <script src="erde/erde-cyb.js"></script>
   <script src="register/register.js"></script>
   <script src="mousePointer/mousePointer.js"></script>
+  <script src="EmailJs/emailJs.js"></script>
 
 </body>
 </html>
