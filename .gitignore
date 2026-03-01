@@ -4,6 +4,7 @@ Backend/data/
 Backend/.env
 dist/
 build/
+Frontend/forensic/video
 *.log
 .DS_Store
 Thumbs.db

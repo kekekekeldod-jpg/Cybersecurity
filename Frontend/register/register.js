@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Wenn Backend und Frontend auf derselben Domain / Port laufen, bleibt das leer:
   const API = ''; 
-
+ 
   // ---------------- API-Helfer ----------------
 
   async function apiRegister(email, password) {

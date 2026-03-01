@@ -79,25 +79,22 @@ db.exec(`
 
 const app = express();
 
-/**
- * 0) Proxy-Vertrauen (wichtig: VOR Limitern & Sessions)
- *    Internet -> nginx -> node  => 1 Proxy ist korrekt.
- */
+ // Proxy-Vertrauen (wichtig: VOR Limitern & Sessions)
+ // Internet -> nginx -> node  => 1 Proxy ist korrekt.
+ 
 app.set("trust proxy", 1);
 
-/**
- * Helper: echte Client-IP (erste IP aus X-Forwarded-For)
- */
+// Helper: echte Client-IP (erste IP aus X-Forwarded-For)
+ 
 function getClientIp(req) {
   const fwd = req.headers["x-forwarded-for"];
   if (typeof fwd === "string" && fwd.length > 0) return fwd.split(",")[0].trim();
   return req.socket.remoteAddress || "";
 }
 
-/**
- * 1) SICHERHEIT: Helmet (CSP etc.)
- *    HSTS bleibt aus, weil nginx das bereits setzt.
- */
+ // SICHERHEIT: Helmet (CSP etc.)
+ // HSTS bleibt aus, weil nginx das bereits setzt.
+ 
 app.use(
   helmet({
     hsts: false,
@@ -138,15 +135,12 @@ app.use(
   })
 );
 
-/**
- * 2) Body-Limits (Schutz gegen riesige JSON- oder Form-Requests)
- */
+
+// Body-Limits (Schutz gegen riesige JSON- oder Form-Requests)
+
 app.use(express.json({ limit: "64kb" }));
 app.use(express.urlencoded({ extended: true, limit: "64kb" }));
 
-/**
- * 3) Rate-Limiter & Slow-Down (app-seitiger Abuse-Schutz)
- */
 
 // Globaler “Soft”-Limiter für alle Requests
 const globalLimiter = rateLimit({
@@ -178,12 +172,11 @@ const SHIELD_WINDOW_MS = 30 * 1000;
 const SHIELD_MAX_REQ = 400;
 const ipBuckets = new Map();
 
-/**
- * Shield-Middleware:
- * - zählt Requests pro IP in einem 30s-Fenster
- * - wenn > SHIELD_MAX_REQ → 429 Too Many Requests
- * - schützt vor "aus Versehen k6 ultra" von einer einzigen IP
- */
+
+ // Shield-Middleware:
+ // zählt Requests pro IP in einem 30s-Fenster
+ // wenn > SHIELD_MAX_REQ → 429 Too Many Requests
+ 
 app.use((req, res, next) => {
   const now = Date.now();
   const ip = getClientIp(req);
@@ -212,9 +205,9 @@ app.use((req, res, next) => {
 app.use(speedLimiter);
 app.use(globalLimiter);
 
-/**
- * 4) Session / Cookies (mit SQLite Store statt MemoryStore)
- */
+
+ // Session / Cookies (mit SQLite Store statt MemoryStore)
+
 const SQLiteStore = SQLiteStoreFactory(session);
 
 app.use(
@@ -237,9 +230,8 @@ app.use(
   })
 );
 
-/**
- * 5) Request-Logger -> in DB (access_logs)
- */
+ // Request-Logger -> in DB (access_logs)
+
 app.use((req, res, next) => {
   const ip = getClientIp(req);
   const ua = (req.get("User-Agent") || "").slice(0, 1000);
@@ -276,7 +268,7 @@ function logLogin({ userId = null, emailAttempt = null, success = 0, ip = "", ua
     console.error("logLogin DB error:", e?.message || e);
   }
 }
-
+ 
 function requireAuth(req, res, next) {
   if (req.session?.userId) return next();
   if (req.accepts("html")) return res.redirect("/?auth=required");
@@ -372,9 +364,9 @@ app.get("/auth/whoami", (req, res) => {
   res.json({ ok: false });
 });
 
-/**
- * 7) PROTECTED STATIC
- */
+
+ // PROTECTED STATIC
+ 
 app.use(
   "/member",
   requireAuth,
@@ -386,9 +378,8 @@ app.get("/member/white-hat-hacker", requireAuth, noCache, (_req, res) => {
   res.sendFile(path.join(PROTECTED_ROOT, "white-hat-hacker.html"));
 });
 
-/**
- * 8) PUBLIC STATIC
- */
+// PUBLIC STATIC
+
 app.use(
   express.static(FRONTEND_ROOT, {
     index: "index.html",
@@ -402,18 +393,17 @@ app.get("*", (req, res, next) => {
   res.sendFile(path.join(FRONTEND_ROOT, "index.html"));
 });
 
-/**
- * 9) Error-Handler (Fallback)
- */
+ 
+// Error-Handler (Fallback)
+
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err?.stack || err);
   if (!res.headersSent) res.status(500).send("Interner Serverfehler");
   else next();
 });
 
-/**
- * 10) Start server
- */
+// Start server
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🌐 Server läuft hinter nginx. Local: http://127.0.0.1:${PORT}`);
 });
