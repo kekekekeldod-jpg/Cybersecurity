@@ -19,7 +19,7 @@ export class Start {
         context.textBaseline = 'top';
         context.font = "italic small-caps 600 200px Montserrat";
         context.fillStyle = '#8d6715ff';
-        context.textAlign = 'top';
+        context.textAlign = 'center';
         context.fillText('مَرْدُوٓ هَكَرٰ ﷻ', this.width / 2, this.height / 2 - 850);
 
 
