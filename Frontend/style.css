@@ -292,188 +292,187 @@
     border: 1px solid ghostwhite;
     }
 
-    /* ==============================
-   AUTH MODAL (Register / Login)
-   ============================== */
+      /* ==============================
+    AUTH MODAL (Register / Login)
+    ============================== */
 
-/* --- Overlay Hintergrund --- */
-.auth-modal {
-  position: fixed;
-  inset: 0;
-  display: none;          /* wird per JS eingeschaltet */
-  place-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;                  /* über allem */
-  padding: clamp(12px, 3vw, 28px);
-}
-
-.auth-modal.open {
-  display: grid;
-  z-index: 100;
-}
-
-/* --- Hauptkarte --- */
-.auth-card {
-  position: relative;
-  width: min(92vw, 860px);
-  height: min(72vh, 560px);
-  background: url('bilder/register.jpg') center / cover no-repeat;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(189, 17, 17, 0.35);
-}
-
-@keyframes rotateIn {
-  0% {
-    opacity: 0;
-    transform: rotateX(-90deg) scale(0.9);
+  /* --- Overlay Hintergrund --- */
+  .auth-modal {
+    position: fixed;
+    inset: 0;
+    display: none;          /* wird per JS eingeschaltet */
+    place-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;                  /* über allem */
+    padding: clamp(12px, 3vw, 28px);
   }
-  100% {
-    opacity: 1;
-    transform: rotateX(0) scale(1);
+
+  .auth-modal.open {
+    display: grid;
+    z-index: 100;
   }
-}
 
-.auth-card.rotate-in{
-  animation: rotateIn 0.5s ease-out;
-}
+  /* --- Hauptkarte --- */
+  .auth-card {
+    position: relative;
+    width: min(92vw, 860px);
+    height: min(72vh, 560px);
+    background: url('bilder/register.jpg') center / cover no-repeat;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(189, 17, 17, 0.35);
+  }
 
-/* Dunkler Overlay über dem Hintergrundbild */
-.auth-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-}
+  @keyframes rotateIn {
+    0% {
+      opacity: 0;
+      transform: rotateX(-90deg) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: rotateX(0) scale(1);
+    }
+  }
 
-/* --- Schließen-Button (X) --- */
-.auth-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 3;
-}
+  .auth-card.rotate-in{
+    animation: rotateIn 0.5s ease-out;
+  }
 
-.auth-close:hover {
-  filter: brightness(1.2);
-}
+  /* Dunkler Overlay über dem Hintergrundbild */
+  .auth-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+  }
 
-/* --- Formular-Container --- */
-.auth-form {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: clamp(10px, 2.5vw, 20px);
-  padding: clamp(16px, 4vw, 40px);
-  text-align: center;
-  color: #e7ecff;
-  z-index: 2;
-  transition: transform 0.45s ease, opacity 0.45s ease;
-}
+  /* --- Schließen-Button (X) --- */
+  .auth-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 3;
+  }
 
-/* --- Titel (Anmelden / Registrieren) --- */
-.auth-title {
-  margin: 0 0 0.3em;
-  font-size: clamp(26px, 4vw, 44px);
-  font-weight: 900;
-  color: #f4e8d8;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
+  .auth-close:hover {
+    filter: brightness(1.2);
+  }
 
-/* --- Standardzustand: Login sichtbar --- */
-.auth-form--login {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
+  /* --- Formular-Container --- */
+  .auth-form {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: clamp(10px, 2.5vw, 20px);
+    padding: clamp(16px, 4vw, 40px);
+    text-align: center;
+    color: #e7ecff;
+    z-index: 2;
+    transition: transform 0.45s ease, opacity 0.45s ease;
+  }
 
-/* --- Register ist rechts außerhalb --- */
-.auth-form--register {
-  transform: translateX(100%) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+  /* --- Titel (Anmelden / Registrieren) --- */
+  .auth-title {
+    margin: 0 0 0.3em;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 900;
+    color: #f4e8d8;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
 
-/* --- Wenn Klasse "show-register" aktiv ist, swipen --- */
-.auth-card.show-register .auth-form--login {
-  transform: translateX(-100%) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+  /* --- Standardzustand: Login sichtbar --- */
+  .auth-form--login {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 
-.auth-card.show-register .auth-form--register {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
+  /* --- Register ist rechts außerhalb --- */
+  .auth-form--register {
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
-/* --- Eingabefelder --- */
-.auth-field input {
-  width: min(84vw, 420px);
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  background: rgba(10, 12, 18, 0.45);
-  color: #e7ecff;
-  outline: none;
-}
+  /* --- Wenn Klasse "show-register" aktiv ist, swipen --- */
+  .auth-card.show-register .auth-form--login {
+    transform: translateX(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
-.auth-field input::placeholder {
-  color: #cdd6ff;
-  text-align: center;
-}
+  .auth-card.show-register .auth-form--register {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 
-/* --- Button --- */
-.auth-btn {
-  width: min(84vw, 420px);
-  padding: 0.9rem 1rem;
-  border-radius: 12px;
-  border: none;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #121417;
-  background: linear-gradient(135deg, #523a03, #ffc24b);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease;
-}
+  /* --- Eingabefelder --- */
+  .auth-field input {
+    width: min(84vw, 420px);
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(10, 12, 18, 0.45);
+    color: #e7ecff;
+    outline: none;
+  }
 
-.auth-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-}
+  .auth-field input::placeholder {
+    color: #cdd6ff;
+    text-align: center;
+  }
 
-/* --- Text und Links unten (Wechsel zwischen Login/Register) --- */
-.auth-switch {
-  margin: 0.25rem 0 0;
-}
+  /* --- Button --- */
+  .auth-btn {
+    width: min(84vw, 420px);
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #121417;
+    background: linear-gradient(135deg, #523a03, #ffc24b);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
 
-.auth-link {
-  font-size: clamp(4px, 2.4vw, 14px);
-  background: none;
-  border: none;
-  padding: 0 0.2rem;
-  color: #aa8632;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: underline;
-  z-index: 3;
-}
+  .auth-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
 
-    
-    .policy-link {
+  /* --- Text und Links unten (Wechsel zwischen Login/Register) --- */
+  .auth-switch {
+    margin: 0.25rem 0 0;
+  }
+
+  .auth-link {
+    font-size: clamp(4px, 2.4vw, 14px);
+    background: none;
+    border: none;
+    padding: 0 0.2rem;
+    color: #aa8632;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    z-index: 3;
+  }
+
+  .policy-link {
     display: none;
     }
     
@@ -3244,6 +3243,58 @@
     display: inline-block !important;
     padding: 6px 12px;
     font-size: 13px;
-  }
-    
+  }    
+
+  .mobileForensicWrapper{
+      display: block;
+      grid-template-columns: none;
+      max-width: 530px;
     }
+
+    .wrapperOne h2{
+     font-size: 25px;
+    }
+
+    .wrapperOne h5{
+     font-size: 20px;
+    }
+
+    .wrapperOne p{
+      font-size: 17px;
+    }
+
+    .wrapperTwo img{
+      height: 50%;
+      transition: none;
+      cursor: none;
+    }
+
+    .wrapperTwo img:hover{
+      transform: none;
+    }
+
+    .cursor-light {
+      display: none;
+    }
+
+    .start-text .p2 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 1px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.3rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+  .auth-card {
+    width: 500px;
+    height: 350px;
+  }
+
+    }
+    

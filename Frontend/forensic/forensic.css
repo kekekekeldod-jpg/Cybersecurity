@@ -902,6 +902,7 @@ header{
   display: block;
   justify-items: center;
   align-items: center;
+  margin-top: 30px;
   padding: clamp(2rem, 5vw, 4rem);
 }
 
@@ -931,14 +932,11 @@ header{
   color:sandybrown
 }
 
-.forensicVideo {
-  margin-top: 30px;
-}
-
 .forensicVideo video{
   width: clamp(280px, 80vw, 900px);
   height: auto;
   border-radius: 5px;
+  box-shadow: 0 15px 40px rgba(126, 16, 71, 0.63);
 }
 
 /* ================= SECTIONS-Footer ================= */
@@ -1198,6 +1196,10 @@ footer{
 .footer-copy{
  margin-top: 93px;
  font-size: 12px;
+}
+
+.cursor-light {
+  display: none;
 }
 
 }
