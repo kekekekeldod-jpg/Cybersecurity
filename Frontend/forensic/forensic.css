@@ -933,7 +933,7 @@ header{
 }
 
 .forensicVideo video{
-  width: clamp(280px, 80vw, 900px);
+  width: clamp(100px, 70vw, 900px);
   height: auto;
   border-radius: 5px;
   box-shadow: 0 15px 40px rgba(126, 16, 71, 0.63);
@@ -1206,36 +1206,72 @@ footer{
   max-width: 600px;
 }
 
+.forensicSecondWrapper p{
+  font-size: 12px;
+}
+
 .forensicCellebriteWrapper{
   max-width: 600px;
+}
+
+.forensicCellebriteWrapper p{
+  font-size: 12px;
 }
 
 .forensicSecureSmartphoneWrapper{
   max-width: 600px;
 }
 
+.forensicSecureSmartphoneWrapper p{
+  font-size: 12px;
+}
+
 .forensicStatesWrapper{
   max-width: 600px;
+}
+
+.forensicStatesWrapper p{
+  font-size: 12px;
 }
 
 .forensicStepsWrapper{
   max-width: 600px;
 }
 
+.forensicStepsWrapper p{
+  font-size: 12px;
+}
+
 .forensicBruteforceWrapper{
   max-width: 600px;
+}
+
+.forensicBruteforceWrapper p{
+  font-size: 12px;
 }
 
 .forensicAesWrapper{
   max-width: 600px;
 }
 
+.forensicAesWrapper p{
+  font-size: 12px;
+}
+
 .forensicAntiWrapper{
   max-width: 600px;
 }
 
+.forensicAntiWrapper p{
+  font-size: 12px;
+}
+
 .forensicAntiPixelWrapper{
   max-width: 600px;
+}
+
+.forensicAntiPixelWrapper{
+  font-size: 12px;
 }
 
 
@@ -1243,20 +1279,40 @@ footer{
   max-width: 600px;
 }
 
+.forensicAntiSamsungWrapper p{
+  font-size: 12px;
+}
+
 .forensicAntiIphonesWrapper{
   max-width: 600px;
+}
+
+.forensicAntiIphonesWrapper p{
+  font-size: 12px;
 }
 
 .forensicFazitWrapper{
   max-width: 600px;
 }
 
+.forensicFazitWrapper p{
+  font-size: 12px;
+}
+
 .forensicAnleitung{
   max-width: 600px;
 }
 
+.forensicAnleitung p{
+  font-size: 12px;
+}
+
 .forensicOneWrapper{
   max-width: 600px;
+}
+
+.forensicOneWrapper p{
+  font-size: 12px;
 }
 
 }
