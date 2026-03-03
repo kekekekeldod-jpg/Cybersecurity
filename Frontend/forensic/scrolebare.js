@@ -63,6 +63,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
     }
   });
   sr.reveal('.footer-content', {delay:200, origin:'bottom'});
+  sr.reveal('.forensicVideo', {delay:200, origin:'bottom'});
   sr.reveal('.forensicAntiIphonesWrapper', {
     rotate: {
       x: 180,
