@@ -933,7 +933,8 @@ header{
 }
 
 .forensicVideo video{
-  width: clamp(200px, 66vw, 900px);
+  width: 100%;
+  max-width: clamp(200px, 80vw, 900px);
   height: auto;
   justify-items: center;
   border-radius: 5px;
