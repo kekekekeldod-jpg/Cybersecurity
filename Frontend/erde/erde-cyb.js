@@ -5,7 +5,6 @@
         let camera; 
         let renderer;
         let earthmesh;
-        let atmosphereMesh;
         let cloudMesh;
         let stars;
 
