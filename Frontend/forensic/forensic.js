@@ -62,16 +62,16 @@
       }
 
       // Bonus Passphrase
-      if (len >= 20 && /\s/.test(pw)) score += 10;
+      if (len >= 20 && /\s/.test(pw)) score += 20;
 
       score = Math.max(0, Math.min(100, Math.round(score)));
       result.score = score;
 
-      if (score < 25) result.label = "Sehr schwach";
-      else if (score < 50) result.label = "Schwach";
-      else if (score < 70) result.label = "Mittel";
-      else if (score < 85) result.label = "Stark";
-      else result.label = "Sehr stark";
+      if (score < 25) result.label = "Sehr schwach, Junge!";
+      else if (score < 50) result.label = "Immer noch schwach:(";
+      else if (score < 70) result.label = "Oh man, noch etwas mehr!";
+      else if (score < 85) result.label = "Joar, noch bissle mehr...";
+      else result.label = "BOMBEN Stark";
 
       if (len < 12) result.tips.push("Nutze 12–16+ Zeichen.");
       if (!hasLower) result.tips.push("Kleinbuchstaben hinzufügen.");
@@ -79,10 +79,9 @@
       if (!hasDigit) result.tips.push("Zahlen hinzufügen.");
       if (!hasSymbol) result.tips.push("Sonderzeichen oder Passphrase nutzen.");
 
-      // Canvas-freundlich kürzen
+      // Canvas-Motivation
       result.tips = result.tips.slice(0, 3);
-      if (result.tips.length === 0) result.tips.push("Sieht gut aus ✅");
-
+      if (result.tips.length === 0) result.tips.push("GOT IT, lass sie heulen ✅");
       return result;
     }
 
@@ -196,13 +195,18 @@
         }
       }
 
-      // Dein roter Text unten (optional)
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'center';
       ctx.font = "italic small-caps 700 20px Montserrat";
       ctx.fillStyle = '#2860faff';
       ctx.fillText('Passwort-Stärke-Check', 135, height - 50);
       ctx.fillText('Gib ein Passwort ein und drücke Enter', 210, height - 30);
+
+      ctx.textBaseline = 'top';
+      ctx.textAlign = 'left';
+      ctx.font = "italic small-caps 900 30px Montserrat";
+      ctx.fillStyle = 'rgb(0, 128, 100)';
+      ctx.fillText('Created by Merdo', 20, 15);
     }
 
     function loop() {
