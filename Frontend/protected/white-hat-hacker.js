@@ -37,8 +37,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('.header-center', {delay:200, origin:'bottom'});
   sr.reveal('.header-right', {delay:200, origin:'right'});
   sr.reveal('.daten-s', {delay:200, interval: 600, origin:'bottom'});
-  sr.reveal('.white-hat-hacker-text', {delay:200, origin:'bottom'});
-  sr.reveal('.white-hat-hacker-img-wrapper', { delay: 200, origin:'right'});
+  sr.reveal('.white-hat-hacker-text', {delay:200, origin:'left'});
   sr.reveal('.white-hat-hacker-img-audio', { delay: 200, origin:'right'});
   sr.reveal('.audioarea', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
