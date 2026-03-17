@@ -395,6 +395,11 @@ footer{
   #scrolling{
     width: 6px;
   }
+
+   .cursor-light {
+      display: none;
+    }
+    
 }
 
 @media (max-height: 576px) and (orientation: landscape) {

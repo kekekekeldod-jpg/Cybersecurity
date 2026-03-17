@@ -31,23 +31,23 @@
     .swal-modal {
     width: 500px;
     height: auto;
-    background: linear-gradient(250.59deg, #585304, #0F5043 48.53%, #5B1907 75.52%);
+    background: url("./bilder/swalBackground.jpg") center / cover no-repeat;
     }
     
     .swal-title{
     font-family: "Jacquard 24", system-ui;
-    font-weight: 400;
+    font-weight: 900;
     font-style: normal;
     font-size: 55px;
     color: #02F381;
     }
     
     .swal-text{
-    font-family: "Jacquard 24", system-ui;
-    font-weight: 400;
+     font-family: 'Jersey 15';
+    font-weight: 900;
     font-style: normal;
     font-size: 30px;
-    color: #F30198;
+    color: #861950;
     text-decoration: underline;
     }
     
@@ -63,10 +63,10 @@
     body{
     color: var(--text-color);
     background: #2F3359;
-    overflow-x: hidden;
+    overflow-x: hidd;
     overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width:auto;
+    -ms-overflow-style:auto;
     }
 
     body.no-scroll{
@@ -169,9 +169,6 @@
     100% { left: -50%; }
     }
     
-    ::-webkit-scrollbar{
-    width: 0;
-    }
     
     #scrolling-path{
     z-index: 5000;
@@ -292,173 +289,187 @@
     border: 1px solid ghostwhite;
     }
 
-    /* ==============================
-   AUTH MODAL (Register / Login)
-   ============================== */
+      /* ==============================
+    AUTH MODAL (Register / Login)
+    ============================== */
 
-/* --- Overlay Hintergrund --- */
-.auth-modal {
-  position: fixed;
-  inset: 0;
-  display: none;          /* wird per JS eingeschaltet */
-  place-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;                  /* über allem */
-  padding: clamp(12px, 3vw, 28px);
-}
+  /* --- Overlay Hintergrund --- */
+  .auth-modal {
+    position: fixed;
+    inset: 0;
+    display: none;          /* wird per JS eingeschaltet */
+    place-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;                  /* über allem */
+    padding: clamp(12px, 3vw, 28px);
+  }
 
-.auth-modal.open {
-  display: grid;
-  z-index: 100;
-}
+  .auth-modal.open {
+    display: grid;
+    z-index: 100;
+  }
 
-/* --- Hauptkarte --- */
-.auth-card {
-  position: relative;
-  width: min(92vw, 860px);
-  height: min(72vh, 560px);
-  background: url('bilder/register.jpg') center / cover no-repeat;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(189, 17, 17, 0.35);
-}
+  /* --- Hauptkarte --- */
+  .auth-card {
+    position: relative;
+    width: min(92vw, 860px);
+    height: min(72vh, 560px);
+    background: url('bilder/register.jpg') center / cover no-repeat;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(189, 17, 17, 0.35);
+  }
 
-/* Dunkler Overlay über dem Hintergrundbild */
-.auth-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-}
+  @keyframes rotateIn {
+    0% {
+      opacity: 0;
+      transform: rotateX(-90deg) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: rotateX(0) scale(1);
+    }
+  }
 
-/* --- Schließen-Button (X) --- */
-.auth-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 3;
-}
+  .auth-card.rotate-in{
+    animation: rotateIn 0.5s ease-out;
+  }
 
-.auth-close:hover {
-  filter: brightness(1.2);
-}
+  /* Dunkler Overlay über dem Hintergrundbild */
+  .auth-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+  }
 
-/* --- Formular-Container --- */
-.auth-form {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: clamp(10px, 2.5vw, 20px);
-  padding: clamp(16px, 4vw, 40px);
-  text-align: center;
-  color: #e7ecff;
-  z-index: 2;
-  transition: transform 0.45s ease, opacity 0.45s ease;
-}
+  /* --- Schließen-Button (X) --- */
+  .auth-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 3;
+  }
 
-/* --- Titel (Anmelden / Registrieren) --- */
-.auth-title {
-  margin: 0 0 0.3em;
-  font-size: clamp(26px, 4vw, 44px);
-  font-weight: 900;
-  color: #f4e8d8;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
+  .auth-close:hover {
+    filter: brightness(1.2);
+  }
 
-/* --- Standardzustand: Login sichtbar --- */
-.auth-form--login {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
+  /* --- Formular-Container --- */
+  .auth-form {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: clamp(10px, 2.5vw, 20px);
+    padding: clamp(16px, 4vw, 40px);
+    text-align: center;
+    color: #e7ecff;
+    z-index: 2;
+    transition: transform 0.45s ease, opacity 0.45s ease;
+  }
 
-/* --- Register ist rechts außerhalb --- */
-.auth-form--register {
-  transform: translateX(100%) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+  /* --- Titel (Anmelden / Registrieren) --- */
+  .auth-title {
+    margin: 0 0 0.3em;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 900;
+    color: #f4e8d8;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
 
-/* --- Wenn Klasse "show-register" aktiv ist, swipen --- */
-.auth-card.show-register .auth-form--login {
-  transform: translateX(-100%) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+  /* --- Standardzustand: Login sichtbar --- */
+  .auth-form--login {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 
-.auth-card.show-register .auth-form--register {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
+  /* --- Register ist rechts außerhalb --- */
+  .auth-form--register {
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
-/* --- Eingabefelder --- */
-.auth-field input {
-  width: min(84vw, 420px);
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  background: rgba(10, 12, 18, 0.45);
-  color: #e7ecff;
-  outline: none;
-}
+  /* --- Wenn Klasse "show-register" aktiv ist, swipen --- */
+  .auth-card.show-register .auth-form--login {
+    transform: translateX(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
-.auth-field input::placeholder {
-  color: #cdd6ff;
-  text-align: center;
-}
+  .auth-card.show-register .auth-form--register {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 
-/* --- Button --- */
-.auth-btn {
-  width: min(84vw, 420px);
-  padding: 0.9rem 1rem;
-  border-radius: 12px;
-  border: none;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #121417;
-  background: linear-gradient(135deg, #523a03, #ffc24b);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease;
-}
+  /* --- Eingabefelder --- */
+  .auth-field input {
+    width: min(84vw, 420px);
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(10, 12, 18, 0.45);
+    color: #e7ecff;
+    outline: none;
+  }
 
-.auth-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-}
+  .auth-field input::placeholder {
+    color: #cdd6ff;
+    text-align: center;
+  }
 
-/* --- Text und Links unten (Wechsel zwischen Login/Register) --- */
-.auth-switch {
-  margin: 0.25rem 0 0;
-}
+  /* --- Button --- */
+  .auth-btn {
+    width: min(84vw, 420px);
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #121417;
+    background: linear-gradient(135deg, #523a03, #ffc24b);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
 
-.auth-link {
-  font-size: clamp(4px, 2.4vw, 14px);
-  background: none;
-  border: none;
-  padding: 0 0.2rem;
-  color: #aa8632;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: underline;
-  z-index: 3;
-}
+  .auth-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
 
-    
-    .policy-link {
+  /* --- Text und Links unten (Wechsel zwischen Login/Register) --- */
+  .auth-switch {
+    margin: 0.25rem 0 0;
+  }
+
+  .auth-link {
+    font-size: clamp(4px, 2.4vw, 14px);
+    background: none;
+    border: none;
+    padding: 0 0.2rem;
+    color: #aa8632;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    z-index: 3;
+  }
+
+  .policy-link {
     display: none;
     }
     
@@ -510,6 +521,26 @@
     line-height: 32px;
     margin-bottom: 40px;
     display: block;
+    }
+
+    .start-text .p1 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 3px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.4rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+    .start-text .p1 a:hover{
+    transform: none;
+    text-decoration: underline blueviolet 3px;
+    border: none;
     }
     
     .start-text .p2{
@@ -974,28 +1005,6 @@
     background: linear-gradient(250deg, #B417BB, #1E927E, #7C0505, #B77018);
     }
     
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    
-    
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    color: coral;
-    font-size: 1.8rem;
-    font-weight: 600;
-    }
-    
-    .preis .all-preis .preis-box .preise span:last-child{
-    color: #999;
-    font-size: 0.8rem;
-    
-    }
-    
     .inputi{
     font-size: 16px;
     font-weight: 450;
@@ -1013,125 +1022,6 @@
     font-size: 20px;
     text-align: center;
     margin-bottom: 40px;
-    }
-    
-    .preis{
-    margin-top: 50px;
-    }
-    
-    .preis .all-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 1rem;
-    width: 15rem;
-    font-size: 1.8rem;
-    color: ghostwhite;
-    border-radius: .5rem;
-    background: #1c1c1e;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 60px;
-    }
-    
-    .preis .all-buttons .buttons.active,
-    .preis .all-buttons .buttons:hover {
-    background: linear-gradient(65deg, deeppink, coral);
-    }
-    
-    .preis .all-preis {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 22.7rem);
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
-    }
-    
-    .preis .all-preis .preis-box {
-    padding: 2rem 2.5rem;
-    background-color: #1c1c1e;
-    border-radius: .5rem;
-    margin: 20px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1.8rem;
-    color: ghostwhite;
-    margin-bottom: .5rem;
-    }
-    
-    .preis .all-preis .preis-box .preise {
-    animation: preis .2s linear;
-    transform-origin: top;
-    }
-    
-    @keyframes preis {
-    0% {
-    opacity: .5;
-    transform: scaleY(.5);
-    }
-    }
-    
-    .preis .all-preis .preis-box .preise.jahrlich {
-    display: none;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste {
-    border-top: .1rem solid rgba(255, 255, 255, .1);
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    padding: 1rem 0;
-    font-size: 1.3rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p i {
-    margin-right: 1rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p .fa-circle-check {
-    color: limegreen;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p .fa-circle-xmark {
-    color: tomato;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p span {
-    color: #999;
-    }
-    
-    .prs{
-    display: inline-block;
-    margin-top: 1rem;
-    cursor: pointer;
-    padding: 0.5rem 3.5rem;
-    font-size: 1.2rem;
-    background: linear-gradient(65deg, deeppink, coral);
-    color: ghostwhite;
-    border-radius: 5rem;
-    transition: all .6s ease;
-    }
-
-    .prs:hover{
-      transform: translateY(-4px);
-      background: linear-gradient(65deg, rgb(138, 25, 85), rgb(134, 50, 19));
-    }
-    
-    .preis .all-preis .preis-box .prs {
-    text-align: center;
-    border-radius: .5rem;
-    }
-    
-    .preis .all-preis .preis-box:nth-child(2) {
-    border: .1rem solid rgba(255, 255, 255, .1);
-    box-shadow: 0 .5rem 1rem #000;
     }
     
     .program{
@@ -1397,7 +1287,7 @@
     }
     
     .earth-text{
-    padding: 40px;
+    padding: 30px;
     width: 100%;
     height: auto;
     position: relative;
@@ -1716,6 +1606,71 @@
     .swiper-pagination-bullet-active {
     background-color: var(--second-color);
     }
+
+    .mobileForensicWrapper{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      max-width: 1100px;
+      place-items: center;
+      margin-inline: auto;
+    }
+
+    .wrapperOne{
+      display: block;
+      width: 100%;
+      text-align: start;
+      background: #14373a;
+      padding: clamp(1rem, 3vw, 2rem);
+      border: 3px solid black;
+      border-radius: 20px;
+      box-shadow: 0px 25px 20px -20px rgba(182, 82, 82, 0.7), -25px 0px 20px -20px rgba(65, 16, 97, 0.7), 0px -20px 20px -20px rgba(255, 165, 0, 0.7), 20px 0px 20px -20px rgba(0, 255, 0, 0.7);
+    }
+
+    .wrapperOne h2{
+     font-size: clamp(1rem, 5vw, 2rem);
+     color: #a86313;
+     line-height: clamp(2rem, 5vw, 2rem);
+    }
+
+    .wrapperOne h5{
+     font-size: clamp(0.5rem, 5vw, 1rem);
+     color: #f30000;
+     line-height: clamp(2rem, 5vw, 3rem);
+    }
+
+    .wrapperOne p{
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-size: clamp(0.8rem, 3vw, 1.3rem);
+      font-weight: 900;
+    }
+
+    .wrapperOne a{
+      text-decoration: underline;
+      animation: forensicLink 3s linear infinite;
+    }
+
+    @keyframes forensicLink {
+      0% {
+        color: #0033ff;
+      }
+      50% {
+        color:red;
+      }
+      100%{
+        color: #51520C;
+      }
+    }
+
+    .wrapperTwo img{
+      width: 100%;
+      height: auto;
+      transition: all ease.8s;
+      cursor: pointer;
+    }
+
+    .wrapperTwo img:hover{
+      transform: scale(1.2);
+    }
     
     @media (max-width:1740px){
     header{
@@ -1729,7 +1684,6 @@
     font-size: 18px;
     }
     }
-    
     
     @media (max-width:1450px){
     
@@ -1905,36 +1859,6 @@
       font-size: 18.4px;
       }
     
-    .preis .all-preis {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0 auto;
-    }
-    
-    .preis .all-preis .preis-box .preise{
-    font-size: 0.8rem;
-    }
-    
-    .preis{
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    padding: 0.7rem 0;
-    font-size: 0.8rem;
-    }
-    
-    .prs{
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem 2rem;
-    font-size: 0.7rem;
-    }
-    
     }
     
     @media (max-width:1060px){
@@ -2082,6 +2006,10 @@
     .heading-effekt h2{
     font-size: 25px;
     }
+
+    .heading-effekt p {
+      font-size: 18px;
+    }
     
     .box3 h2{
     font-size: 25px;
@@ -2140,36 +2068,6 @@
     
     .canvas-container .game-p{
     font-size: 30px;
-    }
-    
-    .preis .all-preis {
-    grid-template-columns: repeat(3, 1fr);
-    align-items: stretch;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    display: flex;
-    justify-content: flex-start;
-    padding: 3px auto;
-    font-size: 11px;
-    }
-    
-    .prs{
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 10px;
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 18px;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
     }
     
     }
@@ -2420,6 +2318,26 @@
     margin-bottom: 20px;
     display: block;
     }
+
+    .start-text .p2 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 1px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.3rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+    .start-text .p2 a:hover{
+    transform: none;
+    text-decoration: underline blueviolet 1px;
+    border: none;
+    }
     
     .start-text{
     padding-top: 25px;
@@ -2625,34 +2543,6 @@
     font-size: 15px;
     }
     
-    .preis .all-preis {
-    display: block;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1rem; 
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 1.2rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    font-size: 0.8rem; 
-    }
-    
-    .prs{
-    padding: 1rem 2.5rem;
-    font-size: 0.6rem;
-    }
-    
     .button:hover{
     background: linear-gradient(250.59deg, #3d1a61 10%, #4a0c5a 48.53%, #691546 75.52%);
     border: none;
@@ -2821,13 +2711,17 @@
     margin-bottom: 0;
     }
 
-     .navmenu-right { gap: 8px; }
-  .nav-btn{
+    .navmenu-right { gap: 8px; }
+    .nav-btn{
     display: inline-block !important;
     padding: 8px 14px;
     font-size: 14px;
     border-radius: 12px;
   }
+
+  .wrapperTwo img:hover{
+      transform: none;
+    }
     }
     
     
@@ -3232,52 +3126,12 @@
     font-size: 15px;
     }
     
-    .preis .all-preis {
-    display: block;
-    }
-    
-    .preis .all-buttons .buttons {
-    padding: 0.8rem;
-    width: 13rem;
-    font-size: 1rem;
-    margin-top: 40px;
-    }
-    
-    .preis .all-preis .preis-box h3 {
-    font-size: 1rem; 
-    }
-    
-    .preis .all-preis .preis-box .preise span:first-child{
-    font-size: 1.2rem;
-    }
-    
-    .preis .all-preis .preis-box .preis-liste p {
-    font-size: 0.8rem; 
-    }
-    
-    .preis .all-preis .preis-box {
-      width: 100;
-      height: auto;
-      max-width: 450px;
-      max-height: 450px;
-    }
-    
-    .preis .all-preis{
-      margin-left: 45px;
-    }
-    
-    .prs{
-    padding: 1rem 2.5rem;
-    font-size: 0.6rem;
-    }
-    
     .button:hover{
     background: linear-gradient(250.59deg, #3d1a61 10%, #4a0c5a 48.53%, #691546 75.52%);
     border: none;
     transform: none;
-    
     }
-    
+
     .menu-content{
     display: block;
     }
@@ -3386,6 +3240,58 @@
     display: inline-block !important;
     padding: 6px 12px;
     font-size: 13px;
-  }
-    
+  }    
+
+  .mobileForensicWrapper{
+      display: block;
+      grid-template-columns: none;
+      max-width: 530px;
     }
+
+    .wrapperOne h2{
+     font-size: 25px;
+    }
+
+    .wrapperOne h5{
+     font-size: 20px;
+    }
+
+    .wrapperOne p{
+      font-size: 17px;
+    }
+
+    .wrapperTwo img{
+      height: 50%;
+      transition: none;
+      cursor: none;
+    }
+
+    .wrapperTwo img:hover{
+      transform: none;
+    }
+
+    .cursor-light {
+      display: none;
+    }
+
+    .start-text .p2 a{
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      color: #e90404;
+      text-decoration: underline rgb(119, 138, 14) 1px;
+      transition: none;
+      text-transform: none;
+      line-height: 0;
+      font-size: clamp(0.3rem, 3vw, 0.8);
+      border: none;
+      transition: ease .6s;
+    }
+
+  .auth-card {
+    width: 500px;
+    height: 350px;
+  }
+
+    }
+    

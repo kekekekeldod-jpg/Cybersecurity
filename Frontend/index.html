@@ -1,64 +1,116 @@
 <!DOCTYPE html>     
 <html lang="de">   
-  
-<!-- 
-Mein Name ist Mertcan, und trotz meiner aktuellen Situation habe ich mich bemüht, diese Seite vollständig eigenständig zu programmieren. Mein Ziel ist es, professionelle Web-, Sicherheits- und Spieleentwicklung zu erlernen und mich ständig weiterzuentwickeln. Ich hoffe, die Webseite gefällt euch.
+<!--
+Mein Name ist Mertcan, und trotz meiner aktuellen Situation habe ich dieses Projekt vollständig selbstständig entwickelt.
+Mein Ziel ist es, professionelle Fähigkeiten in der Webentwicklung, IT-Sicherheit und Spieleentwicklung aufzubauen
+und mich kontinuierlich weiterzuentwickeln. Ich hoffe, dass euch diese Webseite gefällt.
 
-=== Update 16.11.2025 – Großes System-Upgrade ===
+============================================================
+UPDATE – 03.03.2026 (Mobile-Forensic & Sicherheitsupdate)
+============================================================
 
-+++ Neue Hauptfunktionen +++
-• Vollständiges Login- & Registrierungs­system (Node.js + Express + Sessions)
-• Geschützter „/member/“-Bereich mit Zugriff nur nach Anmeldung
-• Passwort-Hashing mit bcrypt (aktuell testweise abschaltbar)
-• SQLite-Datenbank mit Benutzerverwaltung & Login-Protokollierung
-• Backend-API mit sicherer Strukturierung: /auth/login, /auth/register, /auth/logout, /auth/whoami
-• Logging von IP, User-Agent und Login-Status (erfolgreich / nicht erfolgreich)
-• Erweiterte Server-Sicherheit durch Helmet-CSP und Cookie-Konfiguration
+=== Neue Mobile-Forensic-Seite ===
+• Vollständig neue Seite „Mobile Forensic“ mit ausführlicher technischer Erklärung.
+• Detaillierte Aufklärung zu modernen Mobile-Forensik-Tools wie Cellebrite und GrayKey.
+• Technische Erklärung zu möglichen Schutzmechanismen gegen physische Gerätezugriffe.
+• Erweiterte Informationen zu Brute-Force-Angriffen, PIN-Sicherheit und Passwortstärke.
+• Integration eines erklärenden Videobeitrags zur Veranschaulichung der Thematik.
+• Optimierte Struktur für bessere Lesbarkeit und mobile Darstellung.
 
-+++ Infrastruktur-Upgrade +++
-• Vollständiger eigener Cloud-Server (Ubuntu 20.04 LTS, Oracle Cloud)
-• Node.js dauerhaft online durch PM2 (Auto-Restart + Monitoring)
-• Nginx Reverse-Proxy vor Express.js eingerichtet (optimierte Performance)
-• Volle HTTPS-Verschlüsselung mit Let’s Encrypt SSL-Zertifikat
-• Eigene Domain merdocyb25.com eingerichtet und live verbunden
-• DNS-Konfiguration über Hostinger / Cloudflare vorbereitet
-• Server-Ordnerstruktur sauber aufgebaut: /srv/merdo/cy24/
+=== Sicherheits- & Backend-Verbesserungen ===
+• Weitere Härtung des Backends (Node.js / Express).
+• Verbesserte Validierungslogik für eingehende Requests.
+• Optimierte Session- und Cookie-Sicherheit.
+• Erweiterte Logging- und Monitoring-Mechanismen.
+• Interne Code-Struktur bereinigt und sicherheitsrelevante Prozesse stabilisiert.
+• Performance-Optimierungen bei Authentifizierungsprozessen.
 
-+++ Neue rechtliche Dokumente +++
-• Komplettes Impressum hinzugefügt
-• Vollständige Datenschutzerklärung (DSGVO-konform)
-• Klare Informationen über Hosting, IP-Speicherung, Cookies, Logfiles
+=== Allgemeine Optimierungen ===
+• Weitere kleinere Bugfixes und Stabilitätsverbesserungen.
+• Feinschliff im UI/UX-Bereich.
+• Verbesserte Ladezeiten durch interne Strukturverbesserungen.
+• Code-Refactoring für bessere Wartbarkeit.
 
-=== Spielerische & grafische Verbesserungen ===
-• HTML-Code an nahezu alle Displaygrößen angepasst (Smartphone, Tablet, Desktop)
-• Swipe-Funktionen für iPads entwickelt
-• Fehlerhafte Hintergrundfarben korrigiert (mehrfach)
-• Cyber-3D-Erde implementiert (Three.js)
-• Scroll-Reveal-Probleme auf iPads gefixt
-• Offline-Icons hinzugefügt
-• Balken/Navigation umprogrammiert und stabilisiert
-• GIFs und neue Bilder integriert
-• Neuer Registrierungs-Button mit verbessertem UI/UX
-• Swal-Popup-Design überarbeitet und Fehler behoben
+=== Allgemeine Änderungen ===
+• Der frühere „Preis“-Bereich wurde vollständig überarbeitet und in den neuen Bereich „Mobile Forensic“ umbenannt.
+• Zahlreiche Bugfixes, Stabilitätsverbesserungen und strukturelle Optimierungen wurden durchgeführt.
+• Neue Farbgestaltung und visuelle Überarbeitungen im gesamten Projekt.
+• Verbesserte Performance und bessere Darstellung auf allen Endgeräten.
 
-=== Spielfeatures / Snake-Game ===
-• Wiedergabefehler der Audio-Dateien beseitigt
-• Game-Over-Hintergrund wieder korrekt gesetzt
-• Neues Scaling-System im Canvas implementiert (für responsive Gameplay)
-• Verbesserte Touch-Gesten für mobile Geräte
-• Food-Rendering und Kollisionslogik optimiert
-• Bewegungslogik und UI dynamisch an Displaygrößen angepasst
+=== Neue Sicherheits- & Schutzfunktionen ===
+• Neue eigene Seite „Website- & Geräteschutz“ zur Aufklärung über Sicherheitsmaßnahmen.
+• Integration eines Passwort-Stärke-Checkers / Validators.
+• Verbesserte clientseitige Sicherheits- und Validierungslogik.
 
-=== Entwicklungs-Ressourcen, die zum Aufbau dieser Seite beigetragen haben ===
-https://github.com/crc137/fontawesome-free-pro/tree/main/Core-Styles
-https://fonts.google.com/
-https://fontawesome.com/
-https://scrollrevealjs.org/
-https://swiperjs.com
+=== Spiele & interaktive Inhalte ===
+• Beide Spiele – **Snake Game** und **Merdo of Caney** – wurden erweitert und repariert.
+• Stabilitätsverbesserungen und Fehlerbehebungen im Gameplay.
+• Optimierte Darstellung, Steuerung und Benutzerführung.
+• Laufende Weiterentwicklung mit regelmäßigen Updates.
+
+=== Backend- & Authentifizierungssystem ===
+• Vollständig implementiertes Login- & Registrierungssystem (Node.js + Express).
+• Geschützter Bereich `/member/`, nur nach erfolgreicher Anmeldung erreichbar.
+• Passwort-Hashing mit bcrypt (testweise deaktivierbar).
+• SQLite-Datenbank mit Benutzerverwaltung und Login-Protokollierung.
+• Sichere Backend-API-Struktur:
+  - /auth/login
+  - /auth/register
+  - /auth/logout
+  - /auth/whoami
+• Protokollierung von IP-Adresse, User-Agent und Login-Status (erfolgreich / fehlgeschlagen).
+• Erweiterte Serversicherheit durch Helmet (CSP) und sichere Cookie-Einstellungen.
+
+=== Infrastruktur-Upgrade ===
+• Eigener Cloud-Server (Ubuntu 20.04 LTS auf Oracle Cloud).
+• Node.js läuft dauerhaft über PM2 (Auto-Neustart & Monitoring).
+• Nginx als Reverse Proxy vor Express zur Leistungs- und Sicherheitssteigerung.
+• Vollständige HTTPS-Verschlüsselung mit Let’s Encrypt SSL-Zertifikat.
+• Eigene Domain eingerichtet: **merdocyb25.com**
+• DNS-Konfiguration über Hostinger / Cloudflare.
+• Saubere Serverstruktur:
+  /srv/merdo/cy24/
+
+=== Rechtliches & Transparenz ===
+• Vollständiges Impressum integriert.
+• DSGVO-konforme Datenschutzerklärung hinzugefügt.
+• Klare Informationen zu:
+  - Hosting
+  - IP-Speicherung
+  - Cookies
+  - Server-Logs
+
+=== UI/UX & Design-Verbesserungen ===
+• Optimiert für alle Bildschirmgrößen (Smartphone, Tablet, Desktop).
+• Swipe-Gesten für Tablets implementiert.
+• Fehlerhafte Hintergrunddarstellungen korrigiert.
+• 3D-Cyber-Erde (Three.js) integriert.
+• ScrollReveal-Probleme auf iPads behoben.
+• Offline-Icons ergänzt.
+• Navigationsleiste überarbeitet und stabilisiert.
+• Neue Bilder und GIFs integriert.
+• Verbesserter Registrierungs-Button (UI/UX).
+• SweetAlert-Design überarbeitet und Fehler behoben.
+
+=== Snake-Game Verbesserungen ===
+• Audioprobleme behoben.
+• Game-Over-Hintergrund korrekt dargestellt.
+• Neues responsives Canvas-Skalierungssystem.
+• Verbesserte Touch-Steuerung für Mobilgeräte.
+• Optimierte Food-Darstellung und Kollisionslogik.
+• Bewegungs- und UI-Logik dynamisch an Bildschirmgröße angepasst.
+
+=== Verwendete Ressourcen & Tools ===
+https://github.com/crc137/fontawesome-free-pro/tree/main/Core-Styles  
+https://fonts.google.com/  
+https://fontawesome.com/  
+https://scrollrevealjs.org/  
+https://swiperjs.com  
 https://www.emailjs.com/
 
 === Hinweis ===
-Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls öffentlich auf GitHub einsehbar.
+Der vollständige Quellcode (Frontend, Backend und Datenbanklogik)
+ist öffentlich auf GitHub einsehbar.
 -->
 
   <!--Der Anfang vom Head-Bereich-->
@@ -67,8 +119,12 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
+  <!-- Cybersecurity -->
   <title>Cybersecurity</title>
+
+  <!-- FavIcon-PNG -->
+  <link rel="icon" type="image/png" href="bilder/anonym.png">
   
   <!-- CSS-Datei -->
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -86,10 +142,10 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
   <link rel="stylesheet" href="css-funktione/swiper/swiper-bundle.min.css"/>
 
   <!-- Google Fonts -->
-  <link rel="stylesheet" href="google-fonts/Fonts/permanent-marker1.css">
-  <link rel="stylesheet" href="google-fonts/Fonts/permanent-marker.css">
-  <link rel="stylesheet" href="google-fonts/Fonts/jersey-15.css">
-  <link rel="stylesheet" href="google-fonts/Fonts/jacquard-24.css">
+  <link rel="stylesheet" href="google-fonts/permanent-marker1.css">
+  <link rel="stylesheet" href="google-fonts/permanent-marker.css">
+  <link rel="stylesheet" href="google-fonts/jersey-15.css">
+  <link rel="stylesheet" href="google-fonts/jacquard-24.css">
 </head>
 
 <!--Das Ende vom Head-Bereich-->
@@ -117,7 +173,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
           <li><a href="#uber-mich"><i class="fa-solid fa-info"></i> Über mich</a></li>
           <li><a href="#anmeldung"><i class="fa-solid fa-user"></i> Kontakt</a></li>
           <li><a href="#program"><i class="fa-solid fa-laptop-code"></i> P-G</a></li>
-          <li><a href="#preis"><i class="fa-solid fa-store"></i> Store</a></li>
+          <li><a href="#mobile"><i class="fa-solid fa-store"></i> Mobile</a></li>
           <li class="li-ex">
             <a href="https://go.screenpal.com/watch/cZfr25VMhhJ">
               <i class="fa-regular fa-file-video"></i> Video
@@ -133,7 +189,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
 
     <!-- Footer im Drawer bleibt unten -->
       <div class="underheader">
-        <p>&copy; 2024 Merdo</p>
+        <p>&copy; 2026 Merdo</p>
       </div>
     </div>
   </nav>
@@ -154,7 +210,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </div> 
     </button>
   </div>
 </header>
@@ -171,10 +227,10 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
     <div class="start-text">
       <span>Cybersecurity
       </span>
-      <h5># Lernprogramm</h5>
+      <h5># Kali Linux</h5>
       <h1>Software-</h1>
-      <p class="p1">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu erweitern und dich unserem Team anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klickst du auf das Video unten, kannst du sehen, wie ich diese Seite entwickelt habe</p>
-      <p class="p2">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu vertiefen und dich unserem Team anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klicke bitte auf die Balken in der oberen rechten Ecke der Menüleiste, um das Video zu sehen, in dem ich zeige, wie ich diese Seite programmiert habe.</p>
+      <p class="p1">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu erweitern und dich mir anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klickst du auf das Video unten, kannst du sehen, wie ich diese Seite entwickelt habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
+      <p class="p2">Hier hast du die Möglichkeit, deine Informatik- und Programmierkenntnisse im Bereich Softwareentwicklung zu vertiefen und dich mir anzuschließen, um gemeinsam eine sichere digitale Zukunft zu gestalten. Wenn du dich über den Register-Button einloggst, erhältst du außerdem Zugriff auf ein zweites, von mir selbst programmiertes Spiel. Klicke bitte auf die Balken in der oberen rechten Ecke der Menüleiste, um das Video zu sehen, in dem ich zeige, wie ich diese Seite programmiert habe. Hier findest du übrigens den gesamten Code der Webseite als Open-Source auf Github: <a href="https://github.com/kekekekeldod-jpg/Cybersecurity.git">FULL-CODE</a></p>
       <div class="start-btn">
         <a href="#sicher" class="btn2">Lies mehr<i class="fa-solid fa-arrow-right"></i></a>
         <a href="https://go.screenpal.com/watch/cZfr25VMhhJ" class="btn2">Video sehen<i class="fa-solid fa-play"></i></a>
@@ -246,7 +302,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
           <p>Sende hier deine Daten<br>&#8659;</p>
         </div>
 
-        <form class="formular">
+        <form id="contactForm" class="formular" action="#" method="post">
           <div class="row">
             <div class="form-group">
               <input type="text" name="name" class="form-control" id="name" placeholder="Name">
@@ -288,7 +344,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
           <div class="form-group mt-3">
            <textarea class="form-control" name="message" id="textarea" rows="5" cols="55" placeholder="Nachricht (Bewerbung)"></textarea>
            </div>
-          <div class="text-center"><button onclick="sendMail(); return false;" class="button2">Senden</button></div>
+          <div class="text-center"><button type="submit" class="button2">Senden</button></div>
           </form>
       </div>
       <div>
@@ -301,7 +357,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
     <section class="program" id="program">
       <div class="heading-effekt">
         <h2>Programmiersprachen</h2>
-        <p>Hier ist eine kleine Übersicht über die Kosten für verschiedene Programmiersprachen. Je nach deinen Präferenzen kannst Du das entsprechende Paket auswählen und teilnehmen.</p>
+        <p>HTML, C#, Python und Java gehören heute zu den bedeutendsten Sprachen und Technologien in der Informatik. HTML bildet die Grundlage jeder Webseite und sorgt dafür, dass Inhalte im Internet strukturiert dargestellt werden können. C# wird vor allem in der professionellen Softwareentwicklung, in Unternehmensanwendungen und in der Spieleprogrammierung mit Engines wie Unity eingesetzt. Python ist wegen seiner einfachen und klaren Syntax besonders beliebt in Bereichen wie Datenanalyse, künstlicher Intelligenz, Automatisierung und Webentwicklung. Java wiederum spielt seit vielen Jahren eine zentrale Rolle bei großen Softwaresystemen, Android-Apps, Backend-Diensten und Unternehmenslösungen. Zusammen decken diese Sprachen ein breites technologisches Spektrum ab und sind deshalb im modernen digitalen Zeitalter besonders bedeutend.</p>
       </div>
       <div class="menu-content">
         <div class="rowis">
@@ -364,26 +420,25 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
      <!--========== Ende von Programmiersprachen ============-->
  <hr>
  
-      <!--========== Spiel ============-->
-
-      
+       <!--========== Spiel ============-->
   <section class="game" id="game">
       <div class="canvas-container" id="canvas-container">
         <h1>Mein Spiel</h1>
-        <p>Hier ist meine kleine programmierte Version eines Schlangenspiels. Es dient als Testversion, um kleine Experimente mit JavaScript durchzuführen und zu erforschen, wie man damit interagiert.</p>
-        <canvas class="field" id='field'></canvas>
+        <p>Hier ist meine kleine programmierte Version eines Schlangenspiels. Es dient als Testversion, um kleine Experimente mit JavaScript durchzuführen und dadurch seine Skills darin zu verbessern.</p>
+        <canvas class="field" id='canvas'></canvas>
         <p class="game-p">Keep enjoying the game !</p>
       </div> 
       <div class="keys">
-        <a class="up arr" onclick="Snake.action('up')">
+        <a class="up arr">
           <i class="chevron up"></i></a>
         <br />
-        <a class="left arr" onclick="Snake.action('left')">
+        <a class="left arr">
           <i class="chevron left"></i></a>
-        <a class="down arr" onclick="Snake.action('down')">
+        <a class="down arr">
           <i class="chevron down"></i></a>
-        <a class="right arr" onclick="Snake.action('right')">
-          <i class="chevron right"></i></a>
+        <a class="right arr">
+          <i class="chevron right"></i>
+        </a>
       </div>
     </section>
          <!--========== Ende vom Spiel ============-->
@@ -393,7 +448,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
      <section>
     <div class="heading-effekt">
       <h2>Cyber-Earth</h2>
-      <p>Die Welt wird zunehmend moderner und visueller. Es ist an der Zeit, eine Vielzahl von Sicherheitsmaßnahmen zu implementieren und den Fokus verstärkt auf die Weiterentwicklung zu legen.</p>
+      <p>Die Welt entwickelt sich rasant weiter und wird immer moderner sowie visueller. Deshalb ist es heute wichtiger denn je, umfassende Sicherheitsmaßnahmen umzusetzen und den Fokus konsequent auf technologische Weiterentwicklung zu richten. Dazu gehört beispielsweise die Integration von Zwei-Faktor-Authentifizierung, die Nutzung von SSL-/TLS-Verschlüsselung für Webseiten, der Einsatz sicherer Passwort-Hashing-Verfahren wie bcrypt oder Argon2 sowie regelmäßige Software-Updates zur Schließung von Sicherheitslücken. Auch Firewalls, Netzwerküberwachung und automatisierte Backups tragen dazu bei, Systeme zuverlässig zu schützen und moderne Technologien sicher und effizient weiterzuentwickeln.</p>
     </div>
       </section>
       <section class="earth">
@@ -412,7 +467,6 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
       <img src="gifs/pc.gif" alt="pc" class="pc">
     </div>
     </div>
-    <div>
       <p>Cybersecurity ist von entscheidender Bedeutung für die Sicherheit unserer Welt in der heutigen digitalen Ära. In einer zunehmend vernetzten Gesellschaft sind wir ständig mit Bedrohungen konfrontiert, die von Cyberkriminellen, Hackern und sogar staatlich unterstützten Akteuren ausgehen können. Der Schutz unserer digitalen Infrastruktur, sei es in Regierungsbehörden, Unternehmen oder persönlichen Geräten, ist daher unerlässlich, um die Integrität, Vertraulichkeit und Verfügbarkeit von Daten zu gewährleisten.</p>
       </div>
   </section>
@@ -422,7 +476,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
   <section class="code-bild">
       <div class="heading-effekt">
       <h2>Code-img</h2>
-      <p>Die Technologie hat es ermöglicht, dass immer leistungsfähigere Apps und Tools für mobile Entwicklung bereitstehen. Apps wie "Spck-Editor" für Android und iOS bieten Funktionen wie Code-Editoren, Terminalzugriff und sogar Compiler für verschiedene Programmiersprachen, alles bequem auf einem Smartphone oder Tablet.</p>
+      <p>Hier seht ihr meinen HTML-, CSS- und JavaScript-Code bildlich dargestellt. Durch moderne Technologie ist es heute möglich, Code nicht nur am Computer zu schreiben, sondern auch direkt auf mobilen Geräten zu entwickeln. Leistungsfähige Apps und Tools für die mobile Programmierung machen das Arbeiten unterwegs extrem einfach. Anwendungen wie der Spck-Editor für Android und iOS bieten professionelle Funktionen wie integrierte Code-Editoren, Terminalzugriff und sogar Compiler für verschiedene Programmiersprachen  und das alles bequem auf dem Smartphone oder Tablet.</p>
       </div>
     <div class="code-img">
       <div>
@@ -525,8 +579,6 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
                    <p class="user-description">
                       Dieser Hacker zeichnet sich durch seine Fähigkeit aus, komplexe Sicherheitssysteme zu umgehen und vertrauliche Daten sicher zu extrahieren.
                    </p>
- 
-                 
                 </div>
              </article>
           </div>
@@ -542,69 +594,32 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
          </div>
           </div>
 
-
          <!-- Pagination -->
+
          <div class="swiper-pagination"></div>
         </div>
      </section>
        <!-- Ende von Swipe-->
   <hr>
-      <!--========== Kauf ============-->
-    <section class="preis" id="preis">
+      <!--========== Mobile Forensic ============-->
+    <section id="mobile" class="mobileforensic">
       <div class="heading-effekt">
-        <h2>Store</h2>
+        <h2>Mobile Forensic Info</h2>
       </div>
-      <div class="abo">
-        <h1>Abo-Mitglied</h1>
-        <p>Wähle jetzt zwischen meiner Mitgliedschaftsangeboten - Premium, Standard oder Basis - und erhalte Zugang zu einer Vielzahl exklusiver Funktionen. Mit der Mitgliedschaft kannst du nicht nur bestimmte Inhalte programmieren, sondern bekommst auch individuelle Unterstützung von mir, um deine Projekte auf das nächste Level zu bringen.</p>
+      <div class="mobileForensicWrapper">
+        <div class="wrapperOne">
+          <h2>Crack-Tools</h2>
+          <h5>Cellebrite / GrayKey</h5>
+          <p>Hier findest du ausführliche Informationen rund um das Thema Mobile Forensik und Smartphone-Sicherheit. Dort wird verständlich erklärt, wie Sicherheitsmechanismen auf Android- und iOS-Geräten funktionieren und welche Maßnahmen helfen können, persönliche Daten besser zu schützen. Der Fokus liegt auf Aufklärung, Prävention und technischem Hintergrundwissen zur mobilen Sicherheit. Ziel ist es, Nutzer für Risiken zu sensibilisieren und ihnen zu zeigen, wie sie ihr eigenes Gerät wirkungsvoll absichern können. Die Inhalte dienen ausschließlich informativen und defensiven Zwecken und sind nicht für illegale oder missbräuchliche Anwendungen gedacht. Klicke hier auf den Link, um auf der Website Of Hack-Protection mehr Infos zu bekommen: 
+          <a href="forensic/forensic.html">Mobile-Protection</a>
+          </p>
+        </div>
+        <div class="wrapperTwo">
+          <img src="bilder/crackTool.png">
+        </div>
       </div>
-      <div class="all-buttons">
-          <div class="buttons monat-btn active">Monatlich</div>
-          <div class="buttons jahr-btn">Jährlich</div>
-      </div>
-      <div class="all-preis">
-          <div class="preis-box">
-              <h3> Standard</h3>
-              <div class="preise monat"><span>€ 9.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 19.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                  <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                  <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Praktische Übungen</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
-                  <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div>
-          <div class="preis-box">
-              <h3>Premium</h3>
-              <div class="preise monat"><span>€ 24.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 49.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Spezielle Support</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div> 
-          <div class="preis-box">
-              <h3>Basis</h3>
-              <div class="preise monat"><span>€ 19.99 / </span><span>Monatlich</span></div>
-              <div class="preise jahrlich"><span>€ 29.99 / </span><span>Jährlich</span></div>
-              <div class="preis-liste">
-                <p><i class="fas fa-circle-check"></i><span>Lerninhalte</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Beratungssitzungen</span></p>
-                <p><i class="fas fa-circle-check"></i><span>Praktische Übungen</span></p>
-                <p><i class="fas fa-circle-xmark"></i><span>Spezielle Support</span></p>
-                <p><i class="fas fa-circle-xmark"></i><span>Full learning</span></p>
-              </div>
-              <a href="#" class="prs">Preis wählen</a>
-          </div>
-          </div>
-        </section>  
-         <!--========== Ende vom Kauf ============-->
+    </section>  
+         <!--========== Ende von Mobile Forensic ============-->
   </main> 
    <!--========== Ende vom Hauptteil ============-->
   <!--========== Footer ============-->
@@ -613,8 +628,8 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
       <div class="footer-content">
         <h3>Information</h3>
         <p>Adresse:<br>Anonym 111</p>
-            <p>Telefon:<br>Keins</p>
-            <p>Email:<br>merdoscr<br>@hotmai.cr</p>
+            <p>Telefon:<br>keins</p>
+            <p>Email:<br>anonym<br>@hotmail.com</p>
         </div>
         <div class="footer-content">
           <h3>Kurze Links</h3>
@@ -639,7 +654,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
       </div>
     </div>
     <div class="footer-copy">
-      <p>&copy; 2025 created by Merdo</p>
+      <p>&copy; 2026 created by Merdo</p>
     </div>
   </footer>
   
@@ -652,13 +667,13 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
 
     <!-- Login -->
     <form class="auth-form auth-form--login" id="loginForm" novalidate>
-      <h2 class="auth-title" id="authTitle">Anmelden</h2>
+      <h2 class="auth-title" id="authTitle">Anmelden <i class="fa-brands fa-fort-awesome-alt"></i></h2>
       <div class="auth-field">
         <input
           id="loginEmail"
           name="email"
           type="email"
-          placeholder="E-Mail"
+          placeholder="E-Mail" 
           autocomplete="email"
           inputmode="email"
           required
@@ -682,7 +697,7 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
 
     <!-- Register -->
     <form class="auth-form auth-form--register" id="registerForm" novalidate>
-      <h2 class="auth-title">Registrieren</h2>
+      <h2 class="auth-title">Registrieren <i class="fa-brands fa-fort-awesome-alt"></i></h2>
       <div class="auth-field">
         <input
           id="regEmail"
@@ -712,7 +727,6 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
     </form>
   </div>
 </div>
-
 <!-- Ende Auth-Modal-Container -->
 
 
@@ -720,6 +734,8 @@ Der vollständige Quellcode (Frontend + Backend + Datenbanklogik) ist ebenfalls 
   <script src="schlangenspiel/snake.js"></script>
   <script src="erde/erde-cyb.js"></script>
   <script src="register/register.js"></script>
-  <script src="./mousePointer/mousePointer.js"></script>
+  <script src="mousePointer/mousePointer.js"></script>
+  <script src="EmailJs/emailJs.js"></script>
+
 </body>
 </html>

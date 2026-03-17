@@ -5,6 +5,8 @@
         let camera; 
         let renderer;
         let earthmesh;
+        let cloudMesh;
+        let stars;
 
         let canvasWidth, canvasHeight, canvasColor;
 
@@ -39,19 +41,57 @@
         const earthgeometry = new THREE.SphereGeometry(0.6, 32, 32);
         
         const earthmaterial = new THREE.MeshStandardMaterial({
-            roughness: 1,
+            roughness: 0.3,
             metalness: 0,
             map: new THREE.TextureLoader().load('bilder/erdmape.jpg'),
             bumpMap: new THREE.TextureLoader().load('bilder/earthbump.jpg'),
-            bumpScale: 1.1,
+            bumpScale: 2,
         });
         
         earthmesh = new THREE.Mesh(earthgeometry, earthmaterial);
         scene.add(earthmesh);
-        
+
+        const cloudGeometry = new THREE.SphereGeometry(0.60, 62, 64);
+        const cloudMaterial = new THREE.MeshStandardMaterial({
+            map: new THREE.TextureLoader().load('bilder/earthClouds.png'),
+            transparent: true,
+            opacity: 0.2,
+            bumpScale: 5
+        });
+
+        cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
+        scene.add(cloudMesh);
+
         // Umgebungslicht setzen
         const ambientlight = new THREE.AmbientLight(0xffffff, 0.2);
         scene.add(ambientlight);
+
+        const sunlight = new THREE.DirectionalLight(0xffffff, 0.008);
+        sunlight.position.set(5, 2, 5);
+        scene.add(sunlight);
+
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 3000;
+        const starsPositions = [];
+
+        for (let i = 0; i < starsCount; i++) {
+            starsPositions.push((Math.random()-0.5)*300);
+            starsPositions.push((Math.random()-0.5)*300);
+            starsPositions.push((Math.random()-0.5)*300);
+        }
+
+        starsGeometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(starsPositions, 3)
+        );
+
+        const starMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.7
+        });
+
+        stars = new THREE.Points(starsGeometry, starMaterial);
+        scene.add(stars);
 
         // Punktlicht setzen
         const pointerlight = new THREE.PointLight(0xffffff, 0.9);
@@ -62,7 +102,7 @@
 
         const animate = () => {
             requestAnimationFrame(animate);
-            earthmesh.rotation.y += 0.0045;
+            earthmesh.rotation.y += 0.00511;
             render();
         }
 

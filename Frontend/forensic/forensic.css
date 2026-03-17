@@ -1,0 +1,1320 @@
+/* =============== GLOBAL RESET (entschärft) =============== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all .6s;
+}
+
+body{
+  background: rgb(25, 32, 48);
+}
+
+#scrolling-path{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: rgb(255, 255, 255, 0.05);
+}
+
+#scrolling{
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  animation: scrollingY 5s linear infinite;
+}
+
+@keyframes scrollingY{
+  0%,100%{
+    filter: hue-rotate(0deg);
+  }
+  50%{
+    filter: hue-rotate(360deg);
+  }
+}
+
+#scrolling:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(10px);
+}
+
+#scrolling:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(30px);
+}
+
+  .cursor-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 45px;
+    pointer-events: none;
+    transform: translate(0,0);
+
+    background: linear-gradient(
+      90deg,
+      rgba(70, 0, 90, 0) 0%,
+      rgba(180, 0, 255, 0.8) 50%,
+      rgba(70, 0, 90, 0) 100%
+    );
+
+    filter: blur(16px);
+    opacity: 1;
+    mix-blend-mode: screen;
+    transition: transform 0.04s linear;
+    z-index: 999999;
+
+    animation: darknetShift 7s linear infinite;
+  }
+
+  @keyframes darknetShift {
+    0%   { filter: hue-rotate(0deg) blur(14px); }
+    100% { filter: hue-rotate(360deg) blur(14px); }
+  }
+
+  .sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(200,0,255,1) 0%,
+      rgba(255,255,255,0.8) 40%,
+      rgba(200,0,255,0.2) 100%
+    );
+    filter: blur(2px);
+    mix-blend-mode: screen;
+    opacity: 1;
+    z-index: 999999;
+
+    animation: sparkleFade 0.6s ease-out forwards;
+  }
+
+  @keyframes sparkleFade {  0%   { transform: scale(1); opacity: 1; }
+    
+    100% { transform: scale(0.2); opacity: 0; }
+  }
+
+
+/* NICHT mehr alle Bilder verstecken!
+   Nur die Canvas-Assets ausblenden (unten) */
+img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ================= HEADER ================= */
+header{
+  background: linear-gradient(90deg, rgb(105, 69, 69), rgb(70, 134, 84), rgb(31, 48, 18));
+  display: flex;
+  justify-content: center;
+  padding: clamp(1rem, 2vw, 2.5rem);
+  width: 100%;
+}
+
+.headerForensic{
+  display: block;
+  text-align: center;
+  background: transparent;
+}
+
+.headerForensic h2{
+  font-size: clamp(1.3rem, 4vw, 3rem);
+  font-weight: 900;
+  color: rgb(172, 134, 65);
+}
+
+/* ================= SECTIONS ================= */
+.forensicOne {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicOneWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: linear-gradient(152deg, rgb(46, 23, 23), rgb(15, 15, 29), rgb(23, 41, 23));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicOneWrapper h2{
+   font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #0a6eb1;
+}
+
+.forensicOneWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color:rgb(155, 120, 89)
+}
+
+/* ================= CANVAS AREA ================= */
+.forensicTwoWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wrapper ist der Anker für absolute Overlay-Elemente */
+#canvasWrap{
+  position: relative;
+  display: inline-block; /* nimmt Canvas-Größe an */
+}
+
+/* Canvas responsive (wie du es wolltest), aber in einem Block */
+#canvasWrap canvas.canvas{
+  display: block;
+  margin: 10px;
+  width: clamp(15rem, 80vw, 33rem);
+  height: auto;
+  border: 10px solid black;
+  cursor: pointer;
+}
+
+/* Start Button */
+.canvasBtn{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  font-size: 25px;
+  color: rgb(65, 150, 121);
+  padding: clamp(0.7rem, 2vw, 1rem);
+  background: rgb(31, 30, 30);
+  border: 2px solid rgb(28, 143, 127);
+  border-radius: 20px;
+  cursor: pointer;
+
+  z-index: 20; /* immer über Canvas */
+}
+
+.canvasBtn:hover{
+  transform: translate(-50%, -50%) scale(1.15);
+  background: rgb(59, 48, 20);
+  color: red;
+  border: 2px dashed rgb(4, 62, 252);
+}
+
+/* Overlay Input über dem Canvas */
+#passwordInput{
+  position: absolute;
+  left: 12%;
+  top: 28%;
+  width: 64%;
+  height: 34px;
+
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+
+  color: #fff;
+  font-size: 16px;
+  font-family: monospace;
+  padding: 6px 10px;
+
+  display: none; /* per JS einblenden */
+  z-index: 20;
+}
+
+/* Buttons über dem Canvas */
+#toggleBtn, #copyBtn{
+  position: absolute;
+  top: 28%;
+  width: 38px;
+  height: 34px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  cursor: pointer;
+
+  display: none; /* per JS einblenden */
+  z-index: 20;
+}
+
+/* rechts neben dem Input (prozentual, damit responsive) */
+#toggleBtn{ left: calc(12% + 64% + 8px); }
+#copyBtn  { left: calc(12% + 64% + 52px); }
+
+/* ✅ NUR die Canvas-Assets ausblenden */
+#hackDog, #hackPhone{
+  display: none;
+}
+
+/* ================= SECOND SECTION ================= */
+.forensicSecond {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.forensicSecondWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  background: rgba(255, 255, 255, 0.2);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+.forensicSecondWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  animation: forensich2 3s linear infinite;
+}
+
+@keyframes forensich2 {
+  0%{ color: red; }
+  50%{ color: antiquewhite; }
+  100%{ color: black; }
+}
+
+.forensicSecondWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(219, 159, 110);
+}
+
+/* ================= Cellebrite § GrayKey ================= */
+
+.forensicCellebrite{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicCellebriteWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #143306;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+.forensicCellebriteWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  animation: cellegray 1s linear infinite;
+}
+
+@keyframes cellegray{
+  0%{ color: red; }
+  100%{ color: rgba(100, 6, 155, 0.808); }
+}
+
+.forensicCellebriteWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(224, 101, 0);
+}
+
+/* ================= Wie Smartphones Daten sowohl auf der Hardware- als auch auf der Softwareebene schützen ================= */
+
+.forensicSecureSmartphone{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicSecureSmartphoneWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #11295e;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicSecureSmartphoneWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #a10f58;
+}
+
+.forensicSecureSmartphoneWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: smartphomeWrapper 4s linear infinite;
+}
+
+@keyframes smartphomeWrapper {
+  0%{ color: red; }
+  50%{ color: rgb(175, 136, 8); }
+  100%{ color: rgba(96, 69, 112, 0.808); }
+}
+
+.forensicSecureSmartphoneWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(127, 145, 138);
+}
+
+
+/* ================= BFU, AFU und Boot-State ================= */
+
+.forensicStates{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicStatesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #1b0e1f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+ .forensicStepsImg{
+  margin: 30px;
+ }
+
+.forensicStepsImg img{
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 230, 161, 0.63);
+  transition: transform 0.3 ease, box-shadow 0.3s ease;
+}
+
+.forensicStatesWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #2b6925;
+  animation: stateSwiper 2s linear infinite;
+}
+
+@keyframes stateSwiper {
+  0% { transform: translateX(0px); }
+  50% { transform: translateX(15px); }
+  100% { transform: translateX(0px); }
+}
+
+.forensicStatesWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: smartphomeWrapper 4s linear infinite;
+}
+
+@keyframes smartphomeWrapper {
+  0%{ color: rgb(223, 234, 123) }
+  50%{ color: rgb(125, 100, 3); }
+  100%{ color: rgba(23, 39, 12, 0.808); }
+}
+
+.forensicStatesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(52, 105, 87);
+}
+
+/* ================= Einleitung der forensischen Schritte ================= */
+
+.forensicSteps {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicStepsWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #3d0d0f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicStepsWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5fb358;
+}
+
+.forensicStepsWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: forensicStep 4s linear infinite;
+}
+
+@keyframes forensicStep {
+  0% { color: red; }
+   50% { color: rgb(15, 94, 61); }
+    100% { color: rgb(131, 71, 37); }
+}
+
+.forensicStepsWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(109, 143, 214);
+}
+/* ================= Einleitung der Brute-Force Schritte ================= */
+
+.forensicBruteforce{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicBruteforceWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #6b8370;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicBruteforceWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5a0c0c;
+  text-decoration: overline;
+}
+
+.forensicBruteforceWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  animation: bruteforce 4s linear infinite;
+}
+
+@keyframes bruteforce {
+  0% { color: rgb(85, 61, 61); }
+  50% { color: rgb(30, 97, 30); }
+  100% { color: blue; }
+}
+
+.forensicBruteforceWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(4, 21, 58);
+}
+
+/* ================= AES-256-Bit-Verschlüsselung ================= */
+.forensicAes{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #557270;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAesWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #532b44;
+  text-decoration: overline;
+}
+
+.forensicAesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(36, 31, 30);
+}
+
+/* ================= Anti-Forensic ================= */
+
+.forensicAnti{
+  display: flex;
+  padding: clamp(1rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #05201f;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: clamp(2rem, 4vw, 7rem);
+}
+
+.pixel{
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel li{
+  display:flex;
+}
+
+.pixel li a{
+  font-size: clamp(0.2rem, 2vw, 1rem);
+  font-weight: 900;
+  color: rgb(88, 73, 53);
+}
+
+.samsung {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.samsung li{
+  display: flex;
+}
+
+.samsung li a{
+  font-size: clamp(0.2rem, 2vw, 1rem);
+  font-weight: 900;
+  color: rgb(88, 73, 53);
+}
+
+.forensicAntiWrapper h2{
+  font-size: clamp(1.1rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin: 15px;
+  width: 100%;
+  text-align: center;
+  color: #99216b;
+}
+
+.forensicAntiWrapper h4{
+  font-size: clamp(0.4rem, 2vw, 1.4rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-align: left;
+  color: #9b5052;
+  text-decoration: underline;
+}
+
+.forensicAntiWrapper p{
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-size: clamp(0.8rem, 2vw, 1.4em);
+ font-weight: 900;
+ color: rgb(139, 60, 44);
+ margin: 20px;
+}
+
+/* ================= Anti-Forensic Pixel ================= */
+
+.forensicAntiPixel {
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiPixelWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #272453;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiPixelWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #9b1414;
+  text-decoration: overline;
+}
+
+.forensicAntiPixelWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #a0055f;
+}
+
+.forensicAntiPixelWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(78, 94, 64);
+}
+
+/* ================= Anti-Forensic Samsung ================= */
+
+.forensicAntiSamsung{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiSamsungWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #185240;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiSamsungWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #6f6eac;
+  text-decoration: overline;
+}
+
+.forensicAntiSamsungWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #0a2647;
+}
+
+.forensicAntiSamsungWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgb(11, 22, 0);
+}
+
+/* ================= Anti-Forensic Iphone ================= */
+
+.forensicAntiIphones{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicAntiIphonesWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: #232c29;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAntiIphonesWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #5e7583;
+  text-decoration: overline;
+}
+
+.forensicAntiIphonesWrapper h3{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-decoration: underline;
+  color: #1a569b;
+}
+
+.forensicAntiIphonesWrapper h4{
+  font-size: clamp(0.4rem, 3vw, 1.7rem);
+  font-weight: 900;
+  margin: clamp(0.1rem, 1vw, 1rem);
+  width: 100%;
+  text-align: center;
+  color: #9b5052;
+  text-decoration: underline;
+}
+
+.ios {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.ios li{
+  display: block;
+  text-align: center;
+}
+
+.ios li a{
+  font-size: clamp(0.2rem, 2vw, 1.3rem);
+  font-weight: 900;
+  color: rgb(175, 108, 20);
+  text-align: center;
+}
+
+.forensicAntiIphonesWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color: rgba(55, 126, 87, 0.637);
+}
+
+/* ================= Fazit ================= */
+.forensicFazit{
+  display: flex;
+  padding: clamp(2rem, 5vw, 4rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.forensicFazitWrapper{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: linear-gradient(152deg, rgb(66, 56, 56), rgb(30, 30, 37), rgb(49, 56, 49));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.fazitBitch{
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 0;
+}
+
+.fazitBitch img {
+  width: clamp(11rem, 20vw, 40rem);
+  height: auto;
+}
+
+.forensicFazitWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #738794;
+  text-decoration: underline;
+}
+
+.forensicFazitWrapper p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color:sandybrown
+}
+
+/* ================= Brute-Force Video ================= */
+.forensicVideo{
+  display: block;
+  justify-items: center;
+  align-items: center;
+  margin-top: 30px;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.forensicAnleitung{
+  display: block;
+  text-align: center;
+  max-width: 1100px;
+  background: linear-gradient(152deg, rgb(66, 56, 56), rgb(30, 30, 37), rgb(49, 56, 49));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 4px solid black;
+  border-radius: 10px;
+}
+
+.forensicAnleitung h2{
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: #738794;
+  text-decoration: underline;
+}
+
+.forensicAnleitung p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(0.8rem, 2vw, 1.4em);
+  font-weight: 900;
+  color:sandybrown
+}
+
+.forensicVideo video{
+  width: 100%;
+  max-width: clamp(200px, 80vw, 900px);
+  height: auto;
+  justify-items: center;
+  border-radius: 5px;
+  box-shadow: 0 15px 40px rgba(126, 16, 71, 0.63);
+}
+
+/* ================= SECTIONS-Footer ================= */
+
+footer{
+    background: rgb(61, 33, 33);
+    padding-top: 50px;
+    margin-top: 50px;
+  }
+
+  .all-footer{
+    width: 100%;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    height: 210px;
+  }
+  
+  .footer-content{
+    width: 33.3%;
+  }
+  
+.footer-content h3{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: rgb(255, 40, 2);
+  }
+  
+  .footer-content p{
+    font-family: 'Permanent Marker', cursive;
+    width: 130px;
+    margin: auto;
+    padding: 7px;
+    font-size: 15px;
+    animation: footerAnimation 5s linear infinite;
+  }
+
+  @keyframes footerAnimation{
+    0% { color: #41300d;}
+    25% { color: aqua;}
+    50% { color: #549933;}
+    75% { color: rgb(47, 67, 85);}
+    100% { color: #f18930;}
+  }
+  
+  .footer-content ul{
+    text-align: center;
+  }
+  
+  .list{
+    padding: 0;
+  }
+
+  .list li a{
+    font-family: 'Permanent Marker', cursive;
+    animation: footerAnimation 5s linear infinite;
+  }
+  
+  .list li{
+    width: auto;
+    text-align: center;
+    list-style-type: none;
+    padding: 7px;
+    position: relative;
+  }
+  
+  .list li::before{
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 100%;
+    width: 0;;
+    height: 3px;
+    background: rgba(11, 220, 228, 0.37);
+    transition-duration: .5s;
+    transition: width .3s ease;
+    -webkit-transition: width .3s ease;
+    
+  }
+  
+  .list li:hover::before{
+    width: 70px;
+    background-color: #7C0505;
+  }
+  
+
+.social-icons{
+  text-align: center;
+  padding: 0;
+}
+
+.social-icons li{
+  display:block;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.social-icons i{
+  font-size: 25px;
+  animation: footerAnimation 5s linear infinite;
+}
+  
+.social-icons a{
+  text-decoration: none;
+  color: ghostwhite;
+}
+  
+.social-icons a:hover{
+  color: #f18930;
+}
+
+.social-icons i:hover{
+  color: #f18930;
+}
+
+.footer-copy{   
+  font-family: 'Permanent Marker', cursive;
+  background: linear-gradient(250.59deg, #41300d, #143306 48.53%, #3a0725 75.52%);
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 85px;
+  color: rgb(255, 0, 0);
+}
+
+
+
+/* Media */
+@media (max-width:576px) {
+  
+  *{
+    font-weight: none;
+  }
+  
+  #scrolling-path{
+    width: 4px;
+  }
+  
+  #scrolling{
+    width: 6px;
+  }
+  
+  section .daten-s div {
+    margin: 5px;
+    margin-top: 35px;
+    
+  }
+
+  section .daten-s div h2{
+    font-size: 25px;
+  }
+  
+  section .daten-s div p{
+  font-family: "Jersey 15", sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  }
+  
+   .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+  .list li::before{
+   content: "";
+   position: none;
+   transform: translate(-50%, -50%);
+   left: 0;
+   top: 0;
+   width: 0;;
+   height:0;
+   background: rgba(12, 12, 66, 0.37);
+   transition-duration: .5s;
+   
+ }
+ 
+ .list li:hover::before{
+   width: none;
+ }
+
+ .list li a{
+   font-size: 12px;
+ }
+ 
+.social-icons li{
+ padding: 2px;
+}
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 80px;
+ font-size: 9px;
+}
+
+ .cursor-light {
+      display: none;
+    } 
+}
+
+@media (max-height: 576px) and (orientation: landscape) {
+ 
+ .all-footer{
+   height: 150px;
+ }
+ 
+ .footer-content h3{
+   font-size: 12px;
+   margin-bottom: 12px;
+ }
+ 
+ .footer-content p{
+   font-size: 10px;
+   width: 90px;
+   padding: 3;
+   line-height: 16px;
+   
+ }
+ 
+ .list li{
+   padding: 3px;
+ }
+ 
+ .list li a{
+   font-size: 12px;
+ }
+ 
+.social-icons li{
+ padding: 2px;
+}
+
+.social-icons i{
+ font-size: 14px;
+}
+
+.footer-copy{
+ margin-top: 93px;
+ font-size: 12px;
+}
+
+.cursor-light {
+  display: none;
+}
+
+.forensicSecondWrapper{
+  max-width: 600px;
+}
+
+.forensicSecondWrapper p{
+  font-size: 12px;
+}
+
+.forensicCellebriteWrapper{
+  max-width: 600px;
+}
+
+.forensicCellebriteWrapper p{
+  font-size: 12px;
+}
+
+.forensicSecureSmartphoneWrapper{
+  max-width: 600px;
+}
+
+.forensicSecureSmartphoneWrapper p{
+  font-size: 12px;
+}
+
+.forensicStatesWrapper{
+  max-width: 600px;
+}
+
+.forensicStatesWrapper p{
+  font-size: 12px;
+}
+
+.forensicStepsWrapper{
+  max-width: 600px;
+}
+
+.forensicStepsWrapper p{
+  font-size: 12px;
+}
+
+.forensicBruteforceWrapper{
+  max-width: 600px;
+}
+
+.forensicBruteforceWrapper p{
+  font-size: 12px;
+}
+
+.forensicAesWrapper{
+  max-width: 600px;
+}
+
+.forensicAesWrapper p{
+  font-size: 12px;
+}
+
+.forensicAntiWrapper{
+  max-width: 600px;
+}
+
+.forensicAntiWrapper p{
+  font-size: 12px;
+}
+
+.forensicAntiPixelWrapper{
+  max-width: 600px;
+}
+
+.forensicAntiPixelWrapper{
+  font-size: 12px;
+}
+
+
+.forensicAntiSamsungWrapper{
+  max-width: 600px;
+}
+
+.forensicAntiSamsungWrapper p{
+  font-size: 12px;
+}
+
+.forensicAntiIphonesWrapper{
+  max-width: 600px;
+}
+
+.forensicAntiIphonesWrapper p{
+  font-size: 12px;
+}
+
+.forensicFazitWrapper{
+  max-width: 600px;
+}
+
+.forensicFazitWrapper p{
+  font-size: 12px;
+}
+
+.forensicAnleitung{
+  max-width: 600px;
+}
+
+.forensicAnleitung p{
+  font-size: 12px;
+}
+
+.forensicOneWrapper{
+  max-width: 600px;
+}
+
+.forensicOneWrapper p{
+  font-size: 12px;
+}
+
+}

@@ -13,95 +13,12 @@ document.querySelectorAll('.navmenu a').forEach(link => {
     });  
 });  
 
-let monatBtn = document.querySelector('.preis .all-buttons .monat-btn');
-let jahrBtn = document.querySelector('.preis .all-buttons .jahr-btn');
-
-let monatlich = document.querySelectorAll('.preis .all-preis .preis-box .monat');
-let jahrlich = document.querySelectorAll('.preis .all-preis .preis-box .jahrlich');
-
-jahrBtn.onclick = () => {
-  monatBtn.classList.remove('active');
-  jahrBtn.classList.add('active');
-
-  monatlich.forEach(mo => {mo.style.display = 'none'});
-  jahrlich.forEach(ja => {ja.style.display = 'block'});
-}
-
-monatBtn.onclick = () => {
-  monatBtn.classList.add('active');
-  jahrBtn.classList.remove('active');
-  
-  monatlich.forEach(mo => {mo.style.display = 'block'});
-  jahrlich.forEach(ja => {ja.style.display = 'none'});
-}
-
   let typed = new Typed('#element', {
     strings:["Merdo", "Anonym", "Hacker"],
   typeSpeed:70,
   backSpeed:65,
   loop: true
   });
-  
-
-  function sendMail() {
-    
-  emailjs.init("NC1PPG_x1vkOSABdg"); 
-
-  const params = { 
-    name: document.querySelector("#name").value,
-    email: document.querySelector("#email").value,
-    phone: document.querySelector("#phone").value,
-    date: document.querySelector("#date").value,
-    age: document.querySelector("#age").value,
-    richtung: document.querySelector("#richtung").value,
-    textarea: document.querySelector("#textarea").value,
-  };
-
-
-  const email = params.email.trim();
-  if (!email || !isValidEmail(email)) {
-    swal({ 
-      title: "Schade 🫤",
-      text: "Bitte gebe eine gültige E-Mail ein.",
-      icon: "error",
-      button: "Ok",
-    });
-    return;
-  }
-
-  const serviceID = "service_n794xlw"; 
-  const templateID = "template_a7cz5dp";
-  
-  emailjs.send(serviceID, templateID, params)
-    .then(res => {
-      if (res.status === 200) {
-        swal({
-          title: "Sehr gut 🙂",
-          text: "Du hast es erfolgreich gesendet",
-          icon: "info",
-          button: "Ok",
-        });
-      } else {
-        swal({ 
-          title: "Schade 🫤",
-          text: "Du hast es nicht erfolgreich gesendet",
-          icon: "error",
-          button: "Ok",
-        });
-      }
-    }) 
-    .catch(error => {
-      console.error("Error sending email:", error);
-    }) 
-    .finally(() => {
-      document.querySelector("form").reset();
-    });
-}
-
-function isValidEmail(email) {
-  
-  return email.includes("@");
-}
 
 
 if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i)) 
@@ -122,7 +39,6 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('form', {delay:200, origin:'bottom'});
   sr.reveal('.abo', {delay:200, origin:'bottom'});
   sr.reveal('.all-buttons', {delay:200, origin:'top'});
-  sr.reveal('.all-preis', {delay:200, origin:'bottom'});
   sr.reveal('.heading-effekt p', {delay:200, scale: 2});
   sr.reveal('.box-ti h2', {delay:200, scale: 2});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
@@ -150,6 +66,13 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
         x: 2,
         y: 2,
         z: 3
+    }
+}); 
+sr.reveal('.mobileForensicWrapper',  {
+    rotate: {
+        x: 123,
+        y: 342,
+        z: 233
     }
 }); 
 };

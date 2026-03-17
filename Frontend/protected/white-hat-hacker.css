@@ -2,15 +2,17 @@
 :root{
   --bg: rgba(255, 255, 255, 0.2);
   --accent-a: #941f1f;
-  --accent-b: #d80000;
+  --accent-b: #ee4c30;
   --muted: rgba(255,255,255,0.05);
   --card-bg: rgb(2,30,46);
   --blur-effect-color: rgba(44, 42, 146, 0.35);
-  --p-color: rgb(6, 178, 184);
+  --p-color: rgb(7, 146, 151);
+  --kali-color: rgb(192, 129, 12);
 }
 
 /* =============== GLOBAL RESET (entschärft) =============== */
 * {
+  font-family: 'Permanent Marker', cursive; 
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,7 +30,6 @@ html{ /* Basis-Schriftgröße kann der Benutzer im Browser überschreiben */
 
 body {
   color: #fff;
-  font-family: 'Permanent Marker', cursive;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -223,6 +224,9 @@ header .header-center {
 
 /* Titel: permanent marker + dynamisch */
 header .header-center h2 {
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(1.4rem, 5vw, 4.5rem);
   color: var(--accent-a);
   margin: 0;
@@ -247,7 +251,6 @@ header .header-center h2 {
 
 /* kleines Untertitelchen */
 .header-sub {
-  font-family: monospace;
   font-size: clamp(0.8rem, 1.4vw, 1.1rem);
   color: var(--accent-b);
   opacity: 0.9;
@@ -266,16 +269,20 @@ header .header-center h2 {
 }
 
 .daten-s div h2{
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(1.4rem, 3vw, 2.6rem);
   color: var(--accent-a);
 }
 
 .daten-s div p{
-  font-family: 'Jacquard 24';
-  font-size: clamp(0.95rem, 1.6vw, 1.6rem);
-  font-weight: 700;
+  font-family: "Coiny", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
   margin-top: .6rem;
-  color: rgb(1, 247, 144);
+  color: rgb(3, 167, 117);
   margin-bottom: .6rem;
 }
 
@@ -300,7 +307,9 @@ header .header-center h2 {
 
 /* Überschrift mit Farb-Gradient und clamp */
 .white-hat-hacker-text h1 {
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(1.8rem, 6vw, 3.3rem);
   margin-bottom: clamp(.6rem, 1.6vw, 2rem);
   background: linear-gradient(90deg, #ff0000, #ffff00, #ff00f3, #0033ff, #ff00c4, #ff0000);
@@ -313,12 +322,12 @@ header .header-center h2 {
 
 /* Fließtext */
 .white-hat-hacker-text p {
-  font-family: 'Jacquard 24';
+  font-family: "Coiny", system-ui;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(0.95rem, 1.6vw, 1.4rem);
-  font-weight: 700;
-  line-height: 1.6;
-  color: rgb(1, 247, 144);
-  text-align: justify;
+  line-height: auto;
+  color: rgb(5, 156, 17);
   margin-right: 0;
 }
 
@@ -363,7 +372,6 @@ header .header-center h2 {
   border-radius: 15px;
   -webkit-backdrop-filter: blur(2px);
   margin-top: 50px;
-
 }
 
 .audio .audioarea{
@@ -372,29 +380,6 @@ header .header-center h2 {
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 7vw, 7rem);
-}
-
-.audio .btnaudio{
-  font-size: clamp(1.2rem, 1.8vw, 5rem);
-  color: rgb(156, 2, 2);
-  display:block;
-  background: #03B1AA;
-  cursor: pointer;
-  border: 3px solid black;
-  border-radius: clamp(6px, 8px, 12px);
-  padding: clamp(0.4rem, 0.7vw, 2rem);
-  transition: all .6s;
-}
-
-.audio .btnaudio:hover{
-  transform: translateY(-5px);
-}
-
-.audio .btnaudio span{
-  font-family: 'Sixtyfour';
-  font-weight: 800;
-  font-size: clamp(1.2rem, 1.8vw, 5rem);
-  color: rgb(156, 2, 2);
 }
 
 .audio .audioarea .hack-list{
@@ -415,7 +400,6 @@ header .header-center h2 {
 
 .audio .audioarea .hackes .hack a{
   font-size: clamp(10px, 18px, 30px);
-  font-family: 'Sixtyfour';
   font-weight: 900;
   color: #74b808;
   cursor: pointer;
@@ -465,10 +449,11 @@ header .header-center h2 {
 }
 
 .physikMath-text h2{
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: 1rem;
-  font-weight: 700;
   animation: header-h2 3s linear infinite;
 }
 
@@ -485,10 +470,11 @@ header .header-center h2 {
 }
 
 .physikMath-text p {
-  font-family: 'Jacquard 24';
+  font-family: "Coiny", system-ui;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(0.95rem, 1.6vw, 1.4rem);
-  font-weight: 700;
-  line-height: 1.6;
+  line-height: auto;
   opacity: 0.85;
   color: var(--p-color);
 }
@@ -519,19 +505,243 @@ header .header-center h2 {
   top: 10%;
   left: 20%;
   transform: rotate(-20deg);
-  z-index: 3;
+  z-index: 2;
 }
 
 .physikImg2{
   top: 8%;
   left: 50%;
   transform: rotate(8deg);
-  z-index: 4;
+  z-index: 3;
 }
 
 /* ==================== End of MATH & Since ==================== */
 
+/* ==================== Kali Linux ==================== */
+.kaliMain{
+  display: block;
+  justify-content:center;
+  max-width: 1400px;
+  background: var(--blur-effect-color);
+  backdrop-filter: blur(3px);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(2px);
+  margin-top: 50px;
+}
 
+.kaliWrapper{
+  text-align: center;
+}
+
+.kaliWrapper h2{
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 1rem;
+  animation: header-h2 3s linear infinite;
+}
+
+@keyframes header-h2{
+  0% {
+    color: #cabe0c;
+  }
+  50%{
+    color: #9e125f;
+  }
+  100%{
+    color: #3ba39a;
+  }
+}
+
+.kaliWrapper p{
+  font-family: "Coiny", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+  line-height: auto;
+  opacity: 0.85;
+  color: var(--kali-color);
+}
+
+.kaliImage{
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.kaliImage img{
+  width: 100%;
+  height: 100%;
+ 
+}
+
+/* ==================== End of Kali Linux ==================== */
+
+/* ==================== Merdo of Caney ==================== */
+
+.game-section{
+ display: block;
+  justify-content:center;
+  max-width: 1400px;
+  background: var(--blur-effect-color);
+  backdrop-filter: blur(3px);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(2px);
+  margin-top: 50px;
+}
+
+.game-section img {
+  display: none;
+}
+
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-wrapper h1{
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--accent-b);
+}
+
+.game-wrapper p{
+   font-family: "Coiny", system-ui;
+   font-weight: 400;
+   font-style: normal;
+   font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+   color: rgb(163, 25, 7);
+   margin-top: 25px;
+}
+
+.canvas {
+  display: block;
+  margin: clamp(1rem, 5vw, 3rem) auto;
+  width: clamp(19rem, 80vw, 50rem);
+  height: auto;
+  cursor: crosshair;
+}
+
+.keys {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 110px;
+  margin-bottom: 30px;
+  display: none;
+ }
+
+ .keys p{
+  font-family: "Coiny", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+ }
+
+  .keys.next{
+    margin-bottom: 0;
+  }
+  
+  .chevron::before {
+  border-style: solid;
+  border-width: 8px 8px 0 0;
+  content: '';
+  display: inline-block;
+  height: 21px;
+  width: 21px;
+  top: -10px;
+  position: relative;
+  transform: rotate(-45deg);
+  }
+  
+  .chevron.up::before {
+  position: relative;
+  top: -9px;
+  left: -2px;
+  }
+  
+  .chevron.down::before {
+  transform: rotate(135deg);
+  top: -14px;
+  left: -1px;
+  }
+  
+  .chevron.right::before {
+  transform: rotate(45deg);
+  top: -12px;
+  left: -3px;
+  }
+  
+  .chevron.left::before {
+  transform: rotate(225deg);
+  top: -12px;
+  left: -1px;
+  }
+  
+  .arr {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 25px;
+  background: rgb(9, 59, 105);
+  color: rgb(124, 10, 109);
+  font-size: 65px;
+  border-right: 10px solid red;
+  border-bottom: 10px solid orange;
+  border-left: 10px solid darkcyan;
+  border-top: 10px solid darkolivegreen;
+  display: inline-block;
+  margin: 2px;
+  transition: all .05s linear;
+  user-select: none;
+  }
+
+  .arr.enter{
+  cursor: pointer;
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  line-height: 8px;
+  background: rgb(9, 59, 105);
+  color: rgb(124, 10, 109);
+  font-size: 50px;
+  border-right: 10px solid red;
+  border-bottom: 10px solid orange;
+  border-left: 10px solid darkcyan;
+  border-top: 10px solid darkolivegreen;
+  display: inline-block;
+  margin: 3px;
+  transition: all .05s linear;
+  user-select: none;
+  }
+
+  .enter {
+  font-size: 23px;
+  font-weight: 900;
+  }
+
+  .qEnter {
+  font-size: 23px;
+  font-weight: 900;
+  }
+
+  .iEnter {
+  font-size: 23px;
+  font-weight: 900;
+  }
+
+  .arr:active {
+  background: rgb(0, 236, 32);
+  }
+    
+
+/* ==================== End of Merdo of Caney ==================== */
 /* ==================== FOOTER ==================== */
  footer{
     padding-top: 50px;
@@ -652,57 +862,8 @@ header .header-center h2 {
   -webkit-backdrop-filter: blur(2px);
 }
 
-.game-section{
-  padding: clamp(1rem, 4vw, 6rem);
-}
 
-.game-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.game-wrapper h1{
-  font-size: clamp(1.6rem, 5vw, 3rem);
-  color: var(--accent-b);
-}
-
-.game-canvas {
-  display: block;
-  margin: clamp(1rem, 5vw, 3rem) auto;
-  max-width: 100%;
-  height: auto;
-  cursor: crosshair;
-}
-
-.game-btn-wrapper{
-  display: block;
-  text-align: center;
-}
-
-.btn{
-  font-size: clamp(1rem, 3vw, 2rem);
-  font-weight: 700;
-  padding: clamp(0.3rem, 2vw, 0.5rem);
-  background: rgba(138, 53, 53, 0.3);
-  backdrop-filter: blur(2px);
-  border: 3px solid gray;
-  color: var(--p-color);
-  box-shadow: 10px 5px 30px rgba(125, 67, 201, 0.25);
-  cursor: pointer;
-  -webkit-backdrop-filter: blur(2px);
-  transition: transform 0.3 ease, box-shadow 0.3s ease;
-  overflow: hidden;
-}
-
-.btn:hover{
-  transform: scale(1.07);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-}
-
-
-@media (max-width:650px) {
+@media (max-width:576px) {
   
    .all-footer{
    height: 150px;
@@ -777,6 +938,15 @@ header .header-center h2 {
   transform: none;
   width: clamp(120px, 40vw, 200px);
   }
+
+  .keys {
+    display: block;
+  }
+  
+   .cursor-light {
+      display: none;
+    }
+    
 
 .footer-copy{
  margin-top: 80px;

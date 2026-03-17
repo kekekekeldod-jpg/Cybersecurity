@@ -32,13 +32,12 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
     duration: 2600,
     delay: 450, 
   });
-
+ 
   sr.reveal('.header-left', {delay:200, origin:'top'});
   sr.reveal('.header-center', {delay:200, origin:'bottom'});
   sr.reveal('.header-right', {delay:200, origin:'right'});
   sr.reveal('.daten-s', {delay:200, interval: 600, origin:'bottom'});
-  sr.reveal('.white-hat-hacker-text', {delay:200, origin:'bottom'});
-  sr.reveal('.white-hat-hacker-img-wrapper', { delay: 200, origin:'right'});
+  sr.reveal('.white-hat-hacker-text', {delay:200, origin:'left'});
   sr.reveal('.white-hat-hacker-img-audio', { delay: 200, origin:'right'});
   sr.reveal('.audioarea', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', { interval: 600, origin:'top'});
@@ -78,4 +77,20 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
       z: 0
     }
   })
+  sr.reveal('.kaliWrapper', {
+    rotate: {
+      x: 342,
+      y: 34,
+      z: 0
+    }
+  })
+  sr.reveal('.kaliImage', {
+    rotate: {
+      x: 143,
+      y: 234,
+      z: 0
+    }
+  })
 };
+
+ 
