@@ -2155,6 +2155,24 @@
     padding: 16px;
     font-size: 20px;
     }
+
+    .swal-register  {
+    width: 270px;
+    height: auto;
+    }
+    
+    .swal-register .swal-title{
+    font-size: 35px;
+    }
+    
+    .swal-register .swal-text{
+    font-size: 18px;
+    }
+    
+    .swal-register .swal-button{
+    padding: 16px;
+    font-size: 20px;
+    }
     
     .box3 h2{
     font-size: 23px;
