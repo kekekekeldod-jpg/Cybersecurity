@@ -41,7 +41,7 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('.all-buttons', {delay:200, origin:'top'});
   sr.reveal('.heading-effekt p', {delay:200, scale: 2});
   sr.reveal('.box-ti h2', {delay:200, scale: 2});
-  sr.reveal('.footer-content', { interval: 600, origin:'top'});
+  sr.reveal('.footer-content', { interval: 100, origin:'top'});
   sr.reveal('.anmeldung-img', {delay:200, origin: 'right'});
   sr.reveal('.box-ti', { delay:200, origin:'bottom'});
   sr.reveal('.canvas-container p, canvas', {delay:200, origin:'bottom'});

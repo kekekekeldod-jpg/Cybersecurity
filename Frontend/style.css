@@ -43,7 +43,7 @@
     }
     
     .swal-text{
-     font-family: 'Jersey 15';
+    font-family: 'Jersey 15';
     font-weight: 900;
     font-style: normal;
     font-size: 30px;
@@ -59,7 +59,41 @@
     text-align: center;
     border-radius: 20px;
     }
+
+    .swal-register  {
+    width: 700px;
+    height: auto;
+    border: 3px solid black;
+    border-radius: 12px;
+    background: rgba(75, 10, 10, 0.541);
+    }
     
+    .swal-register .swal-title{
+    font-family: "Jacquard 24", system-ui;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 55px;
+    color: #0a6d3f;
+    }
+    
+    .swal-register .swal-text{
+    font-family: 'Jersey 15';
+    font-weight: 900;
+    font-style: normal;
+    font-size: 30px;
+    color: #095bd6;
+    text-decoration: underline;
+    }
+    
+    .swal-register .swal-button{
+    color: rgba(83, 83, 189, 0.788);
+    background: #06815c8f;
+    padding: 23px;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 20px;
+    }
+
     body{
     color: var(--text-color);
     background: #2F3359;

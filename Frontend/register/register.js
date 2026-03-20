@@ -115,7 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = loginPass.value;
 
     if (!email || !password) {
-      alert('Bitte E-Mail und Passwort eingeben.');
+      swal({
+        className: "swal-register",
+        title: "Schade 🫤",
+        text: "Bitte gebe eine gültige E-Mail oder Passwort ein.",
+        icon: "error",
+        button: "Ok",
+      });
       return;
     }
 
@@ -130,11 +136,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Geschützte Seite nach Login:
         window.location.href = '/member/white-hat-hacker';
       } else {
-        alert(res.error || 'Login fehlgeschlagen');
+         swal({
+        className: "swal-register",
+        title: "Schade 🫤",
+        text: "Login fehlgeschlagen.",
+        icon: "error",
+        button: "Ok",
+      });
       }
     } catch (err) {
       console.error(err);
-      alert('Es ist ein Fehler beim Login aufgetreten.');
+      swal({
+        className: "swal-register",
+        title: "Schade 🫤",
+        text: "Es ist ein Fehler beim Login aufgetreten.",
+        icon: "error",
+        button: "Ok",
+      });
     } finally {
       btn.disabled = false;
     }
@@ -149,7 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = regPass.value;
 
     if (!email || !password) {
-      alert('Bitte E-Mail und Passwort eingeben.');
+      swal({
+        className: "swal-register",
+        title: "Upps... 😅",
+        text: "Bitte E-Mail und Passwort eingeben.",
+        icon: "error",
+        button: "Ok",
+      });
       return;
     }
 
@@ -160,14 +184,32 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res = await apiRegister(email, password);
       if (res.ok) {
-        alert('Registriert! Jetzt einloggen.');
+       swal({
+        className: "swal-register",
+        title: "Super 🤩",
+        text: "Registriert! Jetzt logge dich bitte ein.",
+        icon: "info",
+        button: "Ok",
+      });
         authCard?.classList.remove('show-register');
       } else {
-        alert(res.error || 'Registrierung fehlgeschlagen');
+        swal({
+        className: "swal-register",
+        title: "Schade 🫤",
+        text: "Registrierung fehlgeschlagen.",
+        icon: "error",
+        button: "Ok",
+      });
       }
     } catch (err) {
       console.error(err);
-      alert('Es ist ein Fehler bei der Registrierung aufgetreten.');
+     swal({
+        className: "swal-register",
+        title: "Schade 🫤",
+        text: "Es ist ein Fehler bei der Registrierung aufgetreten.",
+        icon: "error",
+        button: "Ok",
+      });
     } finally {
       btn.disabled = false;
     }
