@@ -71,7 +71,7 @@ This project is licensed under the MIT License — you’re free to use, modify,
 
 # 👤 Author
 
-Merdo Daniel
+(Mertcan) Merdo Kurt
  💻 Full-Stack Developer — Cybersecurity & Creative Coding
  📧 Contact: caney-phisher@gmail.com
 

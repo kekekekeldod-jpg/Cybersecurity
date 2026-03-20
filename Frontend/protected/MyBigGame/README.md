@@ -97,7 +97,7 @@ Alle Sounds werden korrekt zurückgesetzt (`currentTime = 0`), sodass sie beim e
 
 ## 👤 Autor
 
-**Merdo (Mertcan)**  
+**(Mertcan) Merdo Kurt**  
 Programmierer, Designer und Illustrator  
 
 Alle Grafiken, Animationen und Konzepte wurden vollständig selbst erstellt.
