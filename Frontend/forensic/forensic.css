@@ -9,10 +9,22 @@
   border: none;
   text-decoration: none;
   transition: all .6s;
+  animation: bunt 2s linear infinite;
 }
 
+@keyframes bunt {
+  0%   { border-color: rgba(63, 45, 94, 0.87); }
+  50%  { border-color: rgba(65, 95, 65, 0.87); }
+  100% { border-color: rgba(63, 16, 16, 0.87); }
+}
+
+
 body{
-  background: rgb(25, 32, 48);
+  background: url('./bilder/forensicBackground.jpg');
+  background-size: cover;        /* Bild füllt alles */
+  background-position: center;   /* zentriert */
+  background-repeat: no-repeat;  /* kein Kacheln */
+  background-attachment: fixed; /* bleibt beim Scrollen */
 }
 
 #scrolling-path{
@@ -131,7 +143,7 @@ img{
 
 /* ================= HEADER ================= */
 header{
-  background: linear-gradient(90deg, rgb(105, 69, 69), rgb(70, 134, 84), rgb(31, 48, 18));
+  background: linear-gradient(90deg, rgb(105, 69, 69, 0.87), rgb(70, 134, 84, 0.87), rgb(31, 48, 18, 0.87));
   display: flex;
   justify-content: center;
   padding: clamp(1rem, 2vw, 2.5rem);
@@ -162,14 +174,14 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: linear-gradient(152deg, rgb(46, 23, 23), rgb(15, 15, 29), rgb(23, 41, 23));
+  background: linear-gradient(152deg, rgb(46, 23, 23, 0.87), rgb(15, 15, 29, 0.87), rgb(23, 41, 23, 0.87));
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
 .forensicOneWrapper h2{
-   font-size: clamp(1.2rem, 4vw, 2.4rem);
+  font-size: clamp(1.2rem, 4vw, 2.4rem);
   font-weight: 900;
   margin-bottom: 15px;
   width: 100%;
@@ -196,13 +208,13 @@ header{
   display: inline-block; /* nimmt Canvas-Größe an */
 }
 
-/* Canvas responsive (wie du es wolltest), aber in einem Block */
+/* Canvas responsiv, aber in einem Block */
 #canvasWrap canvas.canvas{
   display: block;
   margin: 10px;
-  width: clamp(15rem, 80vw, 33rem);
+  width: clamp(21rem, 80vw, 33rem);
   height: auto;
-  border: 10px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   cursor: pointer;
 }
 
@@ -293,8 +305,8 @@ header{
   text-align: center;
   max-width: 1100px;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  background: rgba(255, 255, 255, 0.2);
-  border: 4px solid black;
+  background: rgba(30, 41, 43, 0.87);
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 .forensicSecondWrapper h2 {
@@ -331,9 +343,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #143306;
+  background: #143306de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 .forensicCellebriteWrapper h2{
@@ -369,9 +381,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #11295e;
+  background: #11295ede;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -419,9 +431,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #1b0e1f;
+  background: #1b0e1fde;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -487,9 +499,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #3d0d0f;
+  background: #3d0d0fde;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -535,9 +547,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #6b8370;
+  background: #6b8370de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -584,9 +596,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #557270;
+  background: #557270de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -619,9 +631,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #05201f;
+  background: #05201fde;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border:clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -705,9 +717,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #272453;
+  background: #272453de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -749,9 +761,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #185240;
+  background: #185240de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -793,9 +805,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: #232c29;
+  background: #232c29de;
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -864,9 +876,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: linear-gradient(152deg, rgb(66, 56, 56), rgb(30, 30, 37), rgb(49, 56, 49));
+  background: linear-gradient(152deg, rgb(66, 56, 56, 0.87), rgb(30, 30, 37, 0.87), rgb(49, 56, 49, 0.87));
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -910,9 +922,9 @@ header{
   display: block;
   text-align: center;
   max-width: 1100px;
-  background: linear-gradient(152deg, rgb(66, 56, 56), rgb(30, 30, 37), rgb(49, 56, 49));
+  background: linear-gradient(152deg, rgb(66, 56, 56, 0.87), rgb(30, 30, 37, 0.87), rgb(49, 56, 49, 0.87));
   padding: clamp(0.8rem, 3vw, 1.2rem);
-  border: 4px solid black;
+  border: clamp(2px, 1vw, 7px) solid black;
   border-radius: 10px;
 }
 
@@ -937,14 +949,14 @@ header{
   max-width: clamp(200px, 80vw, 900px);
   height: auto;
   justify-items: center;
-  border-radius: 5px;
+  border-radius: 7px;
   box-shadow: 0 15px 40px rgba(126, 16, 71, 0.63);
 }
 
 /* ================= SECTIONS-Footer ================= */
 
 footer{
-    background: rgb(61, 33, 33);
+    background: rgba(47, 39, 61, 0.801);
     padding-top: 50px;
     margin-top: 50px;
   }
@@ -966,7 +978,7 @@ footer{
     font-size: 18px;
     margin-bottom: 15px;
     text-align: center;
-    color: rgb(255, 40, 2);
+    color: rgb(98, 156, 160);
   }
   
   .footer-content p{
@@ -1060,14 +1072,12 @@ footer{
 
 .footer-copy{   
   font-family: 'Permanent Marker', cursive;
-  background: linear-gradient(250.59deg, #41300d, #143306 48.53%, #3a0725 75.52%);
+  background: linear-gradient(250.59deg, #41300dd2, #143306c9 48.53%, #3a0725bb 75.52%);
   text-align: center;
   padding: 10px 0;
   margin-top: 85px;
-  color: rgb(255, 0, 0);
+  color: rgb(6, 94, 177);
 }
-
-
 
 /* Media */
 @media (max-width:576px) {
@@ -1082,6 +1092,11 @@ footer{
   
   #scrolling{
     width: 6px;
+  }
+
+  body{
+    background-size: cover;
+    background-position: -450px;
   }
   
   section .daten-s div {
