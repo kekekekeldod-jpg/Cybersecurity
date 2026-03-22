@@ -14,8 +14,8 @@ import { Life } from "./life.js";
 import { WinScreen } from "../ui/winScreen.js";
 
 // Fixe "Game-Welt"-Größe (logische Auflösung)
-const DESIGN_WIDTH = 3000;
-const DESIGN_HEIGHT = 2000;
+const DESIGN_WIDTH = 3300;
+const DESIGN_HEIGHT = 2030;
  
 window.addEventListener('load', function () {
 
@@ -55,7 +55,7 @@ window.addEventListener('load', function () {
             this.playerHitFromSide = false;
             this.backgroundMusic = new Audio('./MyBigGame/assets/audios/backgroundMusic.mp3');
             this.backgroundMusic.loop = true;     
-            this.backgroundMusic.volume = 1;
+            this.backgroundMusic.volume = 0.5;
 
             this.gameOverMusic = new Audio('./MyBigGame/assets/audios/gameOverMusic.mp3');
             this.gameOverMusic.volume = 1;
@@ -74,6 +74,15 @@ window.addEventListener('load', function () {
             this.winMusic = new Audio('./MyBigGame/assets/audios/winMusic.mp3');
             this.winMusic.volume = 1;
             this.winMusic.currentTime = 0;
+            this.damageSound = new Audio('./MyBigGame/assets/audios/damageSound.mp3');
+            this.damageSound.volume = 1;
+            this.damageSound.currentTime = 0;
+            this.startMusic = new Audio('./MyBigGame/assets/audios/startMusic.mp3');
+            this.startMusic.loop = false;
+            this.startMusic.volume = 1;
+            this.infoMusic = new Audio('./MyBigGame/assets/audios/infoMusic.mp3');
+            this.infoMusic.loop = true;
+            this.infoMusic.volume = 1;
 
             // 'start' | 'playing' | 'gameOver'
             this.state = 'start';
@@ -112,6 +121,8 @@ window.addEventListener('load', function () {
             // i = InfoScreen
             if (this.input.keys.includes('i')){
                 this.infoScreen();
+                this.infoMusic.play();
+                this.startMusic.pause();
                 return;
             }
 
@@ -119,13 +130,16 @@ window.addEventListener('load', function () {
 
             if (this.input.keys.includes('q')) {
                 this.goToStart();
+                this.startMusic.play();
+                this.infoMusic.pause();
                 return;
-            }
-
+            } 
+            
             // START SCREEN
             if (this.state === 'start') {
                 if (this.input.keys.includes('Enter')) {
                     this.state = 'playing';
+                    this.startMusic.pause();
                 }
                 return; // sonst nix
             }
@@ -138,7 +152,7 @@ window.addEventListener('load', function () {
                 return;
             }
 
-            if (this.state === 'win'){
+            if (this.state === 'winScreen'){
                 if (this.input.keys.includes('g')) {
                     this.restart();
                     this.goToStart();
@@ -166,30 +180,27 @@ window.addEventListener('load', function () {
                  this.score.getScorePercent();
                  this.score.update();
 
-                 if (this.playerHitFromSide && !this.playerHitFromTop) {
-                    this.state = 'gameOver';
-                    this.backgroundMusic.pause();
-                    this.gameOverMusic.currentTime = 0;
-                    this.gameOverMusic.play();
-                 }
-
                  if(this.playerHitFromSide && this.playerHitFromTop){
-                    this.doubleKillMusic.play();
+                    this.doubleKillMusic.pause();
                     this.doubleKillMusic.currentTime = 0;
+                    this.doubleKillMusic.play();
                     this.hitMusic.pause();
                     this.enemy.hitState.enter();
                     this.enemyTwo.hitState.enter();
                     this.enemy.state = 'HIT';
                     this.enemyTwo.state = 'HIT';
                     this.score.scoreState += 5;
-                 } 
+                 } else if(this.playerHitFromSide){
+                    this.takePlayerDamage();
+                 }
+                 this.playerHitFromSide = false;
+                 this.playerHitFromTop = false;
 
                    if (this.score.scoreState >= this.score.maxScore) {
-                    this.state = 'win';
+                    this.state = 'winScreen';
                     this.backgroundMusic.pause();
                     this.winMusic.play();
                    }
-                
             }
         }
 
@@ -219,15 +230,17 @@ window.addEventListener('load', function () {
                 this.doubleKillMusic.pause();
                 this.runningMusic.pause();
                 this.hitMusic.pause();
+                this.damageSound.pause();
             }
 
-            if (this.state === 'win'){
+            if (this.state === 'winScreen'){
                 this.winScreen.draw(context);
                 this.pauseBackgroundMusic();
                 this.gameOverMusic.pause();
                 this.doubleKillMusic.pause();
                 this.runningMusic.pause();
                 this.hitMusic.pause();
+                this.damageSound.pause();
             }
         }
 
@@ -235,12 +248,17 @@ window.addEventListener('load', function () {
             console.log('RESTART');
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
+            this.damageSound.currentTime = 0;
+            this.jumpMusic.currentTime = 0;
+            this.hitMusic.currentTime = 0;
+            this.jumpMusic.pause();
             this.background.reset();
             this.enemy.reset();
             this.enemyTwo.reset();
             this.playerFish.reset();
             this.player.reset();
             this.doubleKillMusic.pause();
+            this.hitMusic.pause();
             this.pauseBackgroundMusic();
             this.score.reset();
             this.life.reset();
@@ -253,12 +271,20 @@ window.addEventListener('load', function () {
         goToStart(){
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
+            this.damageSound.currentTime = 0;
+            this.jumpMusic.currentTime = 0;
+            this.hitMusic.currentTime = 0;
+            this.startMusic.currentTime = 0;
+            this.infoMusic.currentTime = 0;
             this.pauseBackgroundMusic();
             this.doubleKillMusic.pause();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
+            this.hitMusic.pause();
             this.jumpMusic.pause();
+            this.startMusic.pause();
             this.runningMusic.pause();
+            this.damageSound.pause();
             this.enemy.reset();
             this.enemyTwo.reset();
             this.playerFish.reset();
@@ -272,12 +298,17 @@ window.addEventListener('load', function () {
         infoScreen(){
             this.backgroundMusic.currentTime = 0;
             this.gameOverMusic.currentTime = 0;
+            this.damageSound.currentTime = 0;
+            this.jumpMusic.currentTime = 0;
+            this.hitMusic.currentTime = 0;
             this.pauseBackgroundMusic();
+            this.hitMusic.pause();
             this.doubleKillMusic.pause();
             this.feedLanding.pause();
             this.gameOverMusic.pause();
             this.jumpMusic.pause();
             this.runningMusic.pause();
+            this.damageSound.pause();
             this.enemy.reset();
             this.enemyTwo.reset();
             this.playerFish.reset();
@@ -286,6 +317,10 @@ window.addEventListener('load', function () {
             this.score.reset();
             this.life.reset();
             this.state = 'info';
+        }
+
+        takePlayerDamage() {
+            return this.player.takeDamage();
         }
 
     }

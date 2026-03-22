@@ -41,20 +41,20 @@ export class Life {
     loseHeart(){
         if (this.frameY < this.maxFrameY){
             this.frameY++;
-        }
 
+       
         if (this.frameY >= this.maxFrameY){
             this.game.state = 'gameOver';
             this.game.backgroundMusic.pause();
             this.game.gameOverMusic.currentTime = 0;
             this.game.gameOverMusic.play();
         }
-
     }
+}
 
    
+
     draw(context){
           context.drawImage(this.image, this.frameX * this.frameWidth, this.frameY * this.frameHeight, this.frameWidth, this.frameHeight, this.x, this.y, this.frameWidth, this.frameHeight);
     }
-
-}
+ }

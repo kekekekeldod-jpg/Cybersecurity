@@ -3,6 +3,7 @@ import { Running, Staying } from "./playerStates.js";
 export class Player { 
     constructor(game) {
         this.game = game;
+        this.enemy = game.enemy;
         this.life = this.game.life;
         this.width = 500;
         this.height = 500;
@@ -18,7 +19,7 @@ export class Player {
         // Physik
         this.vy = 0;
         this.gravity = 3600;
-        this.jumpStrength = -2200;
+        this.jumpStrength = -2350;
         this.jumpStrengthAfterHit = -2200;
 
         // Bewegung
@@ -45,11 +46,22 @@ export class Player {
         this.jumpMusic = this.game.jumpMusic;
         this.feedLanding = this.game.feedLanding;
         this.runningMusic = this.game.runningMusic;
+        this.damageSound = this.game.damageSound;
      
         this.wasInAir = false;   // war im letzten Frame in der Luft?
 
         // Merken, ob der Running-Sound am laufen ist
         this.isRunningSoundPlaying = false;
+
+        // Schaden/Unverwundbarkeit
+        this.isInvulnerable = false;
+        this.invulnerableDuration = 3; // Sekunden
+        this.invulnerableTimer = 0;
+
+        // Blinken
+        this.blinkInterval = 0.12; // Sekunden
+        this.blinkTimer = 0;
+        this.visible = true;
     }
 
     reset() {
@@ -67,9 +79,47 @@ export class Player {
         this.runningMusic.pause();
 
         this.setState(0); // STAYING
+        this.isInvulnerable = false;
+        this.invulnerableTimer = 0;
+        this.blinkTimer = 0;
+        this.visible = true;
+
+        this.setState(0);
+    }
+
+    takeDamage() {
+        if (this.isInvulnerable) return false;
+
+        this.damageSound.play();
+
+        this.game.life.loseHeart();
+
+        this.isInvulnerable = true;
+        this.invulnerableTimer = this.invulnerableDuration;
+        this.blinkTimer = 0;
+        this.visible = false;
+
+        return true;
     }
 
     update(input, dt) {
+          // Invulnerability runterzählen
+        if (this.isInvulnerable) {
+            this.invulnerableTimer -= dt;
+            this.blinkTimer += dt;
+
+            if (this.blinkTimer >= this.blinkInterval) {
+                this.blinkTimer = 0;
+                this.visible = !this.visible;
+            }
+
+            if (this.invulnerableTimer <= 0) {
+                this.isInvulnerable = false;
+                this.invulnerableTimer = 0;
+                this.visible = true;
+            }
+        }
+
         // State-Logik
         this.currentState.handleInput(input);
 
@@ -156,12 +206,12 @@ export class Player {
             const playerSecondBottom = playerSecond.y + playerSecond.height - hitManger;
 
             const playerHitSecondPlayer = playerHead < playerSecondBottom;
-
+            
             if (playerHitSecondPlayer) {
-                this.game.state = 'gameOver';
-                this.gameOverMusic.play();
-            }
-        }
+            this.game.takePlayerDamage();
+          }
+    }
+
 
         // --- Landing-Sound ---
         const currentlyOnGround = this.isOnGround();
@@ -169,10 +219,6 @@ export class Player {
         if (currentlyOnGround && this.wasInAir) {
             this.feedLanding.currentTime = 0;
             this.feedLanding.play();
-
-            if (this.game.life) {
-                this.game.life.loseHeart();
-            }
         }
         
         // Zustand für nächsten Frame merken
@@ -192,7 +238,10 @@ export class Player {
         }
     }
 
+   
     draw(context) {
+        if (!this.visible) return;
+
         context.drawImage(
             this.image,
             this.frameX * this.width,

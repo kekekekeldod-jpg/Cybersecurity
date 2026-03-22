@@ -613,7 +613,7 @@ header .header-center h2 {
    font-weight: 400;
    font-style: normal;
    font-size: clamp(0.95rem, 1.6vw, 1.4rem);
-   color: rgb(163, 25, 7);
+   color: rgb(24, 119, 99);
    margin-top: 25px;
 }
 
@@ -623,6 +623,7 @@ header .header-center h2 {
   width: clamp(19rem, 80vw, 50rem);
   height: auto;
   cursor: crosshair;
+  border: 5px solid rgba(56, 35, 4, 0.644);
 }
 
 .keys {

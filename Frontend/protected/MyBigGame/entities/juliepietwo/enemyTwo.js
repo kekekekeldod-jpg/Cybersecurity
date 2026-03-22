@@ -10,7 +10,7 @@ export class EnemyTwo {
         this.x = 0;
         this.y = this.game.height - this.height;
         this.image = document.getElementById('enemyTwo');
-         this.speed = 600;
+        this.speed = 600;
 
         this.frameX = 0;
         this.frameY = 0;
@@ -74,12 +74,11 @@ export class EnemyTwo {
             this.hitMusic.pause();
             this.hitMusic.currentTime = 0;
             this.hitMusic.play();
-
             this.game.playerHitFromTop = true;
 
         } else {
             this.game.playerHitFromSide = true;
-        }
+       }
 
     }
 
@@ -100,7 +99,6 @@ export class EnemyTwo {
             }
     }
     }
-
 
     draw(context){
           context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);

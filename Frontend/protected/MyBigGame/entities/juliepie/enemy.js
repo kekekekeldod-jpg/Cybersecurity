@@ -67,7 +67,6 @@ export class Enemy {
         const hitOver = playerBottom <= enemyTop + this.height * 0.9 &&
         player.vy > 0;
 
-
         if(hitOver) {
             player.vy = player.jumpStrengthAfterHit;
             punkte.scoreState += 5;
@@ -79,7 +78,8 @@ export class Enemy {
             this.game.playerHitFromTop = true;
 
         } else {
-            this.game.playerHitFromSide = true;
+           this.game.playerHitFromSide = true;
+           
         }
     }
 

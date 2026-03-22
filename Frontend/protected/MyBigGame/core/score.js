@@ -59,7 +59,7 @@ export class Score {
 
         // Prozent-Text rechts neben dem Balken
         context.fillStyle = '#790c0cff';
-        context.font = ' 900 70px Montserrat';
+        context.font = ' 900 75px Montserrat';
         context.textAlign = 'left';
         context.textBaseline = 'middle';
         context.fillText((p * 100).toFixed(2) + '%', this.barX + this.barWidth + 12, this.barY + this.barHeight / 2);
@@ -72,7 +72,7 @@ export class Score {
         context.fillStyle = '#790c0cff';
         context.textAlign = 'left';
         context.textBaseline = 'top';
-        context.font = "italic small-caps 800 70px Montserrat";
+        context.font = "italic small-caps 800 75px Montserrat";
         context.fillText('Score: ' + this.scoreState, 20, 30);
         // Balken
         this.drawBar(context);
@@ -80,7 +80,7 @@ export class Score {
         context.fillStyle = '#790c0cff';
         context.textAlign = 'left';
         context.textBaseline = 'top';
-        context.font = "italic small-caps 800 70px Montserrat";
+        context.font = "italic small-caps 800 75px Montserrat";
         context.fillText('Gewonnen bei 300P', 18, 110);
 
 
