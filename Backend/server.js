@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import Database from "better-sqlite3";
 import express from "express";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 import session from "express-session";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -15,6 +15,14 @@ import SQLiteStoreFactory from "better-sqlite3-session-store";
 
 dotenv.config();
 
+// Argon2 Settings
+const ARGON2_OPTIONS = {
+  type: argon2.argon2id,
+  memoryCost: 2 ** 16, //64MB
+  timeCost: 3,
+  parallelism: 1,
+};
+
 // Pfad-Helfer (ESM)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,23 +32,23 @@ const FRONTEND_ROOT = path.resolve(__dirname, "../Frontend");
 const PROTECTED_ROOT = path.resolve(__dirname, "../Frontend/protected");
 
 const PORT = Number(process.env.PORT || 3000);
-const DB_PATH = process.env.DB_PATH || "./data/user.db";
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, "data", "user.db");
 
 if (!process.env.SESSION_SECRET) {
   throw new Error("SESSION_SECRET missing");
 }
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
-const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
-if (!Number.isFinite(SALT_ROUNDS) || SALT_ROUNDS < 10 || SALT_ROUNDS > 16) {
-  throw new Error("SALT_ROUNDS must be a number between 10 and 16");
-}
-
 // --- DB: Ordner anlegen falls nötig
 const RAW_DB_PATH = DB_PATH.trim();
 const DATA_DIR = path.dirname(RAW_DB_PATH);
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+if (!fs.existsSync(DATA_DIR)) {
+fs.mkdirSync(DATA_DIR, { recursive: true });
+} 
+
 console.log("📁 DB-Ordner geprüft:", DATA_DIR);
+console.log("🗄️ DB-Datei:", RAW_DB_PATH);
 
 // DB öffnen
 const db = new Database(RAW_DB_PATH);
@@ -290,7 +298,8 @@ app.post("/auth/register", async (req, res) => {
     // Optional (empfohlen): Email normalisieren
     const emailNorm = String(email).trim().toLowerCase();
 
-    const hash = await bcrypt.hash(password, SALT_ROUNDS);
+    const hash = await argon2.hash(password, ARGON2_OPTIONS);
+
     const info = db
       .prepare(`INSERT INTO users (email, password_hash) VALUES (?, ?)`)
       .run(emailNorm, hash);
@@ -326,7 +335,8 @@ app.post("/auth/login", async (req, res) => {
       return res.status(401).json({ error: "Ungültige Eingabe" });
     }
 
-    const ok = await bcrypt.compare(password, row.password_hash);
+    const ok = await argon2.verify(row.password_hash, password);
+    
     if (!ok) {
       logLogin({ userId: row.id, emailAttempt: emailNorm, success: 0, ip, ua });
       return res.status(401).json({ error: "Ungültige Eingabe" });
