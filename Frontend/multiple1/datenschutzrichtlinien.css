@@ -21,6 +21,7 @@
    -webkit-tap-highlight-color: transparent;
 }  
 
+/* Scroll Bar Effect */
 #scrolling-path{
   z-index: 9999;
   position: fixed;
@@ -78,6 +79,7 @@ body{
    overflow-x: hidden;
 }
 
+ /* Mouse Pointer Effect */
   .cursor-light {
     position: fixed;
     top: 0;

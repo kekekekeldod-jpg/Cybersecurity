@@ -1705,6 +1705,32 @@
     .wrapperTwo img:hover{
       transform: scale(1.2);
     }
+
+    .ketoWrapper {
+      display: block;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .ketoWrapper ul{
+      margin-top: 3%;
+    }
+
+    .ketoWrapper ul li a{
+      font-size: clamp(0.8rem, 2vw, 1.7rem);
+      font-weight: 800;
+      color: #02F381;
+      text-decoration: underline;
+    }
+
+    .ketoWrapper ul li a:hover{
+      color: #10ebff;
+    }
+
+    .ketoWrapper p{
+      font-size: clamp(0.8rem, 3vw, 1.3rem);
+      font-weight:200;
+    }
     
     @media (max-width:1740px){
     header{

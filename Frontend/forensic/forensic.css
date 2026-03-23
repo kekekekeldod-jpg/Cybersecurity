@@ -133,8 +133,7 @@ body{
   }
 
 
-/* NICHT mehr alle Bilder verstecken!
-   Nur die Canvas-Assets ausblenden (unten) */
+/* Nur die Canvas-Assets ausblenden (unten) */
 img{
   max-width: 100%;
   height: auto;
