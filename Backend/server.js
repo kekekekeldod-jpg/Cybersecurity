@@ -92,16 +92,20 @@ db.exec(`
   );
 
   CREATE TABLE IF NOT EXISTS fingerprints (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ip TEXT,
-    session_id TEXT,
-    user_id INTEGER,
-    fingerprint TEXT NOT NULL,
-    user_agent TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(user_id) REFERENCES users(id)
-  );
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ip TEXT,
+  session_id TEXT,
+  user_id INTEGER,
+  device_id TEXT,
+  risk_score INTEGER DEFAULT 0,
+  fingerprint TEXT NOT NULL,
+  user_agent TEXT,
+  first_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
 
   CREATE TABLE IF NOT EXISTS blocked_ips (
     ip TEXT PRIMARY KEY,
@@ -124,6 +128,15 @@ db.exec(`
 
   CREATE INDEX IF NOT EXISTS idx_fingerprints_ip_time
     ON fingerprints(ip, created_at);
+
+  CREATE INDEX IF NOT EXISTS idx_fingerprints_device_id
+    ON fingerprints(device_id);
+
+  CREATE INDEX IF NOT EXISTS idx_fingerprints_user_id
+    ON fingerprints(user_id);
+
+  CREATE INDEX IF NOT EXISTS idx_fingerprints_last_seen
+    ON fingerprints(last_seen_at);
 `);
 
 const app = express();
@@ -157,28 +170,105 @@ function normalizeFingerprint(input) {
   if (!input || typeof input !== "object") return null;
 
   const fp = {
+    deviceId: String(input.deviceId || "").slice(0, 128),
+
     userAgent: String(input.userAgent || "").slice(0, 500),
     language: String(input.language || "").slice(0, 100),
+    languages: Array.isArray(input.languages) ? input.languages.slice(0, 10) : [],
+
     screen: String(input.screen || "").slice(0, 50),
+    availScreen: String(input.availScreen || "").slice(0, 50),
+    colorDepth: Number(input.colorDepth || 0),
+    pixelRatio: Number(input.pixelRatio || 1),
+
     timezone: String(input.timezone || "").slice(0, 100),
     platform: String(input.platform || "").slice(0, 100),
+
+    hardwareConcurrency: Number(input.hardwareConcurrency || 0),
+    deviceMemory: Number(input.deviceMemory || 0),
+    maxTouchPoints: Number(input.maxTouchPoints || 0),
+
+    cookieEnabled: Boolean(input.cookieEnabled),
+    online: Boolean(input.online),
+
+    connection: {
+      effectiveType: String(input.connection?.effectiveType || "").slice(0, 50),
+      rtt: Number(input.connection?.rtt || 0),
+      downlink: Number(input.connection?.downlink || 0),
+      saveData: Boolean(input.connection?.saveData || false),
+    },
+
     gpuVendor: String(input.gpuVendor || "").slice(0, 300),
     gpuRenderer: String(input.gpuRenderer || "").slice(0, 300),
+
+    webglVendor: String(input.webglVendor || "").slice(0, 300),
+    webglRenderer: String(input.webglRenderer || "").slice(0, 300),
+    webglVersion: String(input.webglVersion || "").slice(0, 300),
+    webglShadingLanguageVersion: String(input.webglShadingLanguageVersion || "").slice(0, 300),
+
+    canvasFingerprint: String(input.canvasFingerprint || "").slice(0, 300),
+
+    uaData: input.uaData && typeof input.uaData === "object" ? input.uaData : {}
   };
 
   return JSON.stringify(fp);
 }
 
+function getDeviceIdFromRawFingerprint(input) {
+  if (!input || typeof input !== "object") return null;
+  return String(input.deviceId || "").slice(0, 128) || null;
+}
+
+function calculateRiskScore(input, ip = "") {
+  if (!input || typeof input !== "object") return 0;
+
+  let score = 0;
+
+  if (!input.userAgent) score += 20;
+  if (!input.language) score += 5;
+  if (!input.screen) score += 10;
+  if (!input.timezone) score += 10;
+  if (!input.platform) score += 10;
+  if (!input.gpuRenderer) score += 10;
+  if (!input.canvasFingerprint) score += 10;
+
+  if (ip && (ip.startsWith("127.") || ip === "::1")) score += 5;
+
+  return score;
+}
+
+function findKnownDevice(deviceId) {
+  if (!deviceId) return null;
+
+  return db.prepare(`
+    SELECT id, user_id, ip, device_id, risk_score, last_seen_at
+    FROM fingerprints
+    WHERE device_id = ?
+    ORDER BY id DESC
+    LIMIT 1
+  `).get(deviceId);
+}
+
 // Fingerprint speichern
 
-function saveFingerprint({ ip, sessionId = null, userId = null, userAgent = "", fingerprint = null }) {
+function saveFingerprint({
+  ip,
+  sessionId = null,
+  userId = null,
+  userAgent = "",
+  fingerprint = null,
+  deviceId = null,
+  riskScore = 0
+}) {
   if (!fingerprint) return;
 
   try {
     db.prepare(`
-      INSERT INTO fingerprints (ip, session_id, user_id, fingerprint, user_agent)
-      VALUES (?, ?, ?, ?, ?)
-    `).run(ip, sessionId, userId, fingerprint, userAgent);
+      INSERT INTO fingerprints (
+        ip, session_id, user_id, device_id, risk_score, fingerprint, user_agent, last_seen_at, updated_at
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    `).run(ip, sessionId, userId, deviceId, riskScore, fingerprint, userAgent);
   } catch (e) {
     console.error("saveFingerprint error:", e?.message || e);
   }
@@ -450,19 +540,24 @@ app.post("/api/fingerprint", (req, res) => {
   try {
     const ip = getClientIp(req);
     const ua = getSafeUserAgent(req);
-    const fingerprint = normalizeFingerprint(req.body);
+   const fingerprint = normalizeFingerprint(req.body);
+   const deviceId = getDeviceIdFromRawFingerprint(req.body);
+   const riskScore = calculateRiskScore(req.body, ip);
 
     if (fingerprint) {
       req.session.fingerprint = fingerprint;
+      req.session.deviceId = deviceId || null;
 
       saveFingerprint({
         ip,
         sessionId: req.sessionID || null,
         userId: req.session?.userId || null,
         userAgent: ua,
-        fingerprint
-      });
-    }
+        fingerprint,
+        deviceId,
+        riskScore
+  });
+}
 
     res.json({ ok: true });
   } catch (e) {
@@ -485,6 +580,8 @@ app.post("/auth/register", async (req, res) => {
     const ip = getClientIp(req);
     const ua = getSafeUserAgent(req);
     const fingerprint = normalizeFingerprint(fpRaw);
+    const deviceId = getDeviceIdFromRawFingerprint(fpRaw);
+    const riskScore = calculateRiskScore(fpRaw, ip);
 
     const hash = await argon2.hash(password, ARGON2_OPTIONS);
 
@@ -493,16 +590,20 @@ app.post("/auth/register", async (req, res) => {
       .run(emailNorm, hash);
 
     // Fingerprint direkt bei Registrierung verknüpfen
-    if (fingerprint) {
+   if (fingerprint) {
       req.session.fingerprint = fingerprint;
+      req.session.deviceId = deviceId || null;
+
       saveFingerprint({
         ip,
         sessionId: req.sessionID || null,
         userId: Number(info.lastInsertRowid),
         userAgent: ua,
-        fingerprint
-      });
-    }
+        fingerprint,
+        deviceId,
+        riskScore
+  });
+}
 
     res.json({ ok: true, userId: info.lastInsertRowid });
   } catch (e) {
@@ -526,6 +627,9 @@ app.post("/auth/login", async (req, res) => {
 
     const emailNorm = String(email).trim().toLowerCase();
     const fingerprint = normalizeFingerprint(fpRaw);
+    const deviceId = getDeviceIdFromRawFingerprint(fpRaw);
+    const riskScore = calculateRiskScore(fpRaw, ip);
+    const knownDevice = findKnownDevice(deviceId);
 
     // Login-Bruteforce zusätzlich auf DB-Basis
     if (isLoginBlocked(ip, emailNorm)) {
@@ -548,6 +652,10 @@ app.post("/auth/login", async (req, res) => {
       return res.status(401).json({ error: "Ungültige Eingabe" });
     }
 
+    if (knownDevice && knownDevice.user_id && knownDevice.user_id !== row.id) {
+    return res.status(403).json({ error: "Gerät ist bereits einem anderen Konto zugeordnet." });
+}
+
     // Session Fixation Protection, neue Session-ID nach Login
     req.session.regenerate((err) => {
       if (err) {
@@ -557,20 +665,23 @@ app.post("/auth/login", async (req, res) => {
 
       req.session.userId = row.id;
       req.session.email = emailNorm;
+
       if (fingerprint) req.session.fingerprint = fingerprint;
+      if (deviceId) req.session.deviceId = deviceId;
 
       logLogin({ userId: row.id, emailAttempt: emailNorm, success: 1, ip, ua, fingerprint });
 
-      // Fingerprint auch nach erfolgreichem Login sichern
-      if (fingerprint) {
-        saveFingerprint({
-          ip,
-          sessionId: req.sessionID || null,
-          userId: row.id,
-          userAgent: ua,
-          fingerprint
-        });
-      }
+  if (fingerprint) {
+    saveFingerprint({
+      ip,
+      sessionId: req.sessionID || null,
+      userId: row.id,
+      userAgent: ua,
+      fingerprint,
+      deviceId,
+      riskScore
+  });
+}
 
       return res.json({ ok: true, email: emailNorm });
     });
@@ -622,6 +733,43 @@ app.get("/admin/security/top-fingerprints", requireAuth, (req, res) => {
       ORDER BY seen DESC
       LIMIT 20
     `).all();
+
+    res.json(rows);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Interner Fehler" });
+  }
+});
+
+app.get("/admin/security/top-devices", requireAuth, (req, res) => {
+  try {
+    const rows = db.prepare(`
+      SELECT device_id, COUNT(*) as seen, MAX(last_seen_at) as last_seen
+      FROM fingerprints
+      WHERE device_id IS NOT NULL AND device_id != ''
+      GROUP BY device_id
+      ORDER BY seen DESC
+      LIMIT 50
+    `).all();
+
+    res.json(rows);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Interner Fehler" });
+  }
+});
+
+app.get("/admin/security/device/:deviceId", requireAuth, (req, res) => {
+  try {
+    const deviceId = String(req.params.deviceId || "");
+
+    const rows = db.prepare(`
+      SELECT id, ip, session_id, user_id, device_id, risk_score, user_agent, created_at, last_seen_at, fingerprint
+      FROM fingerprints
+      WHERE device_id = ?
+      ORDER BY id DESC
+      LIMIT 100
+    `).all(deviceId);
 
     res.json(rows);
   } catch (e) {

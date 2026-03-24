@@ -57,66 +57,187 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
-function getFingerprint() {
-  const gpu = getGpuInfo();
+function getCanvasFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return '';
 
-  return {
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(10, 10, 100, 30);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Merdo-Fingerprint', 12, 12);
+
+    return canvas.toDataURL().slice(0, 180);
+  } catch {
+    return '';
+  }
+}
+
+function getWebglInfo() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl =
+      canvas.getContext('webgl') ||
+      canvas.getContext('experimental-webgl');
+
+    if (!gl) {
+      return {
+        webglVendor: '',
+        webglRenderer: '',
+        webglVersion: '',
+        webglShadingLanguageVersion: ''
+      };
+    }
+
+    return {
+      webglVendor: String(gl.getParameter(gl.VENDOR) || '').slice(0, 200),
+      webglRenderer: String(gl.getParameter(gl.RENDERER) || '').slice(0, 300),
+      webglVersion: String(gl.getParameter(gl.VERSION) || '').slice(0, 200),
+      webglShadingLanguageVersion: String(gl.getParameter(gl.SHADING_LANGUAGE_VERSION) || '').slice(0, 200)
+    };
+  } catch {
+    return {
+      webglVendor: '',
+      webglRenderer: '',
+      webglVersion: '',
+      webglShadingLanguageVersion: ''
+    };
+  }
+}
+
+async function getHighEntropyUAData() {
+  try {
+    if (!navigator.userAgentData?.getHighEntropyValues) return {};
+
+    const data = await navigator.userAgentData.getHighEntropyValues([
+      'architecture',
+      'bitness',
+      'model',
+      'platformVersion',
+      'uaFullVersion',
+      'fullVersionList'
+    ]);
+
+    return data || {};
+  } catch {
+    return {};
+  }
+}
+
+async function createDeviceId(payload) {
+  try {
+    const text = JSON.stringify(payload);
+    const bytes = new TextEncoder().encode(text);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  } catch {
+    return '';
+  }
+}
+
+async function getFingerprint() {
+  const gpu = getGpuInfo();
+  const webgl = getWebglInfo();
+  const uaData = await getHighEntropyUAData();
+
+  const raw = {
     userAgent: navigator.userAgent || '',
     language: navigator.language || '',
+    languages: Array.isArray(navigator.languages) ? navigator.languages.slice(0, 10) : [],
     screen: `${window.screen.width}x${window.screen.height}`,
+    availScreen: `${window.screen.availWidth}x${window.screen.availHeight}`,
+    colorDepth: Number(window.screen.colorDepth || 0),
+    pixelRatio: Number(window.devicePixelRatio || 1),
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
     platform: navigator.platform || '',
+    hardwareConcurrency: Number(navigator.hardwareConcurrency || 0),
+    deviceMemory: Number(navigator.deviceMemory || 0),
+    maxTouchPoints: Number(navigator.maxTouchPoints || 0),
+    cookieEnabled: Boolean(navigator.cookieEnabled),
+    online: Boolean(navigator.onLine),
+
+    connection: {
+      effectiveType: navigator.connection?.effectiveType || '',
+      rtt: Number(navigator.connection?.rtt || 0),
+      downlink: Number(navigator.connection?.downlink || 0),
+      saveData: Boolean(navigator.connection?.saveData || false)
+    },
+
     gpuVendor: gpu.gpuVendor,
-    gpuRenderer: gpu.gpuRenderer
+    gpuRenderer: gpu.gpuRenderer,
+
+    webglVendor: webgl.webglVendor,
+    webglRenderer: webgl.webglRenderer,
+    webglVersion: webgl.webglVersion,
+    webglShadingLanguageVersion: webgl.webglShadingLanguageVersion,
+
+    canvasFingerprint: getCanvasFingerprint(),
+    uaData
+  };
+
+  const deviceId = await createDeviceId(raw);
+
+  return {
+    ...raw,
+    deviceId
   };
 }
   // Fingerprint direkt an Backend senden
-  async function sendFingerprint() {
-    try {
-      await fetch(`${API}/api/fingerprint`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(getFingerprint())
-      });
-    } catch (err) {
-      console.warn('Fingerprint konnte nicht gesendet werden:', err);
-    }
-  }
+ async function sendFingerprint() {
+  try {
+    const fp = await getFingerprint();
 
+    await fetch(`${API}/api/fingerprint`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(fp)
+    });
+  } catch (err) {
+    console.warn('Fingerprint konnte nicht gesendet werden:', err);
+  }
+}
   // ---------------- API-Helfer ----------------
 
   async function apiRegister(email, password) {
-    const r = await fetch(`${API}/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        email,
-        password,
-        fingerprint: getFingerprint()
-      })
-    });
+  const fingerprint = await getFingerprint();
 
-    const data = await r.json().catch(() => ({}));
-    return { ok: r.ok, status: r.status, ...data };
-  }
+  const r = await fetch(`${API}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      email,
+      password,
+      fingerprint
+    })
+  });
 
-  async function apiLogin(email, password) {
-    const r = await fetch(`${API}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        email,
-        password,
-        fingerprint: getFingerprint()
-      })
-    });
+  const data = await r.json().catch(() => ({}));
+  return { ok: r.ok, status: r.status, ...data };
+}
 
-    const data = await r.json().catch(() => ({}));
-    return { ok: r.ok, status: r.status, ...data };
-  }
+async function apiLogin(email, password) {
+  const fingerprint = await getFingerprint();
+
+  const r = await fetch(`${API}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      email,
+      password,
+      fingerprint
+    })
+  });
+
+  const data = await r.json().catch(() => ({}));
+  return { ok: r.ok, status: r.status, ...data };
+}
 
   // ---------------- Modal öffnen / schließen ----------------
 
@@ -188,7 +309,7 @@ function getFingerprint() {
   loginForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email    = loginEmail.value.trim();
+    const email = loginEmail.value.trim();
     const password = loginPass.value;
 
     if (!email || !password) {
