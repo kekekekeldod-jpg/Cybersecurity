@@ -44,6 +44,10 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
     delay: 450, 
   });
 
+  sr.reveal('.ketoOne', {delay:200, origin:'bottom'});
+  sr.reveal('.ketoPlan', {delay:200, origin:'bottom'});
+  sr.reveal('.ketoTraining', {delay:200, origin:'bottom'});
+  sr.reveal('.footer-content', {delay:200, origin:'bottom'});
   sr.reveal('.scroli', {
     rotate: {
       x: 130,
