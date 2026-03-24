@@ -18,7 +18,6 @@
   100% { border-color: rgba(63, 16, 16, 0.87); }
 }
 
-
 body{
   background: url('./bilder/forensicBackground.jpg');
   background-size: cover;        /* Bild füllt alles */
@@ -1091,11 +1090,6 @@ footer{
   
   #scrolling{
     width: 6px;
-  }
-
-  body{
-    background-size: cover;
-    background-position: -450px;
   }
   
   section .daten-s div {
