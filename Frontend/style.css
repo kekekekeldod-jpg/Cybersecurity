@@ -1673,9 +1673,10 @@
     }
 
     .wrapperOne p{
-      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-family: 'Coiny';
       font-size: clamp(0.8rem, 3vw, 1.3rem);
       font-weight: 900;
+      color: #6d8330;
     }
 
     .wrapperOne a{
