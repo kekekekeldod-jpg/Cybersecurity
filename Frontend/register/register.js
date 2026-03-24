@@ -18,6 +18,72 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wenn Backend und Frontend auf derselben Domain / Port laufen, bleibt das leer:
   const API = ''; 
  
+  // Fingerprint sammeln
+ function getGpuInfo() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl =
+      canvas.getContext('webgl') ||
+      canvas.getContext('experimental-webgl');
+
+    if (!gl) {
+      return {
+        gpuVendor: '',
+        gpuRenderer: ''
+      };
+    }
+
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+
+    if (!debugInfo) {
+      return {
+        gpuVendor: '',
+        gpuRenderer: ''
+      };
+    }
+
+    const gpuVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) || '';
+    const gpuRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || '';
+
+    return {
+      gpuVendor: String(gpuVendor).slice(0, 200),
+      gpuRenderer: String(gpuRenderer).slice(0, 300)
+    };
+  } catch {
+    return {
+      gpuVendor: '',
+      gpuRenderer: ''
+    };
+  }
+}
+
+function getFingerprint() {
+  const gpu = getGpuInfo();
+
+  return {
+    userAgent: navigator.userAgent || '',
+    language: navigator.language || '',
+    screen: `${window.screen.width}x${window.screen.height}`,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+    platform: navigator.platform || '',
+    gpuVendor: gpu.gpuVendor,
+    gpuRenderer: gpu.gpuRenderer
+  };
+}
+  // Fingerprint direkt an Backend senden
+  async function sendFingerprint() {
+    try {
+      await fetch(`${API}/api/fingerprint`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(getFingerprint())
+      });
+    } catch (err) {
+      console.warn('Fingerprint konnte nicht gesendet werden:', err);
+    }
+  }
+
   // ---------------- API-Helfer ----------------
 
   async function apiRegister(email, password) {
@@ -25,7 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({
+        email,
+        password,
+        fingerprint: getFingerprint()
+      })
     });
 
     const data = await r.json().catch(() => ({}));
@@ -37,7 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({
+        email,
+        password,
+        fingerprint: getFingerprint()
+      })
     });
 
     const data = await r.json().catch(() => ({}));
@@ -75,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
     authCard?.classList.remove('rotate-in');
     document.body.classList.remove('no-scroll');
   }
+
+  // Fingerprint beim Laden erfassen
+  sendFingerprint();
 
   // ---------------- Event-Listener ----------------
 
@@ -136,13 +213,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Geschützte Seite nach Login:
         window.location.href = '/member/white-hat-hacker';
       } else {
-         swal({
-        className: "swal-register",
-        title: "Schade 🫤",
-        text: "Login fehlgeschlagen.",
-        icon: "error",
-        button: "Ok",
-      });
+        swal({
+          className: "swal-register",
+          title: "Schade 🫤",
+          text: res.error || "Login fehlgeschlagen.",
+          icon: "error",
+          button: "Ok",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -184,26 +261,26 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res = await apiRegister(email, password);
       if (res.ok) {
-       swal({
-        className: "swal-register",
-        title: "Super 🤩",
-        text: "Registriert! Jetzt logge dich bitte ein.",
-        icon: "info",
-        button: "Ok",
-      });
+        swal({
+          className: "swal-register",
+          title: "Super 🤩",
+          text: "Registriert! Jetzt logge dich bitte ein.",
+          icon: "info",
+          button: "Ok",
+        });
         authCard?.classList.remove('show-register');
       } else {
         swal({
-        className: "swal-register",
-        title: "Schade 🫤",
-        text: "Registrierung fehlgeschlagen.",
-        icon: "error",
-        button: "Ok",
-      });
+          className: "swal-register",
+          title: "Schade 🫤",
+          text: res.error || "Registrierung fehlgeschlagen.",
+          icon: "error",
+          button: "Ok",
+        });
       }
     } catch (err) {
       console.error(err);
-     swal({
+      swal({
         className: "swal-register",
         title: "Schade 🫤",
         text: "Es ist ein Fehler bei der Registrierung aufgetreten.",
