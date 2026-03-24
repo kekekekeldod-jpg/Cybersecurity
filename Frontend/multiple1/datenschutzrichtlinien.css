@@ -3,10 +3,10 @@
   --h3-color: rgb(206, 211, 207); 
   --p-color: rgb(199, 113, 0);
   --strong-color: rgb(212, 73, 73); 
-  --a-color: #008aff;
+  --a-color: #79c490;
   --blur-color:  rgba(44, 42, 146, 0.35);
   --border-color: rgba(255,255,255,.2);
-  --li-color: rgb(122, 134, 10);
+  --li-color: rgb(95, 155, 87);
 }
 
 
@@ -223,6 +223,7 @@ section a{
 }
 
 section li{
+  text-decoration: underline;
   color: var(--li-color);
 }
 
