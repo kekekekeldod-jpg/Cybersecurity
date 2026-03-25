@@ -618,17 +618,28 @@ app.post("/api/fingerprint", (req, res) => {
   }
 });
 
+
+const hasAt = /@/;
 app.use("/auth", authLimiter);
 
 app.post("/auth/register", async (req, res) => {
   try {
     const { email, password, fingerprint: fpRaw } = req.body || {};
-    if (!email || !password) {
-      return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
-    }
+    if (
+  typeof email !== "string" ||
+  typeof password !== "string" ||
+  !email.trim() ||
+  !password
+) {
+  return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
+} else if (
+  !hasAt.test(email)
+){
+  return res.status(400).json({error: "Bitte nutzte auch wirklich eine E-mail"});
+}
 
     // Optional Email normalisieren
-    const emailNorm = String(email).trim().toLowerCase();
+    const emailNorm = email.trim().toLowerCase();
     const ip = getClientIp(req);
     const ua = getSafeUserAgent(req);
     const fingerprint = normalizeFingerprint(fpRaw);
@@ -667,18 +678,32 @@ app.post("/auth/register", async (req, res) => {
   }
 });
 
-app.post("/auth/login", async (req, res) => {
+ app.post("/auth/login", async (req, res) => {
   try {
     const { email, password, fingerprint: fpRaw } = req.body || {};
-    if (!email || !password) {
+    const ip = getClientIp(req);
+    const ua = getSafeUserAgent(req);
+    const fingerprint = normalizeFingerprint(fpRaw);
+
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email.trim() ||
+      !password
+    ) {
+      logLogin({
+        userId: null,
+        emailAttempt: null,
+        success: 0,
+        ip,
+        ua,
+        fingerprint
+      });
+
       return res.status(400).json({ error: "E-Mail und Passwort erforderlich" });
     }
 
-    const ip = getClientIp(req);
-    const ua = getSafeUserAgent(req);
-
-    const emailNorm = String(email).trim().toLowerCase();
-    const fingerprint = normalizeFingerprint(fpRaw);
+    const emailNorm = email.trim().toLowerCase();
     const deviceId = getDeviceIdFromRawFingerprint(fpRaw);
     const riskScore = calculateRiskScore(fpRaw, ip);
     const knownDevice = findKnownDevice(deviceId);
@@ -863,6 +888,10 @@ app.get("*", (req, res, next) => {
 // Error-Handler (Fallback)
 
 app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({ error: "Ungültiges JSON" });
+  }
+
   console.error("Unhandled error:", err?.stack || err);
   if (!res.headersSent) res.status(500).send("Interner Serverfehler");
   else next();
