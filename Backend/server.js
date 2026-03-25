@@ -244,7 +244,8 @@ function findKnownDevice(deviceId) {
     SELECT id, user_id, ip, device_id, risk_score, last_seen_at
     FROM fingerprints
     WHERE device_id = ?
-    ORDER BY id DESC
+      AND user_id IS NOT NULL
+    ORDER BY last_seen_at DESC, id DESC
     LIMIT 1
   `).get(deviceId);
 }
@@ -263,12 +264,63 @@ function saveFingerprint({
   if (!fingerprint) return;
 
   try {
-    db.prepare(`
-      INSERT INTO fingerprints (
-        ip, session_id, user_id, device_id, risk_score, fingerprint, user_agent, last_seen_at, updated_at
-      )
-      VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-    `).run(ip, sessionId, userId, deviceId, riskScore, fingerprint, userAgent);
+    if (deviceId) {
+      const updateResult = db.prepare(`
+        UPDATE fingerprints
+        SET
+          ip = ?,
+          session_id = ?,
+          user_id = COALESCE(?, user_id),
+          risk_score = ?,
+          fingerprint = ?,
+          user_agent = ?,
+          last_seen_at = CURRENT_TIMESTAMP,
+          updated_at = CURRENT_TIMESTAMP
+        WHERE device_id = ?
+      `).run(
+        ip,
+        sessionId,
+        userId,
+        riskScore,
+        fingerprint,
+        userAgent,
+        deviceId
+      );
+
+      if (updateResult.changes === 0) {
+        db.prepare(`
+          INSERT INTO fingerprints (
+            ip, session_id, user_id, device_id, risk_score, fingerprint, user_agent,
+            first_seen_at, last_seen_at, created_at, updated_at
+          )
+          VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        `).run(
+          ip,
+          sessionId,
+          userId,
+          deviceId,
+          riskScore,
+          fingerprint,
+          userAgent
+        );
+      }
+    } else {
+      db.prepare(`
+        INSERT INTO fingerprints (
+          ip, session_id, user_id, device_id, risk_score, fingerprint, user_agent,
+          first_seen_at, last_seen_at, created_at, updated_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      `).run(
+        ip,
+        sessionId,
+        userId,
+        deviceId,
+        riskScore,
+        fingerprint,
+        userAgent
+      );
+    }
   } catch (e) {
     console.error("saveFingerprint error:", e?.message || e);
   }
@@ -540,9 +592,9 @@ app.post("/api/fingerprint", (req, res) => {
   try {
     const ip = getClientIp(req);
     const ua = getSafeUserAgent(req);
-   const fingerprint = normalizeFingerprint(req.body);
-   const deviceId = getDeviceIdFromRawFingerprint(req.body);
-   const riskScore = calculateRiskScore(req.body, ip);
+    const fingerprint = normalizeFingerprint(req.body);
+    const deviceId = getDeviceIdFromRawFingerprint(req.body);
+    const riskScore = calculateRiskScore(req.body, ip);
 
     if (fingerprint) {
       req.session.fingerprint = fingerprint;
@@ -556,8 +608,8 @@ app.post("/api/fingerprint", (req, res) => {
         fingerprint,
         deviceId,
         riskScore
-  });
-}
+      });
+    }
 
     res.json({ ok: true });
   } catch (e) {
@@ -590,7 +642,7 @@ app.post("/auth/register", async (req, res) => {
       .run(emailNorm, hash);
 
     // Fingerprint direkt bei Registrierung verknüpfen
-   if (fingerprint) {
+    if (fingerprint) {
       req.session.fingerprint = fingerprint;
       req.session.deviceId = deviceId || null;
 
@@ -602,8 +654,8 @@ app.post("/auth/register", async (req, res) => {
         fingerprint,
         deviceId,
         riskScore
-  });
-}
+      });
+    }
 
     res.json({ ok: true, userId: info.lastInsertRowid });
   } catch (e) {
@@ -653,8 +705,9 @@ app.post("/auth/login", async (req, res) => {
     }
 
     if (knownDevice && knownDevice.user_id && knownDevice.user_id !== row.id) {
-    return res.status(403).json({ error: "Gerät ist bereits einem anderen Konto zugeordnet." });
-}
+      logLogin({ userId: row.id, emailAttempt: emailNorm, success: 0, ip, ua, fingerprint });
+      return res.status(403).json({ error: "Gerät ist bereits einem anderen Konto zugeordnet." });
+    }
 
     // Session Fixation Protection, neue Session-ID nach Login
     req.session.regenerate((err) => {
@@ -671,17 +724,17 @@ app.post("/auth/login", async (req, res) => {
 
       logLogin({ userId: row.id, emailAttempt: emailNorm, success: 1, ip, ua, fingerprint });
 
-  if (fingerprint) {
-    saveFingerprint({
-      ip,
-      sessionId: req.sessionID || null,
-      userId: row.id,
-      userAgent: ua,
-      fingerprint,
-      deviceId,
-      riskScore
-  });
-}
+      if (fingerprint) {
+        saveFingerprint({
+          ip,
+          sessionId: req.sessionID || null,
+          userId: row.id,
+          userAgent: ua,
+          fingerprint,
+          deviceId,
+          riskScore
+        });
+      }
 
       return res.json({ ok: true, email: emailNorm });
     });

@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const authModal   = document.getElementById('authModal');
-  const authCard    = authModal?.querySelector('.auth-card');
+  const authModal = document.getElementById('authModal');
+  const authCard  = authModal?.querySelector('.auth-card');
   const closeAuthBtn = authModal?.querySelector('.auth-close');
   const toRegister  = authModal?.querySelector('#toRegister');
-  const toLogin     = authModal?.querySelector('#toLogin');
+  const toLogin = authModal?.querySelector('#toLogin');
 
   // Öffnen-Button: nimm zuerst #openAuth, sonst .nav-btn
   const openAuthBtn = document.getElementById('openAuth') || document.querySelector('.nav-btn');
 
-  const loginForm    = document.getElementById('loginForm');
-  const loginEmail   = document.getElementById('loginEmail');
-  const loginPass    = document.getElementById('loginPass');
+  const loginForm = document.getElementById('loginForm');
+  const loginEmail = document.getElementById('loginEmail');
+  const loginPass = document.getElementById('loginPass');
   const registerForm = document.getElementById('registerForm');
-  const regEmail     = document.getElementById('regEmail');
-  const regPass      = document.getElementById('regPass');
+  const regEmail = document.getElementById('regEmail');
+  const regPass = document.getElementById('regPass');
 
   // Wenn Backend und Frontend auf derselben Domain / Port laufen, bleibt das leer:
   const API = ''; 
@@ -129,7 +129,29 @@ async function getHighEntropyUAData() {
 
 async function createDeviceId(payload) {
   try {
-    const text = JSON.stringify(payload);
+    const stablePayload = {
+      userAgent: payload.userAgent || '',
+      language: payload.language || '',
+      languages: Array.isArray(payload.languages) ? payload.languages.slice(0, 10) : [],
+      screen: payload.screen || '',
+      availScreen: payload.availScreen || '',
+      colorDepth: Number(payload.colorDepth || 0),
+      pixelRatio: Number(payload.pixelRatio || 1),
+      timezone: payload.timezone || '',
+      platform: payload.platform || '',
+      hardwareConcurrency: Number(payload.hardwareConcurrency || 0),
+      deviceMemory: Number(payload.deviceMemory || 0),
+      maxTouchPoints: Number(payload.maxTouchPoints || 0),
+      gpuVendor: payload.gpuVendor || '',
+      gpuRenderer: payload.gpuRenderer || '',
+      webglVendor: payload.webglVendor || '',
+      webglRenderer: payload.webglRenderer || '',
+      webglVersion: payload.webglVersion || '',
+      webglShadingLanguageVersion: payload.webglShadingLanguageVersion || '',
+      canvasFingerprint: payload.canvasFingerprint || ''
+    };
+
+    const text = JSON.stringify(stablePayload);
     const bytes = new TextEncoder().encode(text);
     const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
