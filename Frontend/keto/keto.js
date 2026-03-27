@@ -47,6 +47,10 @@ if (window.innerWidth > 1050 && !navigator.userAgent.match(/iPad|Macintoshi/i))
   sr.reveal('.ketoOne', {delay:200, origin:'bottom'});
   sr.reveal('.ketoPlan', {delay:200, origin:'bottom'});
   sr.reveal('.ketoTraining', {delay:200, origin:'bottom'});
+  sr.reveal('.ketoPlan', {delay:200, origin:'bottom'});
+  sr.reveal('.ketoExplanation', {delay:200, origin:'bottom'});
+  sr.reveal('.ketoTrackerWrapper', {delay:200, origin:'top'});
+  sr.reveal('.tracker-card', {delay:200, origin:'bottom'});
   sr.reveal('.footer-content', {delay:200, origin:'bottom'});
   sr.reveal('.scroli', {
     rotate: {
