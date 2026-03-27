@@ -302,7 +302,7 @@ header h2{
   display: block;
   text-align: center;
   max-width: 1000px;
-  background-color: rgb(30, 53, 68);
+  background: linear-gradient(230deg, rgb(61, 63, 36), rgb(54, 17, 52), rgb(30, 44, 37));
   padding: clamp(0.8rem, 3vw, 1.2rem);
   border: 3px solid black;
   border-radius: 10px;
@@ -329,6 +329,42 @@ header h2{
   box-shadow: 0px 0px 50px clamp(0.4rem, 2vw, 1rem) rgb(105, 82, 7);
 }
 
+/* ================= Keto Plan Explanation ================= */
+.ketoExplanation {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.ketoExplanationWrapper{
+  margin-top: 0;
+  display: block;
+  text-align: center;
+  max-width: 1000px;
+  background: linear-gradient(230deg, rgb(63, 36, 36), rgb(17, 17, 54), rgb(20, 18, 18));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-bottom: clamp(2rem, 10vw, 5rem);
+}
+.ketoExplanationWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: teal;
+  text-decoration: underline;
+}
+
+.ketoExplanationWrapper p{
+  font-size: clamp(0.8rem, 2vw, 1.5em);
+  color: rgb(151, 125, 77);
+}
+
+
 /* ================= Keto-Sixpack Tracker ================= */
 .ketoTracker{
   display: block;
@@ -344,7 +380,7 @@ header h2{
   display: block;
   text-align: center;
   max-width: 1000px;
-  background-color: rgb(34, 40, 44);
+  background: linear-gradient(230deg, rgb(14, 33, 39), rgb(41, 22, 22), rgb(31, 27, 18));
   padding: clamp(0.8rem, 3vw, 1.2rem);
   border: 3px solid black;
   border-radius: 10px;
@@ -362,7 +398,7 @@ header h2{
 
 .ketoTrackerWrapper p{
   font-size: clamp(0.8rem, 2vw, 1.5em);
-  color: rgb(77, 91, 151);
+  color: rgb(151, 125, 77);
 }
 
 .tracker-card {
