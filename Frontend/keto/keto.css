@@ -329,6 +329,113 @@ header h2{
   box-shadow: 0px 0px 50px clamp(0.4rem, 2vw, 1rem) rgb(105, 82, 7);
 }
 
+/* ================= Keto-Sixpack Tracker ================= */
+.ketoTracker{
+  display: block;
+  justify-content: center;
+  align-items: center;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.ketoTrackerWrapper{
+  margin-top: 0;
+  display: block;
+  text-align: center;
+  max-width: 1000px;
+  background-color: rgb(34, 40, 44);
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-bottom: clamp(2rem, 10vw, 5rem);
+}
+
+.ketoTrackerWrapper h2{
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: teal;
+  text-decoration: underline;
+}
+
+.ketoTrackerWrapper p{
+  font-size: clamp(0.8rem, 2vw, 1.5em);
+  color: rgb(77, 91, 151);
+}
+
+.tracker-card {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.tracker-card h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-align: center;
+  color: aquamarine;
+}
+
+#progress-text {
+  margin-bottom: 20px;
+  opacity: 0.9;
+   color: rgb(127, 193, 255);
+}
+
+#tracker-grid {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 8px;
+}
+
+.day-box {
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: scale(0.8);
+  opacity: 0;
+  animation: fadePop 0.4s ease forwards;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.day-box:hover {
+  transform: scale(1.08);
+}
+
+.day-box.past {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.45);
+}
+
+.day-box.today {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.55);
+}
+
+.day-box.future {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes fadePop {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 
 /* ================= SECTIONS-Footer ================= */
 
