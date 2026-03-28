@@ -420,9 +420,16 @@ header h2{
 }
 
 #progress-text {
+  font-size: clamp(0.8rem, 2vw, 1.3rem);
   margin-bottom: 20px;
   opacity: 0.9;
-   color: rgb(127, 193, 255);
+  color: rgb(127, 193, 255);
+}
+
+.tracker-card img {
+   width: 100%;
+   height: auto;
+   max-width: clamp(3rem, 20vw, 10rem);
 }
 
 #tracker-grid {
