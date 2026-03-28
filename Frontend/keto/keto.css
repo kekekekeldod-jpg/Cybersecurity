@@ -348,7 +348,6 @@ header h2{
   padding: clamp(0.8rem, 3vw, 1.2rem);
   border: 3px solid black;
   border-radius: 10px;
-  margin-bottom: clamp(2rem, 10vw, 5rem);
 }
 .ketoExplanationWrapper h2 {
   font-size: clamp(1.2rem, 4vw, 3rem);
@@ -372,7 +371,7 @@ header h2{
   align-items: center;
   max-width: 1100px;
   margin-inline: auto;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2rem, 5vw, 4rem)
 }
 
 .ketoTrackerWrapper{
@@ -437,14 +436,14 @@ header h2{
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transform: scale(0.8);
   opacity: 0;
   animation: fadePop 0.4s ease forwards;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: all .3s;
+  cursor: crosshair;
 }
 
 .day-box:hover {
-  transform: scale(1.08);
+  transform: scale(1);
 }
 
 .day-box.past {
