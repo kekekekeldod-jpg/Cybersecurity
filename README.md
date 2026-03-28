@@ -35,13 +35,19 @@ the back-end → secure data handling, API development, and logic control
 
 HTML5
 
-CSS3 (Flexbox & Grid)
+CSS3 (Flexbox, Grid, Animations, Transitions)
 
-JavaScript (ES6+)
+JavaScript (ES6+, DOM Manipulation, Date API)
+
+LocalStorage (Browser Storage)
+
+Three.js (3D Visualization / 3D World)
 
 Node.js
 
 Express.js
+
+Nginx (Web Server / Reverse Proxy)
 
 EmailJS
 
@@ -50,6 +56,14 @@ ScrollReveal.js
 Font Awesome
 
 Google Fonts
+
+Krita (Design / Game Assets)
+
+Responsive Design
+
+HTTPS / TLS
+
+REST (basic API structures)
 
 # 🕹️ Future Plans
 
