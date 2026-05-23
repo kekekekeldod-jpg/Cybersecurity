@@ -478,6 +478,50 @@ header h2{
   }
 }
 
+/* ================= Aktuelles Gewicht ================= */
+.aktuellGewicht {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.aktuellGewichtWrapper{
+  margin-top: 0;
+  display: block;
+  text-align: center;
+  max-width: 1000px;
+  background: linear-gradient(230deg, rgb(59, 19, 19), rgb(18, 18, 34), rgb(17, 29, 25));
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  border: 3px solid black;
+  border-radius: 10px;
+}
+.aktuellGewichtWrapper h2 {
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 15px;
+  width: 100%;
+  color: teal;
+  text-decoration: underline;
+}
+
+.aktuellGewichtWrapper h3 {
+  font-size: clamp(1.4rem, 5vw, 3.6rem);
+  font-weight: 900;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-bottom: 15px;
+  width: 100%;
+  color: teal;
+  text-decoration: underline;
+}
+
+.aktuellGewichtWrapper p{
+  font-size: clamp(0.8rem, 2vw, 1.5em);
+  color: rgb(158, 161, 103);
+}
+
 
 /* ================= SECTIONS-Footer ================= */
 
