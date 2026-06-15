@@ -83,6 +83,5 @@ export class Score {
         context.font = "italic small-caps 800 75px Montserrat";
         context.fillText('Gewonnen bei 300P', 18, 110);
 
-
     }
 }

@@ -15,7 +15,7 @@ import SQLiteStoreFactory from "better-sqlite3-session-store";
 
 dotenv.config();
 
-// Argon2 Settings
+// Argon2 Einstellungen
 const ARGON2_OPTIONS = {
   type: argon2.argon2id,
   memoryCost: 2 ** 16, //64MB
