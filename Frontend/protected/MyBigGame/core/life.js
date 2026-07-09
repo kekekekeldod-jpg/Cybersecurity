@@ -52,8 +52,6 @@ export class Life {
     }
 }
 
-   
-
     draw(context){
           context.drawImage(this.image, this.frameX * this.frameWidth, this.frameY * this.frameHeight, this.frameWidth, this.frameHeight, this.x, this.y, this.frameWidth, this.frameHeight);
     }
