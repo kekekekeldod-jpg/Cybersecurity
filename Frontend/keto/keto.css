@@ -538,7 +538,7 @@ header h2{
   display: block;
   text-align: center;
   max-width: 1000px;
-  background: linear-gradient(230deg, rgb(102, 41, 41), rgb(23, 23, 68), rgb(12, 59, 44));
+  background: linear-gradient(230deg, rgb(102, 41, 41), rgb(23, 23, 68), rgb(8, 44, 32));
   padding: clamp(0.8rem, 3vw, 1.2rem);
   border: 3px solid black;
   border-radius: 10px;
