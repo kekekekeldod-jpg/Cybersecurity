@@ -1,0 +1,71 @@
+
+=== GIT STATUS ===
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .gitignore
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	e --show-toplevel
+	git-check.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+=== BRANCHES ===
+* main c16b1cc [origin/main: ahead 1] update
+
+=== REMOTES ===
+origin	https://github.com/kekekekeldod-jpg/Cybersecurity.git (fetch)
+origin	https://github.com/kekekekeldod-jpg/Cybersecurity.git (push)
+
+=== LOCAL GIT CONFIG ===
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/kekekekeldod-jpg/Cybersecurity.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
+branch.main.vscode-merge-base=origin/main
+
+=== GITIGNORE ===
+# Backend
+Backend/node_modules/
+Backend/data/
+Backend/.env
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
+Nginxcode.txt
+user.db
+Frontend/forensic/video/BruteforceVideo.MP4
+=== GIT LFS TRACKING ===
+Git LFS ist nicht installiert oder nicht eingerichtet
+
+=== GIT LFS FILES ===
+
+=== VIDEO TRACKING CHECK ===
+Frontend/forensic/video/BruteforceVideo.MP4
+
+=== LETZTE 10 COMMITS ===
+c16b1cc update
+cd0c2a5 update
+9b9c30b update
+2b32aa9 update
+42aa773 update
+e310825 update
+5d87175 update
+6a141f0 update
+2c35f05 update
+18fe08c update
+
+=== GROSSE DATEIEN > 50 MB ===
+338M	./Frontend/forensic/video/BruteforceVideo.MP4
